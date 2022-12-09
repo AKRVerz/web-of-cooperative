@@ -31,7 +31,7 @@ export type Aggregate<Cursor, Order, Distinct> = Omit<
 >;
 
 export const prisma = new PrismaClient({
-  log: [],
+  log: ['error', 'info', 'query', 'warn'],
 });
 
 export const models = _.omit(prisma, [
@@ -83,7 +83,7 @@ export type ModelTypes = {
     Include: unknown;
     Create: Prisma.FileCreateInput | Prisma.FileUncheckedCreateInput;
     Update: Prisma.FileUpdateInput | Prisma.FileUncheckedUpdateInput;
-    Cursor: Prisma.FileWhereUniqueInput;
+    Cursor: unknown;
     Order: Prisma.FileOrderByWithRelationInput;
     Delegate: Prisma.FileDelegate<ModelDelegate>;
     GroupBy: Prisma.FileGroupByOutputType;

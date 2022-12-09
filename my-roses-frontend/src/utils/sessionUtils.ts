@@ -52,9 +52,9 @@ export const getAccountId = (): number | undefined => {
 
   if (_.isNil(token)) return;
 
-  const { accountId } = jwtDecode<IJWT>(token);
+  const { id } = jwtDecode<IJWT>(token);
 
-  return accountId;
+  return id;
 };
 
 export const removeToken = () => localStorage.removeItem('access_token');

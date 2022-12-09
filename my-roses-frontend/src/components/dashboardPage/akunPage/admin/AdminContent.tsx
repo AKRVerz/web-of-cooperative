@@ -19,26 +19,29 @@ import {
 import Router from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { FaSearch, FaEdit, FaTrash } from 'react-icons/fa';
-import {
-  deleteResource,
-  getAllData as _getAllData,
-} from 'src/store/actions/resources';
 import { errorToastfier } from 'src/utils/toastifier';
 
 import { RootState } from 'src/store';
-import { RESOURCE_NAME, USER_ROLE } from 'src/utils/constant';
+import { RESOURCE_NAME } from 'src/utils/constant';
 import DeleteConfirmationModal from 'src/components/baseComponent/DeleteConfirmationModal';
-import useCustomDebounce from 'src/utils/useCustomDebounce';
+import useCustomDebounce from 'src/hooks/useCustomDebounce';
 import {
   DashboardContainer,
   DashboardMainContainer,
   DashboardTableContainer,
   Pagination,
 } from 'src/components/baseComponent';
+import useChakraToast from 'src/hooks/useChakraToast';
 import { buttonStyle } from 'src/utils/styles';
 import { getResource } from 'src/store/selectors/resources';
+import {
+  deleteUser as _deleteUser,
+  getAlluser as _getAlluser,
+} from 'src/store/actions/resources/users';
+import SessionUtils from 'src/utils/sessionUtils';
 
-const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllData }) => {
+const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAlluser }) => {
+  const toast = useChakraToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
@@ -58,25 +61,25 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllData }) => {
   const getDatas = async () => {
     if (firstLoad) return;
 
-    await getAllData(RESOURCE_NAME.USERS);
+    await getAlluser(`filters=role="admin"&page=${page}&limit=${limit}`);
   };
 
   const deleteUser = async () => {
     try {
       if (!userId) return;
 
-      await deleteAdmin(RESOURCE_NAME.USERS, userId);
+      await deleteAdmin(userId);
       getDatas();
 
       onClose();
     } catch (e) {
-      errorToastfier(e);
+      errorToastfier(toast, e);
     }
   };
 
   useEffect(() => {
     (async () => {
-      await getAllData(RESOURCE_NAME.USERS, `page=${page}&limit=${limit}`);
+      await getAlluser(`filters=role="admin"&page=${page}&limit=${limit}`);
 
       setFirstLoad(false);
     })();
@@ -162,26 +165,28 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllData }) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {_.map(_.values(users.rows), (admin, index) => (
+                {_.map(_.values(users.rows), (user, index) => (
                   <Tr key={index} bg={index % 2 !== 0 ? '#E1E1E1' : 'white'}>
                     <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
-                    <Td>{admin.userName}</Td>
+                    <Td>{user.username}</Td>
                     <Td>
                       <Flex justifyContent={'space-between'}>
                         <FaEdit
                           onClick={() =>
-                            Router.push(`${Router.pathname}/${admin.id}/update`)
+                            Router.push(`${Router.pathname}/${user.id}/update`)
                           }
                           cursor={'pointer'}
                         />
                         <Spacer />
-                        <FaTrash
-                          onClick={() => {
-                            setUserId(admin.id);
-                            setIsOpen(true);
-                          }}
-                          cursor={'pointer'}
-                        />
+                        {user.id !== SessionUtils.getAccountId() && (
+                          <FaTrash
+                            onClick={() => {
+                              setUserId(user.id);
+                              setIsOpen(true);
+                            }}
+                            cursor={'pointer'}
+                          />
+                        )}
                       </Flex>
                     </Td>
                   </Tr>
@@ -211,8 +216,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const connector = connect(mapStateToProps, {
-  deleteAdmin: deleteResource,
-  getAllData: _getAllData,
+  deleteAdmin: _deleteUser,
+  getAlluser: _getAlluser,
 });
 
 type Props = ConnectedProps<typeof connector>;

@@ -19,4 +19,20 @@ export type Resources = {
   [RESOURCE_NAME.USERS]: ResourceRecord<typeof RESOURCE_NAME.USERS>;
 };
 
+export type Create = {
+  [RESOURCE_NAME.USERS]: Omit<
+    ModelStructure['user'],
+    'id' | 'createdAt' | 'updatedAt'
+  >;
+};
+
+export type Update = {
+  [RESOURCE_NAME.USERS]: Partial<
+    Omit<
+      Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.USERS],
+      'id' | 'createdAt' | 'updatedAt' | 'password'
+    >
+  >;
+};
+
 export as namespace Resource;

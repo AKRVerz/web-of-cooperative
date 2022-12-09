@@ -20,12 +20,15 @@ import Router from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { FaSearch, FaEdit, FaTrash } from 'react-icons/fa';
 import { resources } from 'src/store/selectors';
-import { deleteData, getAllData as _getAllData } from 'src/store/actions/resources';
+import {
+  deleteData,
+  getAllData as _getAllData,
+} from 'src/store/actions/resources';
 import { errorToastfier } from 'src/utils/toastifier';
 import { RootState } from 'src/store';
 import { RESOURCE_NAME, USER_ROLE } from 'src/utils/constant';
 import DeleteConfirmationModal from 'src/components/baseComponent/DeleteConfirmationModal';
-import useCustomDebounce from 'src/utils/useCustomDebounce';
+import useCustomDebounce from 'src/hooks/useCustomDebounce';
 import { getUserFilter } from 'src/utils/user';
 import {
   DashboardContainer,
@@ -43,7 +46,11 @@ const AdminContent: React.FC<Props> = ({ admins, deleteAdmin, getAllData }) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
-  const { isOpen: isCsvOpen, onClose: onCsvClose, onOpen: onCsvOpen } = useDisclosure();
+  const {
+    isOpen: isCsvOpen,
+    onClose: onCsvClose,
+    onOpen: onCsvOpen,
+  } = useDisclosure();
 
   const onClose = () => {
     setIsOpen(false);
@@ -88,7 +95,12 @@ const AdminContent: React.FC<Props> = ({ admins, deleteAdmin, getAllData }) => {
           Data User Admin
         </Text>
         <DashboardContainer px={10} flexDirection={'column'}>
-          <Flex mb={4} mt={8} justifyContent={'space-between'} alignItems="center">
+          <Flex
+            mb={4}
+            mt={8}
+            justifyContent={'space-between'}
+            alignItems="center"
+          >
             <Flex gap={2}>
               <Button
                 {...buttonStyle.confirmation}
@@ -133,7 +145,11 @@ const AdminContent: React.FC<Props> = ({ admins, deleteAdmin, getAllData }) => {
             <Table>
               <Thead>
                 <Tr>
-                  <Th color="white" bg={'royalRed.200'} borderTopLeftRadius={10}>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    borderTopLeftRadius={10}
+                  >
                     No
                   </Th>
                   <Th color="white" bg={'royalRed.200'} width={'95%'}>
@@ -157,7 +173,9 @@ const AdminContent: React.FC<Props> = ({ admins, deleteAdmin, getAllData }) => {
                     <Td>
                       <Flex justifyContent={'space-between'}>
                         <FaEdit
-                          onClick={() => Router.push(`${Router.pathname}/${admin.id}/update`)}
+                          onClick={() =>
+                            Router.push(`${Router.pathname}/${admin.id}/update`)
+                          }
                           cursor={'pointer'}
                         />
                         <Spacer />
@@ -175,11 +193,24 @@ const AdminContent: React.FC<Props> = ({ admins, deleteAdmin, getAllData }) => {
               </Tbody>
             </Table>
           </DashboardTableContainer>
-          <Pagination limit={limit} total={admins.count} page={page} setPage={setPage} />
+          <Pagination
+            limit={limit}
+            total={admins.count}
+            page={page}
+            setPage={setPage}
+          />
         </DashboardContainer>
       </DashboardMainContainer>
-      <DeleteConfirmationModal isOpen={isOpen} onClose={onClose} onSubmit={deleteUser} />
-      <UploadCSV isOpen={isCsvOpen} onClose={onCsvClose} role={USER_ROLE.ADMIN} />
+      <DeleteConfirmationModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={deleteUser}
+      />
+      <UploadCSV
+        isOpen={isCsvOpen}
+        onClose={onCsvClose}
+        role={USER_ROLE.ADMIN}
+      />
     </React.Fragment>
   );
 };

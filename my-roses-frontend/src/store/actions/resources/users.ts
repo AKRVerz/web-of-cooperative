@@ -21,30 +21,15 @@ export const getUserById =
     getDataById(RESOURCE_NAME.USERS, id, query, overwrite)();
 
 export const createUser =
-  (
-    payload: Omit<
-      Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.USERS],
-      'id' | 'createdAt' | 'updatedAt'
-    >
-  ) =>
-  (dispatch: AppDispatch) =>
+  (payload: Koperasi.Resource.Create['users']) => (dispatch: AppDispatch) =>
     addData(RESOURCE_NAME.USERS)(payload)(dispatch);
 
 export const updateUser =
-  (
-    id: number,
-    update: Partial<
-      Omit<
-        Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.USERS],
-        'id' | 'createdAt' | 'updatedAt' | 'password'
-      >
-    >,
-    query = ''
-  ) =>
+  (id: number, update: Koperasi.Resource.Update['users'], query = '') =>
   () =>
     updateData(RESOURCE_NAME.USERS)(id, update, query)();
 
-export const deleteuser =
+export const deleteUser =
   (id: number, noRequest = false) =>
   (dispatch: AppDispatch) =>
     deleteData(RESOURCE_NAME.USERS, id, noRequest)(dispatch);
