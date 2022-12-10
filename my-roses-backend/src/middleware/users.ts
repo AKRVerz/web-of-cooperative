@@ -6,7 +6,8 @@ import { signAccessToken, verifyAccessToken } from '../utils/token';
 import { USER_ROLE } from '../utils/constant';
 
 export const authMw = asyncMw(async (req, res, next) => {
-  if (!req.headers.authorization) return res.status(401).json({ message: 'Unauthorized' });
+  if (!req.headers.authorization)
+    return res.status(401).json({ message: 'Unauthorized' });
 
   const authHeader = req.headers.authorization;
   const bearerToken = authHeader && authHeader.split(' ')[1];
@@ -22,7 +23,10 @@ export const authMw = asyncMw(async (req, res, next) => {
 });
 
 export const createUserMw = asyncMw(async (req, res, next) => {
-  const exist = await repository.user.checkEmailUsername(req.body.email, req.body.username);
+  const exist = await repository.user.checkEmailUsername(
+    req.body.email,
+    req.body.username
+  );
   if (exist) return res.status(400).json(exist);
 
   if (!req.isAdmin) delete req.body.role;
@@ -56,7 +60,11 @@ export const getUserMw = asyncMw(async (req, res, next) => {
 });
 
 export const getUsersMw = asyncMw(async (req, res, next) => {
-  req.users = await repository.user.findAll({}, req.filterQueryParams, req.query);
+  req.users = await repository.user.findAll(
+    {},
+    req.filterQueryParams,
+    req.query
+  );
 
   return next();
 });
@@ -100,7 +108,9 @@ export const returnUserMw = asyncMw(async (req, res) => {
 export const returnUsersMw = asyncMw(async (req, res) => {
   return res.json({
     rows: await Promise.all(
-      _.map(_.get(req.users, 'rows', []), (user) => repository.user.modelToResource(user))
+      _.map(_.get(req.users, 'rows', []), (user) =>
+        repository.user.modelToResource(user)
+      )
     ),
     count: _.get(req.users, 'count', 0),
   });

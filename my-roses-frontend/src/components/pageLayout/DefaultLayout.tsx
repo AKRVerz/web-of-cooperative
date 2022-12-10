@@ -4,7 +4,7 @@ import { Box, Flex } from '@chakra-ui/react';
 const DefaultLayout: ReactFC = ({ children }) => {
   return (
     <Box
-      bgImage={'/bg.jpg'}
+      bgImage={'/tree-g9c17c16a8_1920.jpg'}
       height="100vh"
       width="100vw"
       bgPosition="center"

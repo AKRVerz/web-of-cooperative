@@ -54,17 +54,17 @@ const BaseTopBar: ReactFC = ({ children }) => {
           >
             <Image
               borderRadius="full"
-              src={`${basePath}/logo.png`}
+              src={`${basePath}/Logo-Koperasi-1-1200x900.jpg`}
               alt="Logo"
             />
           </AspectRatio>
         </Flex>
         <VStack spacing={0} alignItems="left">
           <Text {...poppinsText(false)}>
-            SISTEM INFORMASI PENCATATAN PELANGGARAN
+            SISTEM INFORMASI PEMBUKUAN KOPERASI
           </Text>
-          <Text {...aliceText}>SMAN 1 BUKITTINGGI</Text>
-          <Text {...poppinsText()}>SMAN 1 UNGGUL BUKITTINGGI</Text>
+          <Text {...aliceText}>DESA GRIMULYO</Text>
+          <Text {...poppinsText()}>ARGO MULYO LESTARI</Text>
         </VStack>
       </Flex>
       <Spacer />

@@ -40,7 +40,7 @@ import {
 } from 'src/store/actions/resources/users';
 import SessionUtils from 'src/utils/sessionUtils';
 
-const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAlluser }) => {
+const CoreContent: React.FC<Props> = ({ users, deleteCore, getAlluser }) => {
   const toast = useChakraToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
@@ -61,14 +61,14 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAlluser }) => {
   const getDatas = async () => {
     if (firstLoad) return;
 
-    await getAlluser(`filters=role="admin"&page=${page}&limit=${limit}`, true);
+    await getAlluser(`filters=role="core"&page=${page}&limit=${limit}`, true);
   };
 
   const deleteUser = async () => {
     try {
       if (!userId) return;
 
-      await deleteAdmin(userId);
+      await deleteCore(userId);
       getDatas();
 
       onClose();
@@ -79,10 +79,7 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAlluser }) => {
 
   useEffect(() => {
     (async () => {
-      await getAlluser(
-        `filters=role="admin"&page=${page}&limit=${limit}`,
-        true
-      );
+      await getAlluser(`filters=role="core"&page=${page}&limit=${limit}`, true);
 
       setFirstLoad(false);
     })();
@@ -94,7 +91,7 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAlluser }) => {
     <React.Fragment>
       <DashboardMainContainer>
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-          Data User Admin
+          Data User Core
         </Text>
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
@@ -219,10 +216,10 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const connector = connect(mapStateToProps, {
-  deleteAdmin: _deleteUser,
+  deleteCore: _deleteUser,
   getAlluser: _getAlluser,
 });
 
 type Props = ConnectedProps<typeof connector>;
 
-export default connector(AdminContent);
+export default connector(CoreContent);

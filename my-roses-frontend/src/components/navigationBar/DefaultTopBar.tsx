@@ -33,15 +33,17 @@ const DefaultTopBar: ReactFC = () => {
     >
       <Flex align="center" mr={5}>
         <AspectRatio ratio={1} width={{ base: '50px', sm: '75px', md: '85px' }}>
-          <Image borderRadius="full" src={`${basePath}/logo.png`} alt="Logo" />
+          <Image
+            borderRadius="full"
+            src={`${basePath}/Logo-Koperasi-1-1200x900.jpg`}
+            alt="Logo"
+          />
         </AspectRatio>
       </Flex>
       <Stack display={'flex'} alignItems="left">
-        <Text {...poppinsText(false)}>
-          SISTEM INFORMASI PENCATATAN PELANGGARAN
-        </Text>
-        <Text {...aliceText}>SMAN 1 BUKITTINGGI</Text>
-        <Text {...poppinsText()}>SMAN 1 UNGGUL BUKITTINGGI</Text>
+        <Text {...poppinsText(false)}>SISTEM INFORMASI PEMBUKUAN KOPERASI</Text>
+        <Text {...aliceText}>DESA GRIMULYO</Text>
+        <Text {...poppinsText()}>Argo Mulyo Lestari</Text>
       </Stack>
     </Flex>
   );

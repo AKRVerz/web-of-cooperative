@@ -13,8 +13,6 @@ export const getAlluser =
   () =>
     getAllData(RESOURCE_NAME.USERS, query, overwrite)();
 
-getAlluser('filters=role="member"');
-
 export const getUserById =
   (id: number, query = '', overwrite = true) =>
   () =>
