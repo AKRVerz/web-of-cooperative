@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import {
   Flex,
   Text,
@@ -15,30 +15,30 @@ import {
   InputRightElement,
   Spacer,
   useDisclosure,
-} from '@chakra-ui/react';
-import Router from 'next/router';
-import { connect, ConnectedProps } from 'react-redux';
-import { FaSearch, FaEdit, FaTrash } from 'react-icons/fa';
-import { errorToastfier } from 'src/utils/toastifier';
+} from "@chakra-ui/react";
+import Router from "next/router";
+import { connect, ConnectedProps } from "react-redux";
+import { FaSearch, FaEdit, FaTrash } from "react-icons/fa";
+import { errorToastfier } from "src/utils/toastifier";
 
-import { RootState } from 'src/store';
-import { RESOURCE_NAME } from 'src/utils/constant';
-import DeleteConfirmationModal from 'src/components/baseComponent/DeleteConfirmationModal';
-import useCustomDebounce from 'src/hooks/useCustomDebounce';
+import { RootState } from "src/store";
+import { RESOURCE_NAME } from "src/utils/constant";
+import DeleteConfirmationModal from "src/components/baseComponent/DeleteConfirmationModal";
+import useCustomDebounce from "src/hooks/useCustomDebounce";
 import {
   DashboardContainer,
   DashboardMainContainer,
   DashboardTableContainer,
   Pagination,
-} from 'src/components/baseComponent';
-import useChakraToast from 'src/hooks/useChakraToast';
-import { buttonStyle } from 'src/utils/styles';
-import { getResource } from 'src/store/selectors/resources';
+} from "src/components/baseComponent";
+import useChakraToast from "src/hooks/useChakraToast";
+import { buttonStyle } from "src/utils/styles";
+import { getResource } from "src/store/selectors/resources";
 import {
   deleteUser as _deleteUser,
   getAlluser as _getAlluser,
-} from 'src/store/actions/resources/users';
-import SessionUtils from 'src/utils/sessionUtils';
+} from "src/store/actions/resources/users";
+import SessionUtils from "src/utils/sessionUtils";
 
 const MemberContent: React.FC<Props> = ({
   users,
@@ -49,7 +49,7 @@ const MemberContent: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>("");
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
   const {
@@ -97,24 +97,24 @@ const MemberContent: React.FC<Props> = ({
   return (
     <React.Fragment>
       <DashboardMainContainer>
-        <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
+        <Text fontFamily={"Poppins"} fontSize={"1.45rem"} py={5}>
           Data User Member
         </Text>
-        <DashboardContainer px={10} flexDirection={'column'}>
+        <DashboardContainer px={10} flexDirection={"column"}>
           <Flex
             mb={4}
             mt={8}
-            justifyContent={'space-between'}
+            justifyContent={"space-between"}
             alignItems="center"
           >
             <Flex gap={2}>
               <Button
                 {...buttonStyle.confirmation}
                 fontFamily="poppins"
-                fontSize={'0.813rem'}
+                fontSize={"0.813rem"}
                 px={10}
                 borderRadius={25}
-                _focus={{ border: 'none' }}
+                _focus={{ border: "none" }}
                 onClick={() => Router.push(`${Router.pathname}/create`)}
               >
                 Tambah
@@ -122,22 +122,22 @@ const MemberContent: React.FC<Props> = ({
               <Button
                 {...buttonStyle.confirmation}
                 fontFamily="poppins"
-                fontSize={'0.813rem'}
+                fontSize={"0.813rem"}
                 px={10}
                 borderRadius={25}
-                _focus={{ border: 'none' }}
+                _focus={{ border: "none" }}
                 onClick={onCsvOpen}
               >
                 Import CSV
               </Button>
             </Flex>
-            <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
+            <InputGroup width={"15rem"} boxShadow={"lg"} borderRadius={25}>
               <Input
                 px={10}
                 color="black"
                 borderRadius={25}
                 fontFamily="poppins"
-                fontSize={'0.813rem'}
+                fontSize={"0.813rem"}
                 placeholder="Cari"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
@@ -153,17 +153,20 @@ const MemberContent: React.FC<Props> = ({
                 <Tr>
                   <Th
                     color="white"
-                    bg={'royalRed.200'}
+                    bg={"royalRed.200"}
                     borderTopLeftRadius={10}
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'95%'}>
+                  <Th color="white" bg={"royalRed.200"} width={"95%"}>
                     Username
+                  </Th>
+                  <Th color="white" bg={"royalRed.200"} width={"95%"}>
+                    Email
                   </Th>
                   <Th
                     color="white"
-                    bg={'royalRed.200'}
+                    bg={"royalRed.200"}
                     textAlign="center"
                     borderTopRightRadius={10}
                   >
@@ -173,16 +176,17 @@ const MemberContent: React.FC<Props> = ({
               </Thead>
               <Tbody>
                 {_.map(_.values(users.rows), (user, index) => (
-                  <Tr key={index} bg={index % 2 !== 0 ? '#E1E1E1' : 'white'}>
+                  <Tr key={index} bg={index % 2 !== 0 ? "#E1E1E1" : "white"}>
                     <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
                     <Td>{user.username}</Td>
+                    <Td>{user.email}</Td>
                     <Td>
-                      <Flex justifyContent={'space-between'}>
+                      <Flex justifyContent={"space-between"}>
                         <FaEdit
                           onClick={() =>
                             Router.push(`${Router.pathname}/${user.id}/update`)
                           }
-                          cursor={'pointer'}
+                          cursor={"pointer"}
                         />
                         <Spacer />
                         {user.id !== SessionUtils.getAccountId() && (
@@ -191,7 +195,7 @@ const MemberContent: React.FC<Props> = ({
                               setUserId(user.id);
                               setIsOpen(true);
                             }}
-                            cursor={'pointer'}
+                            cursor={"pointer"}
                           />
                         )}
                       </Flex>

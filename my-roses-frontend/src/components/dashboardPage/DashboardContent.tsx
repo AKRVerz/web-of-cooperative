@@ -1,40 +1,201 @@
-import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
-import { Flex, Text, AspectRatio, Grid, GridItem } from '@chakra-ui/react';
-import { FaUser, FaCalendarDay, FaListOl } from 'react-icons/fa';
-import { RiBook2Fill } from 'react-icons/ri';
-import { Card, DashboardContainer } from '../baseComponent';
-import { connect, ConnectedProps } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import _ from "lodash";
+import {
+  Flex,
+  Text,
+  Table,
+  Grid,
+  Tr,
+  Th,
+  Td,
+  Tbody,
+  Thead,
+  Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Spacer,
+  useDisclosure,
+} from "@chakra-ui/react";
+import Router from "next/router";
+import { connect, ConnectedProps } from "react-redux";
+import { FaSearch, FaEdit, FaTrash } from "react-icons/fa";
+import { errorToastfier } from "src/utils/toastifier";
+import { RootState } from "src/store";
+import { RESOURCE_NAME } from "src/utils/constant";
+import DeleteConfirmationModal from "src/components/baseComponent/DeleteConfirmationModal";
+import useCustomDebounce from "src/hooks/useCustomDebounce";
+import {
+  DashboardContainer,
+  DashboardMainContainer,
+  DashboardTableContainer,
+  Pagination,
+} from "src/components/baseComponent";
+import useChakraToast from "src/hooks/useChakraToast";
+import { buttonStyle } from "src/utils/styles";
+import { getResource } from "src/store/selectors/resources";
+import {
+  deleteUser as _deleteUser,
+  getAlluser as _getAlluser,
+} from "src/store/actions/resources/users";
+import SessionUtils from "src/utils/sessionUtils";
 
-const DashboardContent: React.FC<Props> = () => {
+const DashboardContent: React.FC<Props> = ({
+  users,
+  deleteAdmin,
+  getAlluser,
+}) => {
+  const toast = useChakraToast();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [userId, setUserId] = useState<number | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [limit] = useState<number>(15);
+  const {
+    isOpen: isCsvOpen,
+    onClose: onCsvClose,
+    onOpen: onCsvOpen,
+  } = useDisclosure();
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  const getDatas = async () => {
+    if (firstLoad) return;
+
+    await getAlluser(`filters=role="admin"&page=${page}&limit=${limit}`, true);
+  };
+
+  const deleteUser = async () => {
+    try {
+      if (!userId) return;
+
+      await deleteAdmin(userId);
+      getDatas();
+
+      onClose();
+    } catch (e) {
+      errorToastfier(toast, e);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      await getAlluser(
+        `filters=role="admin"&page=${page}&limit=${limit}`,
+        true
+      );
+
+      setFirstLoad(false);
+    })();
+  }, []); // eslint-disable-line
+
+  useCustomDebounce(getDatas, 1000, [searchValue, page]);
+
   return (
-    <Flex
-      flexDirection={'column'}
-      py={3}
-      px={3}
-      height={'fit-content'}
-      width={'100%'}
-      bg={'royalGray.100'}
-    >
-      <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-        Dashboard
-      </Text>
-      <Grid
-        templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
-        my={3}
-        gap={4}
-      ></Grid>
-      <DashboardContainer flexDirection="column" height={'100%'}>
-        <Text fontFamily={'Poppins'} fontSize={'1.45rem'} px={5} py={5}>
-          Data Kategori Pelanggaran Harian
+    <React.Fragment>
+      <DashboardMainContainer>
+        <Text fontFamily={"Poppins"} fontSize={"1.45rem"} py={5}>
+          Dashboard
         </Text>
-        <Flex height={'40rem'} width={'100%'}></Flex>
-      </DashboardContainer>
-    </Flex>
+        <Grid
+          templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
+          my={3}
+          gap={4}
+        ></Grid>
+
+        <DashboardContainer px={10} flexDirection={"column"}>
+          <Flex
+            mb={4}
+            mt={8}
+            justifyContent={"space-between"}
+            alignItems="center"
+          ></Flex>
+          <DashboardTableContainer>
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th
+                    color="white"
+                    bg={"royalRed.200"}
+                    borderTopLeftRadius={10}
+                  >
+                    No
+                  </Th>
+                  <Th color="white" bg={"royalRed.200"} width={"35%"}>
+                    Username
+                  </Th>
+                  <Th color="white" bg={"royalRed.200"} width={"65%"}>
+                    Email
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={"royalRed.200"}
+                    textAlign="center"
+                    borderTopRightRadius={10}
+                  >
+                    Aksi
+                  </Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {_.map(_.values(users.rows), (user, index) => (
+                  <Tr key={index} bg={index % 2 !== 0 ? "#E1E1E1" : "white"}>
+                    <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
+                    <Td>{user.username}</Td>
+                    <Td>{user.email}</Td>
+                    <Td>
+                      <Flex justifyContent={"space-between"}>
+                        <FaEdit
+                          onClick={() =>
+                            Router.push(`${Router.pathname}/${user.id}/update`)
+                          }
+                          cursor={"pointer"}
+                        />
+                        <Spacer />
+                        {user.id !== SessionUtils.getAccountId() && (
+                          <FaTrash
+                            onClick={() => {
+                              setUserId(user.id);
+                              setIsOpen(true);
+                            }}
+                            cursor={"pointer"}
+                          />
+                        )}
+                      </Flex>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </DashboardTableContainer>
+          <Pagination
+            limit={limit}
+            total={users.count}
+            page={page}
+            setPage={setPage}
+          />
+        </DashboardContainer>
+      </DashboardMainContainer>
+      <DeleteConfirmationModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={deleteUser}
+      />
+    </React.Fragment>
   );
 };
 
-const connector = connect(null);
+const mapStateToProps = (state: RootState) => ({
+  users: getResource(RESOURCE_NAME.USERS)(state),
+});
+
+const connector = connect(mapStateToProps, {
+  deleteAdmin: _deleteUser,
+  getAlluser: _getAlluser,
+});
 
 type Props = ConnectedProps<typeof connector>;
 

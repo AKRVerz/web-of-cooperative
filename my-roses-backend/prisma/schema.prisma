@@ -36,7 +36,14 @@ model User {
 
 model Pembukuan {
   id        Int      @id @default(autoincrement())
-  // 
+  hari      String  
+  tanggal   Float   
+  uraian    String
+  sumWood   Float 
+  harga     Int   
+  masuk     Float
+  keluar    Float
+  jumlah    Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
