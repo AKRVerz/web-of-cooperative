@@ -1,13 +1,11 @@
-import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import * as reducers from './reducers';
 import { applyInterceptors } from './axios';
 
 const rootReducer = combineReducers(reducers);
-const composeEnhancers =
-  (typeof window === 'object' &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+const composeEnhancers = composeWithDevToolsDevelopmentOnly({});
 
 const store = createStore(
   rootReducer,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import _ from "lodash";
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import {
   Flex,
   Text,
@@ -16,40 +16,40 @@ import {
   InputRightElement,
   Spacer,
   useDisclosure,
-} from "@chakra-ui/react";
-import Router from "next/router";
-import { connect, ConnectedProps } from "react-redux";
-import { FaSearch, FaEdit, FaTrash } from "react-icons/fa";
-import { errorToastfier } from "src/utils/toastifier";
-import { RootState } from "src/store";
-import { RESOURCE_NAME } from "src/utils/constant";
-import DeleteConfirmationModal from "src/components/baseComponent/DeleteConfirmationModal";
-import useCustomDebounce from "src/hooks/useCustomDebounce";
+} from '@chakra-ui/react';
+import Router from 'next/router';
+import { connect, ConnectedProps } from 'react-redux';
+import { FaSearch, FaEdit, FaTrash } from 'react-icons/fa';
+import { errorToastfier } from 'src/utils/toastifier';
+import { RootState } from 'src/store';
+import { RESOURCE_NAME } from 'src/utils/constant';
+import DeleteConfirmationModal from 'src/components/baseComponent/DeleteConfirmationModal';
+import useCustomDebounce from 'src/hooks/useCustomDebounce';
 import {
   DashboardContainer,
   DashboardMainContainer,
   DashboardTableContainer,
   Pagination,
-} from "src/components/baseComponent";
-import useChakraToast from "src/hooks/useChakraToast";
-import { buttonStyle } from "src/utils/styles";
-import { getResource } from "src/store/selectors/resources";
+} from 'src/components/baseComponent';
+import useChakraToast from 'src/hooks/useChakraToast';
+import { buttonStyle } from 'src/utils/styles';
+import { getResource } from 'src/store/selectors/resources';
 import {
   deleteUser as _deleteUser,
-  getAlluser as _getAlluser,
-} from "src/store/actions/resources/users";
-import SessionUtils from "src/utils/sessionUtils";
+  getAllUser as _getAlluser,
+} from 'src/store/actions/resources/users';
+import SessionUtils from 'src/utils/sessionUtils';
 
 const DashboardContent: React.FC<Props> = ({
   users,
   deleteAdmin,
-  getAlluser,
+  getAllUser,
 }) => {
   const toast = useChakraToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
   const {
@@ -65,7 +65,7 @@ const DashboardContent: React.FC<Props> = ({
   const getDatas = async () => {
     if (firstLoad) return;
 
-    await getAlluser(`filters=role="admin"&page=${page}&limit=${limit}`, true);
+    await getAllUser(`filters=role="admin"&page=${page}&limit=${limit}`, true);
   };
 
   const deleteUser = async () => {
@@ -83,7 +83,7 @@ const DashboardContent: React.FC<Props> = ({
 
   useEffect(() => {
     (async () => {
-      await getAlluser(
+      await getAllUser(
         `filters=role="admin"&page=${page}&limit=${limit}`,
         true
       );
@@ -97,20 +97,20 @@ const DashboardContent: React.FC<Props> = ({
   return (
     <React.Fragment>
       <DashboardMainContainer>
-        <Text fontFamily={"Poppins"} fontSize={"1.45rem"} py={5}>
+        <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
           Dashboard
         </Text>
         <Grid
-          templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
+          templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
           my={3}
           gap={4}
         ></Grid>
 
-        <DashboardContainer px={10} flexDirection={"column"}>
+        <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
             mb={4}
             mt={8}
-            justifyContent={"space-between"}
+            justifyContent={'space-between'}
             alignItems="center"
           ></Flex>
           <DashboardTableContainer>
@@ -119,20 +119,20 @@ const DashboardContent: React.FC<Props> = ({
                 <Tr>
                   <Th
                     color="white"
-                    bg={"royalRed.200"}
+                    bg={'royalRed.200'}
                     borderTopLeftRadius={10}
                   >
                     No
                   </Th>
-                  <Th color="white" bg={"royalRed.200"} width={"35%"}>
+                  <Th color="white" bg={'royalRed.200'} width={'35%'}>
                     Username
                   </Th>
-                  <Th color="white" bg={"royalRed.200"} width={"65%"}>
+                  <Th color="white" bg={'royalRed.200'} width={'65%'}>
                     Email
                   </Th>
                   <Th
                     color="white"
-                    bg={"royalRed.200"}
+                    bg={'royalRed.200'}
                     textAlign="center"
                     borderTopRightRadius={10}
                   >
@@ -142,17 +142,17 @@ const DashboardContent: React.FC<Props> = ({
               </Thead>
               <Tbody>
                 {_.map(_.values(users.rows), (user, index) => (
-                  <Tr key={index} bg={index % 2 !== 0 ? "#E1E1E1" : "white"}>
+                  <Tr key={index} bg={index % 2 !== 0 ? '#E1E1E1' : 'white'}>
                     <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
                     <Td>{user.username}</Td>
                     <Td>{user.email}</Td>
                     <Td>
-                      <Flex justifyContent={"space-between"}>
+                      <Flex justifyContent={'space-between'}>
                         <FaEdit
                           onClick={() =>
                             Router.push(`${Router.pathname}/${user.id}/update`)
                           }
-                          cursor={"pointer"}
+                          cursor={'pointer'}
                         />
                         <Spacer />
                         {user.id !== SessionUtils.getAccountId() && (
@@ -161,7 +161,7 @@ const DashboardContent: React.FC<Props> = ({
                               setUserId(user.id);
                               setIsOpen(true);
                             }}
-                            cursor={"pointer"}
+                            cursor={'pointer'}
                           />
                         )}
                       </Flex>
@@ -194,7 +194,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const connector = connect(mapStateToProps, {
   deleteAdmin: _deleteUser,
-  getAlluser: _getAlluser,
+  getAllUser: _getAlluser,
 });
 
 type Props = ConnectedProps<typeof connector>;

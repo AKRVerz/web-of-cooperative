@@ -25,8 +25,8 @@ export const applyInterceptors = (dispatch: AppDispatch) => {
           config.resourceName = config.headers
             .resourceName as Koperasi.Resource.ResourceName;
 
-        if (_.isBoolean(config.headers.overwrite))
-          config.overwrite = config.headers.overwrite;
+        if (config.headers.overwrite)
+          config.overwrite = config.headers.overwrite == 'true';
       }
 
       return config;

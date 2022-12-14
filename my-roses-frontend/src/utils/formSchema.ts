@@ -2,6 +2,17 @@ import _ from 'lodash';
 import * as Yup from 'yup';
 import { USER_ROLE } from './constant';
 
+const isValidNumber = (value: number | undefined, greaterThan = 0) => {
+  if (
+    typeof value === 'undefined' ||
+    typeof +value !== 'number' ||
+    Number.isNaN(+value)
+  )
+    return false;
+
+  return +value > greaterThan;
+};
+
 export const passwordSchema = Yup.object({
   password: Yup.string().required('Password dibutuhkan'),
 });
@@ -20,6 +31,36 @@ export const userSchema = Yup.object({
     .required('Role Dibutuhkan')
     .test('role', 'Role Tidak Valid', (role) => _.includes(USER_ROLE, role)),
 }).concat(passwordSchema);
+
+export const pembukuanSchema = Yup.object({
+  tanggal: Yup.date().required('Tanggal Dibutuhkan'),
+  uraian: Yup.string().required('Uraian Dibutuhkan'),
+  sumWood: Yup.number()
+    .test('isSumWoodValid', 'Batang/Kg harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Jumlah Batang/Kg Dibutuhkan'),
+  harga: Yup.number()
+    .test('isSumWoodValid', 'Harga harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Harga Dibutuhkan'),
+  masuk: Yup.number()
+    .test('isSumWoodValid', 'Masuk harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Masuk Dibutuhkan'),
+  keluar: Yup.number()
+    .test('isSumWoodValid', 'Keluar harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Keluar Dibutuhkan'),
+  jumlah: Yup.number()
+    .test('isSumWoodValid', 'Jumlah harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Jumlah Dibutuhkan'),
+});
 
 export const guruSchema = Yup.object({
   namaLengkap: Yup.string().required('Nama lengkap dibutuhkan'),

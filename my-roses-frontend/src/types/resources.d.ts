@@ -6,22 +6,28 @@ type ResourceName = typeof RESOURCE_NAME[keyof typeof RESOURCE_NAME];
 
 export type ResourceStructure = {
   [RESOURCE_NAME.USERS]: ModelStructure['user'];
+  [RESOURCE_NAME.PEMBUKUANS]: ModelStructure['pembukuan'];
 };
 
 export type ResourceRecord<T extends ResourceName> = {
   rows: {
-    [id: number]: Resource[T];
+    [id: number]: ResourceStructure[T];
   };
   count: number;
 };
 
 export type Resources = {
   [RESOURCE_NAME.USERS]: ResourceRecord<typeof RESOURCE_NAME.USERS>;
+  [RESOURCE_NAME.PEMBUKUANS]: ResourceRecord<typeof RESOURCE_NAME.PEMBUKUANS>;
 };
 
 export type Create = {
   [RESOURCE_NAME.USERS]: Omit<
     ModelStructure['user'],
+    'id' | 'createdAt' | 'updatedAt'
+  >;
+  [RESOURCE_NAME.PEMBUKUANS]: Omit<
+    ModelStructure['pembukuan'],
     'id' | 'createdAt' | 'updatedAt'
   >;
 };
@@ -31,6 +37,12 @@ export type Update = {
     Omit<
       Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.USERS],
       'id' | 'createdAt' | 'updatedAt' | 'password'
+    >
+  >;
+  [RESOURCE_NAME.PEMBUKUANS]: Partial<
+    Omit<
+      Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.PEMBUKUANS],
+      'id' | 'createdAt' | 'updatedAt'
     >
   >;
 };

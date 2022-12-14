@@ -1,11 +1,11 @@
 import React from 'react';
+import PembukuanCreate from 'src/components/dashboardPage/pembukuanPage/PembukuanCreate';
 import { AdminLayout } from 'src/components/pageLayout';
-import LaporanSiswaCreate from 'src/components/dashboardPage/laporanPelanggaran/LaporanSiswaCreate';
 
 const LaporanDetail = () => {
   return (
     <AdminLayout>
-      <LaporanSiswaCreate />
+      <PembukuanCreate />
     </AdminLayout>
   );
 };
