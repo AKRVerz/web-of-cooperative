@@ -5,8 +5,6 @@ import {
   VStack,
   FormControl,
   Input,
-  InputGroup,
-  InputRightElement,
   FormErrorMessage,
   FormLabel,
   Button,
@@ -14,7 +12,6 @@ import {
 import Router from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import {
   DashboardContainer,
   DashboardMainContainer,
