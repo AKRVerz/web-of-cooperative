@@ -45,8 +45,8 @@ const BottomBar: ReactFC = () => {
   return (
     <Flex bg={'white'} overflow="visible" bottom={0} width={'100%'} py={3}>
       <Grid
-        templateColumns={'repeat(4, 1fr)'}
-        gap={4}
+        templateColumns={'repeat(3, 1fr)'}
+        gap={3}
         width={'100%'}
         position={'relative'}
       >
@@ -54,13 +54,6 @@ const BottomBar: ReactFC = () => {
           <Flex justifyContent={'center'} alignItems={'center'}>
             <AspectRatio ratio={1} width={5}>
               {inHome() ? <HiHome /> : <VscHome />}
-            </AspectRatio>
-          </Flex>
-        </GridItem>
-        <GridItem onClick={() => router.push('/grafik')} {...navigationStyle}>
-          <Flex justifyContent={'center'} alignItems={'center'}>
-            <AspectRatio ratio={1} width={5}>
-              {inGraph() ? <GoGraph /> : <VscGraph />}
             </AspectRatio>
           </Flex>
         </GridItem>

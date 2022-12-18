@@ -55,15 +55,6 @@ const TopBar: ReactFC = () => {
           <AspectRatio
             ratio={1}
             width={6}
-            onClick={() => router.push('/grafik')}
-          >
-            {inGraph() ? <GoGraph /> : <VscGraph />}
-          </AspectRatio>
-        </Flex>
-        <Flex {...navigationStyle}>
-          <AspectRatio
-            ratio={1}
-            width={6}
             onClick={() => router.push('/settings')}
           >
             {inSettings() ? <BsGearFill /> : <VscSettingsGear />}

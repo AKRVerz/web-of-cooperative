@@ -27,12 +27,15 @@ import React, { useState } from 'react';
 import { BiUser } from 'react-icons/bi';
 import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { connect, ConnectedProps } from 'react-redux';
-import Router from 'next/router';
+import { errorToastfier } from 'src/utils/toastifier';
 import { userLogin as _userLogin } from 'src/store/actions/currentUser';
 import { USER_ROLE } from 'src/utils/constant';
+import useChakraToast from 'src/hooks/useChakraToast';
+import router from 'next/router';
 
 const FormLogin: ReactFC<Props> = ({ userLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const toast = useChakraToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const interText = {
     fontFamily: 'Inter',
@@ -49,15 +52,24 @@ const FormLogin: ReactFC<Props> = ({ userLogin }) => {
   const login = async (
     values: Pick<
       Koperasi.Resource.ResourceStructure['users'],
-      'email' | 'password'
+      'email' | 'password' | 'role'
     >
   ) => {
     try {
-      await userLogin(values);
+      const result = await userLogin(values);
 
-      // router.push('/admin');
+      switch (result.role) {
+        case USER_ROLE.ADMIN:
+          router.push('/dashboard');
+          break;
+        case USER_ROLE.CORE:
+          router.push('/');
+        default:
+          router.push('/');
+          break;
+      }
     } catch (e) {
-      // errorToastfier(e);
+      errorToastfier(toast, e);
     }
   };
 
@@ -78,6 +90,7 @@ const FormLogin: ReactFC<Props> = ({ userLogin }) => {
             initialValues={{
               email: '',
               password: '',
+              role: USER_ROLE.MEMBER,
             }}
             onSubmit={login}
           >
@@ -148,6 +161,25 @@ const FormLogin: ReactFC<Props> = ({ userLogin }) => {
                     </InputGroup>
                     {!!errors.password && touched.password && (
                       <FormErrorMessage>{errors.password}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.role && touched.role}>
+                    <InputGroup>
+                      <Select
+                        id="kategori"
+                        placeholder="-Masuk Sebagai-"
+                        color={'royalBlack.100'}
+                        borderColor={'royalRed.200'}
+                        boxShadow="lg"
+                        value={values.role}
+                        onChange={handleChange('role')}
+                        onBlur={handleBlur('role')}
+                      >
+                        {generateRole()}
+                      </Select>
+                    </InputGroup>
+                    {!!errors.role && touched.role && (
+                      <FormErrorMessage>{errors.role}</FormErrorMessage>
                     )}
                   </FormControl>
                   <Box

@@ -1,5 +1,5 @@
-import React from "react";
-import _ from "lodash";
+import React from 'react';
+import _ from 'lodash';
 import {
   Accordion,
   AccordionButton,
@@ -9,85 +9,85 @@ import {
   Flex,
   VStack,
   Text,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { GoSignOut } from "react-icons/go";
-import { FaUser, FaHome } from "react-icons/fa";
-import { RiAddCircleFill, RiBook2Fill } from "react-icons/ri";
-import { USER_ROLE } from "src/utils/constant";
-import { removeToken } from "src/utils/sessionUtils";
-import useTopBarHeight from "src/utils/useTopBarHeight";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { GoSignOut } from 'react-icons/go';
+import { FaUser, FaHome } from 'react-icons/fa';
+import { RiAddCircleFill, RiBook2Fill } from 'react-icons/ri';
+import { USER_ROLE } from 'src/utils/constant';
+import { removeToken } from 'src/utils/sessionUtils';
+import useTopBarHeight from 'src/utils/useTopBarHeight';
 
 const SideBar: ReactFC<Props> = ({ show }) => {
   const router = useRouter();
   const decreasor = useTopBarHeight();
 
   const isActive = {
-    fontWeight: "bold",
-    color: "royalRed.200",
+    fontWeight: 'bold',
+    color: 'royalRed.200',
   };
 
   const generateAccordion = () =>
     _.map(USER_ROLE, (role, key) => {
-      const resource = role.split("_");
+      const resource = role.split('_');
 
       return (
         <Text
-          cursor={"pointer"}
+          cursor={'pointer'}
           padding={3}
           key={key}
-          _hover={{ color: "royalRed.100" }}
-          onClick={() => router.push(`/dashboard/akun/${resource.join("-")}s`)}
+          _hover={{ color: 'royalRed.100' }}
+          onClick={() => router.push(`/dashboard/akun/${resource.join('-')}s`)}
         >
-          {_.map(resource, (r) => _.capitalize(r)).join(" ")}
+          {_.map(resource, (r) => _.capitalize(r)).join(' ')}
         </Text>
       );
     });
 
   return (
     <Flex
-      height={{ base: `calc(100vh - ${decreasor}px)`, md: "100%" }}
-      width={{ base: "100%", md: "20rem" }}
+      height={{ base: `calc(100vh - ${decreasor}px)`, md: '100%' }}
+      width={{ base: '100%', md: '20rem' }}
       mr={{ base: 0, md: 5 }}
       position={{
-        base: "absolute",
-        md: "relative",
+        base: 'absolute',
+        md: 'relative',
       }}
       bg="white"
-      left={{ base: show ? 0 : "-100%", md: 0 }}
+      left={{ base: show ? 0 : '-100%', md: 0 }}
       zIndex={5}
     >
       <VStack
         spacing={5}
-        alignItems={"flex-start"}
+        alignItems={'flex-start'}
         py={4}
         px={5}
-        width={"100%"}
-        height={"100%"}
+        width={'100%'}
+        height={'100%'}
       >
         <Flex
-          width={"90%"}
-          alignItems={"center"}
-          userSelect={"none"}
-          cursor={"pointer"}
-          onClick={() => router.push("/dashboard")}
-          _hover={{ color: "royalRed.100" }}
-          {...(router.pathname === "/dashboard" && isActive)}
+          width={'90%'}
+          alignItems={'center'}
+          userSelect={'none'}
+          cursor={'pointer'}
+          onClick={() => router.push('/dashboard')}
+          _hover={{ color: 'royalRed.100' }}
+          {...(router.pathname === '/dashboard' && isActive)}
         >
           <AspectRatio ratio={1} width={8} mr={2}>
             <FaHome />
           </AspectRatio>
           <Text>Dashboard</Text>
         </Flex>
-        <Accordion allowMultiple width={"100%"}>
-          <AccordionItem border={"none"}>
+        <Accordion allowMultiple width={'100%'}>
+          <AccordionItem border={'none'}>
             <AccordionButton padding={0}>
               <Flex
-                width={"90%"}
-                alignItems={"center"}
-                userSelect={"none"}
-                _hover={{ color: "royalRed.100" }}
-                {...(_.includes(router.pathname, "/dashboard/akun") &&
+                width={'90%'}
+                alignItems={'center'}
+                userSelect={'none'}
+                _hover={{ color: 'royalRed.100' }}
+                {...(_.includes(router.pathname, '/dashboard/akun') &&
                   isActive)}
               >
                 <AspectRatio ratio={1} width={8} mr={2}>
@@ -100,48 +100,31 @@ const SideBar: ReactFC<Props> = ({ show }) => {
           </AccordionItem>
         </Accordion>
         <Flex
-          width={"90%"}
-          alignItems={"center"}
-          userSelect={"none"}
-          cursor={"pointer"}
-          onClick={() => router.push("/dashboard/pembukuan")}
-          _hover={{ color: "royalRed.100" }}
-          {...(_.includes(router.pathname, "/dashboard/pembukuan") && isActive)}
+          width={'90%'}
+          alignItems={'center'}
+          userSelect={'none'}
+          cursor={'pointer'}
+          onClick={() => router.push('/dashboard/pembukuan')}
+          _hover={{ color: 'royalRed.100' }}
+          {...(_.includes(router.pathname, '/dashboard/pembukuan') && isActive)}
         >
-          <AspectRatio justifyContent={"flex-start"} ratio={1} width={8} mr={2}>
+          <AspectRatio justifyContent={'flex-start'} ratio={1} width={8} mr={2}>
             <RiAddCircleFill />
           </AspectRatio>
           <Text>Laporan</Text>
         </Flex>
         <Flex
-          width={"90%"}
-          alignItems={"center"}
-          userSelect={"none"}
-          cursor={"pointer"}
-          onClick={() => router.push("/dashboard/kategori-pelanggarans")}
-          _hover={{ color: "royalRed.100" }}
-          {...(_.includes(
-            router.pathname,
-            "/dashboard/kategori-pelanggarans"
-          ) && isActive)}
-        >
-          <AspectRatio ratio={1} width={8} mr={2}>
-            <RiBook2Fill />
-          </AspectRatio>
-          <Text>Kategori Pelanggaran</Text>
-        </Flex>
-        <Flex
-          width={"90%"}
-          userSelect={"none"}
-          cursor={"pointer"}
+          width={'90%'}
+          userSelect={'none'}
+          cursor={'pointer'}
           onClick={() => {
             removeToken();
-            router.push("/login");
+            router.push('/login');
           }}
-          _hover={{ color: "royalRed.100" }}
+          _hover={{ color: 'royalRed.100' }}
         >
-          <Flex ml={"5px"} alignItems={"center"}>
-            <AspectRatio justifyContent={"center"} ratio={1} width={8} mr={3}>
+          <Flex ml={'5px'} alignItems={'center'}>
+            <AspectRatio justifyContent={'center'} ratio={1} width={8} mr={3}>
               <GoSignOut />
             </AspectRatio>
             <Text>Keluar</Text>

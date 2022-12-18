@@ -18,7 +18,6 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 import { connect, ConnectedProps } from 'react-redux';
-import SessionUtils from 'src/utils/sessionUtils';
 import Router from 'next/router';
 import { FaEdit, FaSearch, FaTrash } from 'react-icons/fa';
 import { RESOURCE_NAME } from 'src/utils/constant';
@@ -26,7 +25,6 @@ import { RootState } from 'src/store';
 import { resources } from 'src/store/selectors';
 import { getAllPembukuan as _getAllPembukuan } from 'src/store/actions/resources/pembukuans';
 import useCustomDebounce from 'src/hooks/useCustomDebounce';
-import LaporanRow from './PembukuanRow';
 import {
   DashboardContainer,
   DashboardMainContainer,
@@ -72,7 +70,12 @@ const PembukuanContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
         Buat Laporan
       </Text>
       <DashboardContainer px={10} flexDirection={'column'}>
-        <Flex mb={4} mt={8} justifyContent={'flex-end'} alignItems="center">
+        <Flex
+          mb={4}
+          mt={8}
+          justifyContent={'space-between'}
+          alignItems="center"
+        >
           <Flex gap={2}>
             <Button
               {...buttonStyle.confirmation}
@@ -84,17 +87,6 @@ const PembukuanContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
               onClick={() => Router.push(`${Router.pathname}/create`)}
             >
               Tambah
-            </Button>
-            <Button
-              {...buttonStyle.confirmation}
-              fontFamily="poppins"
-              fontSize={'0.813rem'}
-              px={10}
-              borderRadius={25}
-              _focus={{ border: 'none' }}
-              onClick={onCsvOpen}
-            >
-              Import CSV
             </Button>
           </Flex>
           <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
@@ -195,15 +187,13 @@ const PembukuanContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                         cursor={'pointer'}
                       />
                       <Spacer />
-                      {pembukuan.id !== SessionUtils.getAccountId() && (
-                        <FaTrash
-                          onClick={() => {
-                            setPembukuanId(pembukuan.id);
-                            setIsOpen(true);
-                          }}
-                          cursor={'pointer'}
-                        />
-                      )}
+                      <FaTrash
+                        onClick={() => {
+                          setPembukuanId(pembukuan.id);
+                          setIsOpen(true);
+                        }}
+                        cursor={'pointer'}
+                      />
                     </Flex>
                   </Td>
                 </Tr>

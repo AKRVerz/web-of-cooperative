@@ -8,7 +8,8 @@ class User extends BaseRepository(MODELS_NAME.USER) {
   public static async resourceToModel(resource: AnyRecord) {
     const user = _.pick(resource, ['email', 'username', 'password', 'role']);
 
-    if (resource.password) user.password = await hashText(resource.password);
+    if (user.email) user.email = _.toLower(resource.email);
+    if (user.password) user.password = await hashText(resource.password);
 
     return user as Prisma.UserCreateInput;
   }
@@ -32,7 +33,7 @@ class User extends BaseRepository(MODELS_NAME.USER) {
   ) {
     if (!_.isEmpty(email)) {
       const checkEmail = await this.findOne({
-        email,
+        email: _.toLower(email),
       });
 
       if (checkEmail && (!_.isNil(id) ? checkEmail.id !== id : true))

@@ -117,7 +117,10 @@ export const returnUsersMw = asyncMw(async (req, res) => {
 });
 
 export const loginMw = asyncMw(async (req, res) => {
-  const user = await repository.user.findOne({ email: req.body.email });
+  const user = await repository.user.findOne({
+    email: _.toLower(req.body.email),
+    role: req.body.role,
+  });
 
   if (!user) return res.status(404).json({ message: 'User not found' });
 
@@ -126,7 +129,7 @@ export const loginMw = asyncMw(async (req, res) => {
 
   const token = signAccessToken(_.pick(user, ['id', 'role']), req.body.always);
 
-  return res.json({ id: user.id, token });
+  return res.json({ ..._.pick(user, ['id', 'role']), token });
 });
 
 export const isAdminMw = asyncMw(async (req, res, next) => {
