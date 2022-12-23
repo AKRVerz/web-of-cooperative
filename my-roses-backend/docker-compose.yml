@@ -1,25 +1,23 @@
-version: "3.1"
+version: "3"
 services:
-  # MySQL Service
-  db:
-    build: ./docker/db/
+  koperasi-argo-mulyo:
+    image: postgres:14
     container_name: ${DB_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-    command: --default-authentication-plugin=mysql_native_password
-    networks:
-      - koperasi-network
     volumes:
-      - ./.tmp/db-data:/var/lib/mysql
+      - ./db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - koperasi-argo-mulyo
 
-# Docker Networks
+volumes:
+  koperasi-argo-mulyo:
+
 networks:
-  koperasi-network:
-    driver: bridge
+  koperasi-argo-mulyo:
