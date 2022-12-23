@@ -218,7 +218,7 @@ const FormLogin: ReactFC<Props> = ({ userLogin }) => {
           <Divider mt={5} variant={'solid'} />
           <ModalBody>
             <Text textAlign={'center'} {...interText} mt={5} mb={5}>
-              Silahkan datang ke ruang Tata Usaha
+              Silahkan Hubungi Pihak Koperasi
             </Text>
           </ModalBody>
           <Divider variant={'solid'} />

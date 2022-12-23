@@ -47,4 +47,10 @@ export type Update = {
   >;
 };
 
+export type UpdatePassword = {
+  password: string;
+  confirmationPassword: string;
+  oldPassword: string;
+};
+
 export as namespace Resource;

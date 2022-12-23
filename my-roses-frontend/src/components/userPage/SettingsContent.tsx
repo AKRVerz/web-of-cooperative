@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Flex,
   Text,
@@ -10,21 +10,18 @@ import {
   FormLabel,
   FormErrorMessage,
   InputRightElement,
-} from "@chakra-ui/react";
-import Router from "next/router";
-import { Formik, Form } from "formik";
-import { connect, ConnectedProps } from "react-redux";
-import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
-import { DashboardContainer } from "src/components/baseComponent";
-import useChakraToast from "src/hooks/useChakraToast";
-import {
-  changePassword as _changePassword,
-  IChangePass,
-} from "src/store/actions/resources";
-import { errorToastfier, toastfier } from "src/utils/toastifier";
-import { changePasswordSchema } from "src/utils/formSchema";
-import { buttonStyle, createUserInput } from "src/utils/styles";
-import { getAccountId, getRole } from "src/utils/sessionUtils";
+} from '@chakra-ui/react';
+import Router from 'next/router';
+import { Formik, Form } from 'formik';
+import { connect, ConnectedProps } from 'react-redux';
+import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+import { DashboardContainer } from 'src/components/baseComponent';
+import useChakraToast from 'src/hooks/useChakraToast';
+import { changePassword as _changePassword } from 'src/store/actions/resources';
+import { errorToastfier } from 'src/utils/toastifier';
+import { changePasswordSchema } from 'src/utils/formSchema';
+import { buttonStyle, createUserInput } from 'src/utils/styles';
+import { getAccountId } from 'src/utils/sessionUtils';
 
 const SettingsContent: React.FC<Props> = ({ changePassword }) => {
   const toast = useChakraToast();
@@ -34,16 +31,16 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
   const [isConfirmPassVisible, setIsConfirmPassVisible] =
     useState<boolean>(false);
 
-  const changeUserPass = async (value: IChangePass) => {
+  const changeUserPass = async (values: Resource.UpdatePassword) => {
     setIsRequested(true);
 
     try {
-      await changePassword(getAccountId()!, getRole()!, value);
+      await changePassword(getAccountId()!, values);
 
-      toastfier("Password berhasil diperbarui!", { type: "success" });
+      toast('Password berhasil diperbarui!');
 
       return setTimeout(() => {
-        Router.push("/");
+        Router.push('/');
       }, 3000);
     } catch (e) {
       errorToastfier(toast, e);
@@ -53,22 +50,22 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
   };
 
   return (
-    <DashboardContainer height={"100%"}>
+    <DashboardContainer height={'100%'}>
       <Flex
         flexDirection="column"
-        height={"100%"}
-        width={{ base: "100%", md: "40%" }}
+        height={'100%'}
+        width={{ base: '100%', md: '40%' }}
         p={5}
       >
-        <Text fontSize={20} fontWeight={"medium"} fontFamily={"Poppins"} mb={4}>
+        <Text fontSize={20} fontWeight={'medium'} fontFamily={'Poppins'} mb={4}>
           Ganti Password
         </Text>
         <Flex p={3}>
           <Formik
             initialValues={{
-              oldPassword: "",
-              password: "",
-              confirmationPassword: "",
+              oldPassword: '',
+              password: '',
+              confirmationPassword: '',
             }}
             validationSchema={changePasswordSchema}
             onSubmit={changeUserPass}
@@ -98,10 +95,10 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
                         id="oldPassword"
                         placeholder="Pasword lama"
                         value={values.oldPassword}
-                        onChange={handleChange("oldPassword")}
-                        onBlur={handleBlur("oldPassword")}
+                        onChange={handleChange('oldPassword')}
+                        onBlur={handleBlur('oldPassword')}
                         {...createUserInput}
-                        type={isOldPassVisible ? "text" : "password"}
+                        type={isOldPassVisible ? 'text' : 'password'}
                       />
                       <InputRightElement>
                         {isOldPassVisible ? (
@@ -131,10 +128,10 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
                         id="password"
                         placeholder="Password"
                         value={values.password}
-                        onChange={handleChange("password")}
-                        onBlur={handleBlur("password")}
+                        onChange={handleChange('password')}
+                        onBlur={handleBlur('password')}
                         {...createUserInput}
-                        type={isPassVisible ? "text" : "password"}
+                        type={isPassVisible ? 'text' : 'password'}
                       />
                       <InputRightElement>
                         {isPassVisible ? (
@@ -167,10 +164,10 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
                         id="confirmationPassword"
                         placeholder="Konfirmasi Password"
                         value={values.confirmationPassword}
-                        onChange={handleChange("confirmationPassword")}
-                        onBlur={handleBlur("confirmationPassword")}
+                        onChange={handleChange('confirmationPassword')}
+                        onBlur={handleBlur('confirmationPassword')}
                         {...createUserInput}
-                        type={isConfirmPassVisible ? "text" : "password"}
+                        type={isConfirmPassVisible ? 'text' : 'password'}
                       />
                       <InputRightElement>
                         {isConfirmPassVisible ? (
@@ -197,10 +194,10 @@ const SettingsContent: React.FC<Props> = ({ changePassword }) => {
                 <Button
                   {...buttonStyle.confirmation}
                   fontFamily="poppins"
-                  fontSize={"0.813rem"}
+                  fontSize={'0.813rem'}
                   px={10}
                   borderRadius={6}
-                  _focus={{ border: "none" }}
+                  _focus={{ border: 'none' }}
                   type="submit"
                   disabled={isRequested}
                   mt={4}

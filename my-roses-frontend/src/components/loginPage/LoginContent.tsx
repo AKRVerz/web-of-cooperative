@@ -35,7 +35,7 @@ const LoginContent: ReactFC = () => {
           textAlign={'center'}
         >
           <Text color={'white'} {...poppinsText(false)}>
-            Selamat datang di website <br /> pelaporan pelanggaran!
+            Selamat datang di website <br /> pembukuan koperasi
           </Text>
         </Flex>
         <Flex flexDirection={'column'}>

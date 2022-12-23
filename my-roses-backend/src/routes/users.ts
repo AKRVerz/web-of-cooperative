@@ -6,6 +6,14 @@ const router = Router();
 // POST /users
 router.post('/', user.authMw, user.createUserMw, user.returnUserMw);
 
+// POST /users/:id/password
+router.post(
+  '/:id/password',
+  user.authMw,
+  user.getUserMw,
+  user.changePasswordMw
+);
+
 // GET /users
 router.get('/', user.authMw, user.getUsersMw, user.returnUsersMw);
 

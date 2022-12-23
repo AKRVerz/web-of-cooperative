@@ -137,3 +137,29 @@ export const isAdminMw = asyncMw(async (req, res, next) => {
 
   return next();
 });
+
+export const changePasswordMw = asyncMw(async (req, res) => {
+  if (req.userAuth.id !== +req.params.id && !req.isAdmin)
+    return res.status(403).json({ message: 'Forbidden' });
+
+  const isSamePassword = await compareText(
+    req.body.oldPassword,
+    req.userAuth.password
+  );
+
+  if (!isSamePassword)
+    return res.status(401).json({ message: 'Wrong Password' });
+
+  if (
+    _.isNil(req.body.password) ||
+    _.isNil(req.body.confirmationPassword) ||
+    req.body.password !== req.body.confirmationPassword
+  )
+    return res.status(401).json({ message: 'Password Not Match!' });
+
+  await repository.user.update(+req.params.id, {
+    ..._.pick(await repository.user.resourceToModel(req.body), ['password']),
+  });
+
+  return res.status(201).json({ message: 'Password Updated Successfully!' });
+});

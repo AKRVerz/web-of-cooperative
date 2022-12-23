@@ -1,30 +1,11 @@
-import axios from "src/store/axios";
-import { AppDispatch } from "src/store";
-import { USER_ROLE } from "src/utils/constant";
+import axios from 'src/store/axios';
+import { AppDispatch } from 'src/store';
+import { RESOURCE_NAME, USER_ROLE } from 'src/utils/constant';
 
 interface ActionUpdate<T extends Koperasi.Resource.ResourceName> {
   id: number;
   data: Koperasi.Resource.ResourceStructure[T];
 }
-
-export interface IChangePass {
-  oldPassword: string;
-  password: string;
-  confirmationPassword: string;
-}
-
-export type RoleType = typeof USER_ROLE[keyof typeof USER_ROLE];
-
-export const getResourceURL = (value: string) => {
-  switch (value) {
-    case USER_ROLE.ADMIN:
-      return "users";
-    case USER_ROLE.CORE:
-      return "cores";
-    default:
-      return "members";
-  }
-};
 
 export const setResource = <T extends Koperasi.Resource.ResourceName>(
   resourceName: T,
@@ -43,9 +24,9 @@ export const updateResource = <T extends Koperasi.Resource.ResourceName>(
 });
 
 export const changePassword =
-  (id: number, role: RoleType, payload: IChangePass) => async () => {
+  (id: number, payload: Resource.UpdatePassword) => async () => {
     try {
-      await axios.post(`/${getResourceURL(role)}/${id}/password`, payload);
+      await axios.post(`/${RESOURCE_NAME.USERS}/${id}/password`, payload);
     } catch (err) {
       return Promise.reject(err);
     }
@@ -71,7 +52,7 @@ export const deleteResource = <T extends Koperasi.Resource.ResourceName>(
 export const getAllData =
   <T extends Koperasi.Resource.ResourceName>(
     resourceName: T,
-    query = "",
+    query = '',
     overwrite = true
   ) =>
   async () => {
@@ -93,7 +74,7 @@ export const getDataById =
   <T extends Koperasi.Resource.ResourceName>(
     resourceName: T,
     id: number,
-    query = "",
+    query = '',
     overwrite = false
   ) =>
   async () => {
@@ -133,7 +114,7 @@ export const addData =
 // Update the data by id
 export const updateData =
   <T extends Koperasi.Resource.ResourceName>(resourceName: T) =>
-  (id: number, update: any, query = "") =>
+  (id: number, update: any, query = '') =>
   async () => {
     const { data } = await axios.patch<Koperasi.Resource.ResourceStructure[T]>(
       `/${resourceName}/${id}?${query}`,
