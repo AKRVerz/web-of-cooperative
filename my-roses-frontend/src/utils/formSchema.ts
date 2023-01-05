@@ -45,21 +45,11 @@ export const pembukuanSchema = Yup.object({
       isValidNumber(value, 0)
     )
     .required("Harga Dibutuhkan"),
-  masuk: Yup.number()
-    .test("isSumWoodValid", "Masuk harus besar dari 0", (value) =>
-      isValidNumber(value, 0)
-    )
-    .required("Masuk Dibutuhkan"),
   keluar: Yup.number()
     .test("isSumWoodValid", "Keluar harus besar dari 0", (value) =>
       isValidNumber(value, 0)
     )
     .required("Keluar Dibutuhkan"),
-  jumlah: Yup.number()
-    .test("isSumWoodValid", "Jumlah harus besar dari 0", (value) =>
-      isValidNumber(value, 0)
-    )
-    .required("Jumlah Dibutuhkan"),
 });
 
 export const adminSchema = Yup.object({
