@@ -1,27 +1,27 @@
-import _ from "lodash";
-import moment from "moment";
-import { AppDispatch } from "src/store";
-import { RESOURCE_NAME } from "src/utils/constant";
+import _ from 'lodash';
+import moment from 'moment';
+import { AppDispatch } from 'src/store';
+import { RESOURCE_NAME } from 'src/utils/constant';
 import {
   addData,
   deleteData,
   getAllData,
   getDataById,
   updateData,
-} from "../resources";
+} from '../resources';
 
 export const getAllPembukuan =
-  (query = "", overwrite = true) =>
+  (query = '', overwrite = true) =>
   () =>
     getAllData(RESOURCE_NAME.PEMBUKUANS, query, overwrite)();
 
 export const getPembukuanById =
-  (id: number, query = "", overwrite = true) =>
+  (id: number, query = '', overwrite = true) =>
   () =>
     getDataById(RESOURCE_NAME.PEMBUKUANS, id, query, overwrite)();
 
 export const createPembukuan =
-  (payload: Koperasi.Resource.Create["pembukuans"]) =>
+  (payload: Koperasi.Resource.Create['pembukuans']) =>
   (dispatch: AppDispatch) => {
     return addData(RESOURCE_NAME.PEMBUKUANS)({
       ...payload,
@@ -30,7 +30,7 @@ export const createPembukuan =
   };
 
 export const updatePembukuan =
-  (id: number, update: Koperasi.Resource.Update["pembukuans"], query = "") =>
+  (id: number, update: Koperasi.Resource.Update['pembukuans'], query = '') =>
   () =>
     updateData(RESOURCE_NAME.PEMBUKUANS)(
       id,
