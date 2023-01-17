@@ -32,6 +32,8 @@ model User {
   role      Role     @default(member)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  noKtp     Int
+  alamat    String
 }
 
 model Pembukuan {

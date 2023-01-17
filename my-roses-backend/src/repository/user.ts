@@ -6,7 +6,14 @@ import { AnyRecord, ModelStructure, MODELS_NAME } from './prisma-repo';
 
 class User extends BaseRepository(MODELS_NAME.USER) {
   public static async resourceToModel(resource: AnyRecord) {
-    const user = _.pick(resource, ['email', 'username', 'password', 'role']);
+    const user = _.pick(resource, [
+      'email',
+      'username',
+      'password',
+      'role',
+      'noKtp',
+      'alamat',
+    ]);
 
     if (user.email) user.email = _.toLower(resource.email);
     if (user.password) user.password = await hashText(resource.password);

@@ -150,11 +150,18 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllUser }) => {
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'35%'}>
+
+                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
                     Username
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'65%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
                     Email
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
+                    No KTP
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'35%'}>
+                    Alamat
                   </Th>
                   <Th
                     color="white"
@@ -172,6 +179,8 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllUser }) => {
                     <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
                     <Td>{user.username}</Td>
                     <Td>{user.email}</Td>
+                    <Td>{user.noKtp}</Td>
+                    <Td>{user.alamat}</Td>
                     <Td>
                       <Flex justifyContent={'space-between'}>
                         <FaEdit
