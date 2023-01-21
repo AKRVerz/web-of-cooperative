@@ -1,5 +1,5 @@
 import { ButtonProps, InputProps } from '@chakra-ui/react';
-// import { StyleSheet } from '@react-pdf/renderer';
+import { StyleSheet } from '@react-pdf/renderer';
 
 const createDefaultInput = {
   borderRadius: 0,
@@ -38,38 +38,38 @@ export const buttonStyle = {
   } as ButtonProps,
 };
 
-// export const pdfStyles = StyleSheet.create({
-//   body: {
-//     paddingVertical: 60,
-//     paddingHorizontal: 60,
-//   },
-//   title: {
-//     fontSize: 14,
-//     textAlign: 'center',
-//     fontFamily: 'Times-Roman',
-//     fontWeight: 'bold',
-//     margin: 15,
-//   },
-//   text: {
-//     margin: 5,
-//     fontSize: 12,
-//     lineHeight: 1.5,
-//     textAlign: 'justify',
-//     fontFamily: 'Times-Roman',
-//   },
-//   header: {
-//     fontSize: 12,
-//     marginBottom: 20,
-//     textAlign: 'center',
-//     color: 'grey',
-//   },
-//   pageNumber: {
-//     position: 'absolute',
-//     fontSize: 12,
-//     bottom: 30,
-//     left: 0,
-//     right: 0,
-//     textAlign: 'center',
-//     color: 'grey',
-//   },
-// });
+export const pdfStyles = StyleSheet.create({
+  body: {
+    paddingVertical: 60,
+    paddingHorizontal: 60,
+  },
+  title: {
+    fontSize: 14,
+    textAlign: 'center',
+    fontFamily: 'Times-Roman',
+    fontWeight: 'bold',
+    margin: 15,
+  },
+  text: {
+    margin: 5,
+    fontSize: 12,
+    lineHeight: 1.5,
+    textAlign: 'justify',
+    fontFamily: 'Times-Roman',
+  },
+  header: {
+    fontSize: 12,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: 'grey',
+  },
+  pageNumber: {
+    position: 'absolute',
+    fontSize: 12,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: 'center',
+    color: 'grey',
+  },
+});

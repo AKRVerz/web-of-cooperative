@@ -18,7 +18,7 @@ export const passwordSchema = Yup.object({
 });
 
 export const loginSchema = Yup.object({
-  userName: Yup.string().required('Username Dibutuhkan'),
+  userName: Yup.string().required('Nama Lengkap Dibutuhkan'),
   role: Yup.mixed()
     .required('Role Dibutuhkan')
     .test('role', 'Role Tidak Valid', (role) => _.includes(USER_ROLE, role)),
@@ -26,7 +26,7 @@ export const loginSchema = Yup.object({
 
 export const userSchema = Yup.object({
   email: Yup.string().email().required('Email Dibutuhkan'),
-  username: Yup.string().required('Username Dibutuhkan'),
+  username: Yup.string().required('Nama Lengkap Dibutuhkan'),
   noKtp: Yup.string().required('No KTP Dibutuhkan'),
   alamat: Yup.string().required('Alamat Dibutuhkan'),
   tanggal: Yup.date().required('Tanggal Dibutuhkan'),

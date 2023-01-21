@@ -47,3 +47,10 @@ export const deletePembukuan =
   (id: number, noRequest = false) =>
   (dispatch: AppDispatch) =>
     deleteData(RESOURCE_NAME.PEMBUKUANS, id, noRequest)(dispatch);
+
+export const DEFAULT_DOCUMENT_PROPS = {
+  author: 'Koperasi Argo Mulyo Lestari',
+  creator: 'Koperasi Argo Mulyo Lestari',
+  producer: 'Desa Grimulyo',
+  subject: 'Laporan Pembukuan',
+};

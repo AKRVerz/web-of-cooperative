@@ -122,10 +122,10 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                   <FormControl
                     isInvalid={!!errors.username && touched.username}
                   >
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Nama Lengkap</FormLabel>
                     <Input
                       id="userName"
-                      placeholder="Username"
+                      placeholder="Nama Lengkap"
                       value={values.username}
                       onChange={handleChange('username')}
                       onBlur={handleBlur('username')}

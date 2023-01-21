@@ -155,7 +155,7 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllUser }) => {
                     Hari/Tanggal
                   </Th>
                   <Th color="white" bg={'royalRed.200'} width={'25%'}>
-                    Username
+                    Nama Lengkap
                   </Th>
                   <Th color="white" bg={'royalRed.200'} width={'20%'}>
                     Email
