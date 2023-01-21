@@ -23,6 +23,9 @@ export const getPembukuanById =
 export const createPembukuan =
   (payload: Koperasi.Resource.Create['pembukuans']) =>
   (dispatch: AppDispatch) => {
+    payload.masuk = payload.harga * payload.sumWood;
+    payload.jumlah = payload.masuk - payload.keluar;
+
     return addData(RESOURCE_NAME.PEMBUKUANS)({
       ...payload,
       tanggal: moment(payload.tanggal).toISOString() as unknown as Date,
