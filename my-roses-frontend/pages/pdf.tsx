@@ -33,7 +33,7 @@ const ExportPdf: React.FC<Props> = ({ pembukuans, getAllData }) => {
             kedalam surat berikut :
           </Text>
           <RiwayatTableHead />
-          <RiwayatTableRow pembukuan={pembukuans} />
+          <RiwayatTableRow pembukuans={pembukuans} />
           <Text
             style={styles.pageNumber}
             render={({ pageNumber, totalPages }) =>

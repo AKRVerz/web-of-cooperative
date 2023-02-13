@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { ButtonProps, InputProps } from "@chakra-ui/react";
 import { StyleSheet } from "@react-pdf/renderer";
-=======
-import { ButtonProps, InputProps } from '@chakra-ui/react';
-import { StyleSheet } from '@react-pdf/renderer';
->>>>>>> 1b70d191ab3ba94f400e44012ebb06210bb4573a
 
 const createDefaultInput = {
   borderRadius: 0,
@@ -77,6 +72,5 @@ export const pdfStyles = StyleSheet.create({
     right: 0,
     textAlign: "center",
     color: "grey",
-
   },
 });

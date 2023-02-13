@@ -1,14 +1,12 @@
 import React from "react";
 import _ from "lodash";
 import moment from "moment";
-import { connect, ConnectedProps } from "react-redux";
-import { Text, View, StyleSheet, Page } from "@react-pdf/renderer";
-import { RootState } from "src/store";
-import { resources } from "src/store/selectors";
-import { RESOURCE_NAME } from "src/utils/constant";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
+import { ResourceRecord } from "src/types/resources";
 
 const styles = StyleSheet.create({
   row: {
+    display: "flex",
     flexDirection: "row",
     borderColor: "black",
     borderWidth: 1,
@@ -16,14 +14,32 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 1.5,
   },
-  all: {
+  uraian: {
     borderRightColor: "black",
-    borderRightWidth: 1,
+    borderRightWidth: 2,
+    width: "25%",
+    marginHorizontal: 3,
+  },
+  sum: {
+    borderRightColor: "black",
+    borderRightWidth: 2,
     width: "20%",
     textAlign: "center",
     marginHorizontal: 3,
   },
+  harga: {
+    borderRightColor: "black",
+    borderRightWidth: 2,
+    width: "15%",
+    marginHorizontal: 3,
+  },
+  jumlah: {
+    width: "15%",
+    marginHorizontal: 3,
+  },
   date: {
+    borderRightColor: "black",
+    borderRightWidth: 2,
     width: "25%",
     marginHorizontal: 3,
   },
@@ -31,28 +47,26 @@ const styles = StyleSheet.create({
 
 const RiwayatTableRow: React.FC<Props> = ({ pembukuans }) => {
   return (
-    <View style={styles.row}>
+    <View>
       {_.map(_.values(pembukuans.rows), (pembukuan) => (
-        <View>
-          <Text style={styles.date}>
-            {moment(pembukuan.tanggal).format("dddd / DD MMMM YYYY")}
-          </Text>
-          <Text style={styles.all}>{pembukuan.uraian}</Text>
-          <Text style={styles.all}>{pembukuan.sumWood}</Text>
-          <Text style={styles.all}>{pembukuan.harga}</Text>
-          <Text style={styles.all}>{pembukuan.jumlah}</Text>
-        </View>
+        <React.Fragment key={pembukuan.id}>
+          <View style={styles.row}>
+            <Text style={styles.date}>
+              {moment(pembukuan.tanggal).format("dddd / DD MMMM YYYY")}
+            </Text>
+            <Text style={styles.uraian}>{pembukuan.uraian}</Text>
+            <Text style={styles.sum}>{pembukuan.sumWood}</Text>
+            <Text style={styles.harga}>{pembukuan.harga}</Text>
+            <Text style={styles.jumlah}>{pembukuan.jumlah}</Text>
+          </View>
+        </React.Fragment>
       ))}
     </View>
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  pembukuans: resources.getResource(RESOURCE_NAME.PEMBUKUANS)(state),
-});
+type Props = {
+  pembukuans: ResourceRecord<"pembukuans">;
+};
 
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-export default connector(RiwayatTableRow);
+export default RiwayatTableRow;
