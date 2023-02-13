@@ -2,7 +2,8 @@
 
 import { PrismaClient, Prisma, User,
  Pembukuan,
- File, } from '@prisma/client';
+ File,
+ Mount, } from '@prisma/client';
 import _ from 'lodash';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,6 +52,7 @@ export const MODELS_NAME = {
   USER: 'user',
   PEMBUKUAN: 'pembukuan',
   FILE: 'file',
+  MOUNT: 'mount',
 } as const;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -58,6 +60,7 @@ export type ModelStructure = {
   user: User;
   pembukuan: Pembukuan;
   file: File;
+  mount: Mount;
 };
 
 export type ModelName = keyof ModelStructure;
@@ -101,5 +104,16 @@ export type ModelTypes = {
     Order: Prisma.FileOrderByWithRelationInput;
     Delegate: Prisma.FileDelegate<ModelDelegate>;
     GroupBy: Prisma.FileGroupByOutputType;
+  },
+  mount: {
+    Where: Prisma.MountWhereInput;
+    Select: Prisma.MountSelect;
+    Include: Prisma.MountInclude;
+    Create: Prisma.MountCreateInput | Prisma.MountUncheckedCreateInput;
+    Update: Prisma.MountUpdateInput | Prisma.MountUncheckedUpdateInput;
+    Cursor: unknown;
+    Order: Prisma.MountOrderByWithRelationInput;
+    Delegate: Prisma.MountDelegate<ModelDelegate>;
+    GroupBy: Prisma.MountGroupByOutputType;
   },
 };
