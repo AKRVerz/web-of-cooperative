@@ -53,6 +53,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const connector = connect(mapStateToProps);
 
-type Props = resources.getResource(RESOURCE_NAME.PEMBUKUANS);
+type Props = ConnectedProps<typeof connector>;
 
-export default RiwayatTableRow;
+export default connector(RiwayatTableRow);

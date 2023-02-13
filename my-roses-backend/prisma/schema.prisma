@@ -32,8 +32,14 @@ model User {
   role      Role     @default(member)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+<<<<<<< HEAD
   
   iurans Mount[]
+=======
+  noKtp     Int
+  alamat    String
+  tanggal   DateTime
+>>>>>>> 1b70d191ab3ba94f400e44012ebb06210bb4573a
 }
 
 model Pembukuan {

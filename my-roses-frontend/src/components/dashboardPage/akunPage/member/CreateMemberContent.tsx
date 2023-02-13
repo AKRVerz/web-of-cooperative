@@ -64,6 +64,9 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
               username: '',
               password: '',
               role: USER_ROLE.MEMBER,
+              noKtp: undefined as unknown as number,
+              alamat: '',
+              tanggal: undefined as unknown as Date,
             }}
             validationSchema={userSchema}
             onSubmit={create}
@@ -83,6 +86,25 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                 }}
               >
                 <VStack spacing={2} py={2}>
+                  <FormControl
+                    isInvalid={!!errors.tanggal && !!touched.tanggal}
+                  >
+                    <FormLabel>Tanggal</FormLabel>
+                    <Input
+                      id="tanggal"
+                      placeholder="tanggal"
+                      value={values.tanggal as unknown as string}
+                      onChange={handleChange('tanggal')}
+                      onBlur={handleBlur('tanggal')}
+                      type="date"
+                      {...createUserInput}
+                    />
+                    {!!errors.tanggal && touched.tanggal && (
+                      <FormErrorMessage>
+                        {errors.tanggal as string}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
                   <FormControl isInvalid={!!errors.email && touched.email}>
                     <FormLabel>Email</FormLabel>
                     <Input
@@ -100,10 +122,10 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                   <FormControl
                     isInvalid={!!errors.username && touched.username}
                   >
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Nama Lengkap</FormLabel>
                     <Input
                       id="userName"
-                      placeholder="Username"
+                      placeholder="Nama Lengkap"
                       value={values.username}
                       onChange={handleChange('username')}
                       onBlur={handleBlur('username')}
@@ -111,6 +133,35 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                     />
                     {!!errors.username && touched.username && (
                       <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.noKtp && touched.noKtp}>
+                    <FormLabel>No KTP</FormLabel>
+                    <Input
+                      id="noktp"
+                      placeholder="No KTP"
+                      value={values.noKtp}
+                      onChange={handleChange('noKtp')}
+                      onBlur={handleBlur('noKtp')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.noKtp && touched.noKtp && (
+                      <FormErrorMessage>{errors.noKtp}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.alamat && touched.alamat}>
+                    <FormLabel>Alamat</FormLabel>
+                    <Input
+                      id="alamat"
+                      placeholder="Alamat"
+                      value={values.alamat}
+                      onChange={handleChange('alamat')}
+                      onBlur={handleBlur('alamat')}
+                      {...createUserInput}
+                    />
+                    {!!errors.alamat && touched.alamat && (
+                      <FormErrorMessage>{errors.alamat}</FormErrorMessage>
                     )}
                   </FormControl>
                   <FormControl

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
+import moment from 'moment';
 import {
   Flex,
   Text,
@@ -151,11 +152,20 @@ const CoreContent: React.FC<Props> = ({ users, deleteCore, getAllUser }) => {
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'35%'}>
-                    Username
+                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                    Hari/Tanggal
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'65%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                    Nama Lengkap
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
                     Email
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
+                    No KTP
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'35%'}>
+                    Alamat
                   </Th>
                   <Th
                     color="white"
@@ -171,8 +181,13 @@ const CoreContent: React.FC<Props> = ({ users, deleteCore, getAllUser }) => {
                 {_.map(_.values(users.rows), (user, index) => (
                   <Tr key={index} bg={index % 2 !== 0 ? '#E1E1E1' : 'white'}>
                     <Td>{(page === 1 ? 1 : (page - 1) * limit + 1) + index}</Td>
+                    <Td>
+                      {moment(user.tanggal).format('dddd / DD MMMM YYYY')}
+                    </Td>
                     <Td>{user.username}</Td>
                     <Td>{user.email}</Td>
+                    <Td>{user.noKtp}</Td>
+                    <Td>{user.alamat}</Td>
                     <Td>
                       <Flex justifyContent={'space-between'}>
                         <FaEdit
