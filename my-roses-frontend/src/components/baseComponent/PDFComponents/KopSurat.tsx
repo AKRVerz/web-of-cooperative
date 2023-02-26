@@ -63,7 +63,7 @@ const KopSurat = () => {
       <View style={styles.cops}>
         <Image style={styles['logo.sumbar']} src={'/sumbar.png'} />
         <View style={styles.cops_inner}>
-          <Text style={styles.cops_title}>DESA GRIMULYO LESTARI</Text>
+          <Text style={styles.cops_title}>DESA GIRIMULYO LESTARI</Text>
           <Text style={styles.cops_title}>KOPERASI ARGO MULYO LESTARI</Text>
         </View>
         <Image style={styles['logo.smansa']} src={'/logo.png'} />

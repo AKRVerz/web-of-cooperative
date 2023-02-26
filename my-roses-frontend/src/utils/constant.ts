@@ -7,6 +7,7 @@ export const USER_ROLE = {
 export const RESOURCE_NAME = {
   USERS: 'users',
   PEMBUKUANS: 'pembukuans',
+  IURANS: 'mount',
 } as const;
 
 export const REPORT_CONTENT = {

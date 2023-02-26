@@ -54,6 +54,6 @@ export const deletePembukuan =
 export const DEFAULT_DOCUMENT_PROPS = {
   author: 'Koperasi Argo Mulyo Lestari',
   creator: 'Koperasi Argo Mulyo Lestari',
-  producer: 'Desa Grimulyo',
+  producer: 'Desa Girimulyo',
   subject: 'Laporan Pembukuan',
 };

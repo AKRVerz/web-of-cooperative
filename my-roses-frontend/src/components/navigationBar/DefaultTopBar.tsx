@@ -42,7 +42,7 @@ const DefaultTopBar: ReactFC = () => {
       </Flex>
       <Stack display={'flex'} alignItems="left">
         <Text {...poppinsText(false)}>SISTEM INFORMASI PEMBUKUAN KOPERASI</Text>
-        <Text {...aliceText}>DESA GRIMULYO</Text>
+        <Text {...aliceText}>DESA GIRIMULYO</Text>
         <Text {...poppinsText()}>Argo Mulyo Lestari</Text>
       </Stack>
     </Flex>

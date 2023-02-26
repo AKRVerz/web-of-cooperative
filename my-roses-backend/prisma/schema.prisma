@@ -30,9 +30,12 @@ model User {
   password  String
   username  String   @unique
   role      Role     @default(member)
+  noKtp     Int
+  alamat    String
+  tanggal   DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   iurans Mount[]
 }
 

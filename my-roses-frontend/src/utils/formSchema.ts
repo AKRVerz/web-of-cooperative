@@ -47,30 +47,14 @@ export const pembukuanSchema = Yup.object({
     .test('isSumWoodValid', 'Harga harus besar dari 0', (value) =>
       isValidNumber(value, 0)
     )
-<<<<<<< HEAD
+
     .required('Harga Dibutuhkan'),
-  masuk: Yup.number()
-    .test('isSumWoodValid', 'Masuk harus besar dari 0', (value) =>
-      isValidNumber(value, 0)
-    )
-    .required('Masuk Dibutuhkan'),
-=======
-    .required("Harga Dibutuhkan"),
->>>>>>> a9c55da444f9900bdb308d0456368e2ba2f82202
   keluar: Yup.number()
     .test('isSumWoodValid', 'Keluar harus besar dari 0', (value) =>
       isValidNumber(value, 0)
     )
-<<<<<<< HEAD
+
     .required('Keluar Dibutuhkan'),
-  jumlah: Yup.number()
-    .test('isSumWoodValid', 'Jumlah harus besar dari 0', (value) =>
-      isValidNumber(value, 0)
-    )
-    .required('Jumlah Dibutuhkan'),
-=======
-    .required("Keluar Dibutuhkan"),
->>>>>>> a9c55da444f9900bdb308d0456368e2ba2f82202
 });
 
 export const adminSchema = Yup.object({

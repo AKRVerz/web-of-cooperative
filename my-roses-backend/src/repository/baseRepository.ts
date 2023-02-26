@@ -17,8 +17,12 @@ import {
   ModelTypes,
 } from './prisma-repo';
 
-export const extractCondition = <Cursor, Where>(conditions: Cursor | Where | number | string) => {
-  const dbCond = _.isObject(conditions) ? conditions : { id: _.toNumber(conditions) };
+export const extractCondition = <Cursor, Where>(
+  conditions: Cursor | Where | number | string
+) => {
+  const dbCond = _.isObject(conditions)
+    ? conditions
+    : { id: _.toNumber(conditions) };
 
   return dbCond;
 };
@@ -57,7 +61,8 @@ const BaseRepository = <
       option: Find<Select, Include, Cursor, Order, Scalar> = {}
     ) {
       const limit = +(query.limit === 'all' ? 0 : _.get(query, 'limit', 10));
-      const offset = query.page && query.page > 0 ? limit * (query.page - 1) : 0;
+      const offset =
+        query.page && query.page > 0 ? limit * (query.page - 1) : 0;
       const otherOptions = _.omit(query, ['limit', 'offset', 'page']);
 
       const where = {
@@ -142,9 +147,15 @@ const BaseRepository = <
      * Create a `model`.
      */
 
-    public static async create(data: Create, option: BaseOption<Include, Select> = {}) {
+    public static async create(
+      data: Create,
+      option: BaseOption<Include, Select> = {}
+    ) {
       // @ts-ignore
-      return AbstractBaseRepository.model.create({ data, ...option }) as Promise<Model>;
+      return AbstractBaseRepository.model.create({
+        data,
+        ...option,
+      }) as Promise<Model>;
     }
 
     /**
@@ -216,14 +227,19 @@ const BaseRepository = <
      * It works same as `updateOrCreate` but only have different names.\
      * It exists for anyone who prefer to use prisma `functions` original name.
      */
-    public static async upsert(...params: Parameters<typeof this.updateOrCreate>) {
+    public static async upsert(
+      ...params: Parameters<typeof this.updateOrCreate>
+    ) {
       return AbstractBaseRepository.updateOrCreate(...params);
     }
 
     /**
      * Create many `model`.
      */
-    public static async bulkCreate(data: Prisma.Enumerable<Create>, skipDuplicates = true) {
+    public static async bulkCreate(
+      data: Prisma.Enumerable<Create>,
+      skipDuplicates = true
+    ) {
       // @ts-ignore
       return AbstractBaseRepository.model.createMany({
         data,
@@ -237,7 +253,9 @@ const BaseRepository = <
      * It works same as `bulkCreate` but only have different names.\
      * It exists for anyone who prefer to use prisma `functions` original name.
      */
-    public static async createMany(...params: Parameters<typeof this.bulkCreate>) {
+    public static async createMany(
+      ...params: Parameters<typeof this.bulkCreate>
+    ) {
       return AbstractBaseRepository.bulkCreate(...params);
     }
 
@@ -246,7 +264,10 @@ const BaseRepository = <
      * Note, that providing `undefined` is treated as the value not being there.
      */
 
-    public static async bulkUpdate(where: Where, data: Prisma.Enumerable<Update>) {
+    public static async bulkUpdate(
+      where: Where,
+      data: Prisma.Enumerable<Update>
+    ) {
       // @ts-ignore
       return AbstractBaseRepository.model.updateMany({
         data,
@@ -259,7 +280,9 @@ const BaseRepository = <
      * It works same as `bulkUpdate` but only have different names.\
      * It exists for anyone who prefer to use prisma `functions` original name.
      */
-    public static async updateMany(...params: Parameters<typeof this.bulkUpdate>) {
+    public static async updateMany(
+      ...params: Parameters<typeof this.bulkUpdate>
+    ) {
       return AbstractBaseRepository.bulkUpdate(...params);
     }
 
@@ -318,7 +341,8 @@ const BaseRepository = <
       option: Aggregate<Cursor, Order, Scalar> = {}
     ) {
       // @ts-ignore
-      const aggregate = AbstractBaseRepository.model.aggregate as Delegate['aggregate'];
+      const aggregate = AbstractBaseRepository.model
+        .aggregate as Delegate['aggregate'];
       const where = extractCondition(conditions);
 
       if (_.isEmpty(aggregator)) {

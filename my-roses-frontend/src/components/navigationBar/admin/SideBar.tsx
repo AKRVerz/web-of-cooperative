@@ -115,6 +115,20 @@ const SideBar: ReactFC<Props> = ({ show }) => {
         </Flex>
         <Flex
           width={'90%'}
+          alignItems={'center'}
+          userSelect={'none'}
+          cursor={'pointer'}
+          onClick={() => router.push('/dashboard/iuran')}
+          _hover={{ color: 'royalRed.100' }}
+          {...(_.includes(router.pathname, '/dashboard/iuran') && isActive)}
+        >
+          <AspectRatio justifyContent={'flex-start'} ratio={1} width={8} mr={2}>
+            <RiAddCircleFill />
+          </AspectRatio>
+          <Text>Iuran</Text>
+        </Flex>
+        <Flex
+          width={'90%'}
           userSelect={'none'}
           cursor={'pointer'}
           onClick={() => {

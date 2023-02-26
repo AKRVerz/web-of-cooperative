@@ -1,6 +1,6 @@
-import axios from "src/store/axios";
-import { AppDispatch } from "src/store";
-import { RESOURCE_NAME, USER_ROLE } from "src/utils/constant";
+import axios from 'src/store/axios';
+import { AppDispatch } from 'src/store';
+import { RESOURCE_NAME } from 'src/utils/constant';
 
 interface ActionUpdate<T extends Koperasi.Resource.ResourceName> {
   id: number;
@@ -52,7 +52,7 @@ export const deleteResource = <T extends Koperasi.Resource.ResourceName>(
 export const getAllData =
   <T extends Koperasi.Resource.ResourceName>(
     resourceName: T,
-    query = "",
+    query = '',
     overwrite = true
   ) =>
   async () => {
@@ -74,7 +74,7 @@ export const getDataById =
   <T extends Koperasi.Resource.ResourceName>(
     resourceName: T,
     id: number,
-    query = "",
+    query = '',
     overwrite = false
   ) =>
   async () => {
@@ -114,7 +114,7 @@ export const addData =
 // Update the data by id
 export const updateData =
   <T extends Koperasi.Resource.ResourceName>(resourceName: T) =>
-  (id: number, update: any, query = "") =>
+  (id: number, update: any, query = '') =>
   async () => {
     const { data } = await axios.patch<Koperasi.Resource.ResourceStructure[T]>(
       `/${resourceName}/${id}?${query}`,

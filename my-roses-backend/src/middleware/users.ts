@@ -60,10 +60,26 @@ export const getUserMw = asyncMw(async (req, res, next) => {
 });
 
 export const getUsersMw = asyncMw(async (req, res, next) => {
+  const includes = Array.isArray(req.query.includes)
+    ? (req.query.includes as string[])
+    : ([req.query.includes] as string[]);
+
   req.users = await repository.user.findAll(
     {},
     req.filterQueryParams,
-    req.query
+    _.omit(req.query, ['includes']),
+    {
+      ...(!_.isEmpty(req.query.includes) && {
+        include: _.reduce(
+          includes,
+          (prev, curr) => ({
+            ...prev,
+            [curr]: true,
+          }),
+          {}
+        ),
+      }),
+    }
   );
 
   return next();

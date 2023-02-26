@@ -59,7 +59,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
     async () => {
       if (firstLoad) return;
 
-      await getAllUser(`page=${page}&limit=${limit}`);
+      await getAllUser(`page=${page}&limit=${limit}&includes=iurans`);
     },
     1000,
     [searchValue, page]
@@ -169,7 +169,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                       textAlign={'center'}
                     >
                       <Text width={'31%'} py={2}>
-                        {user.username}
+                        {user.id}
                       </Text>
                       <Text width={'32%'} py={2}>
                         {moment(iuran.date).format('MMMM YYYY')}

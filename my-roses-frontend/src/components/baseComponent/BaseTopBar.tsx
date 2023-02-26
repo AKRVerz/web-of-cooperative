@@ -63,7 +63,7 @@ const BaseTopBar: ReactFC = ({ children }) => {
           <Text {...poppinsText(false)}>
             SISTEM INFORMASI PEMBUKUAN KOPERASI
           </Text>
-          <Text {...aliceText}>DESA GRIMULYO</Text>
+          <Text {...aliceText}>DESA GIRIMULYO</Text>
           <Text {...poppinsText()}>ARGO MULYO LESTARI</Text>
         </VStack>
       </Flex>
