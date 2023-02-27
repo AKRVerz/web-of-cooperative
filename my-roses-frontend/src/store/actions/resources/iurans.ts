@@ -20,6 +20,14 @@ export const getIuranById =
   () =>
     getDataById(RESOURCE_NAME.IURANS, id, query, overwrite)();
 
+export const createIuran =
+  (payload: Koperasi.Resource.Create['users']) => (dispatch: AppDispatch) => {
+    return addData(RESOURCE_NAME.IURANS)({
+      ...payload,
+      tanggal: moment(payload.tanggal).toISOString() as unknown as Date,
+    })(dispatch);
+  };
+
 export const deleteIuran =
   (id: number, noRequest = false) =>
   (dispatch: AppDispatch) =>

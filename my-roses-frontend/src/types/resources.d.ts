@@ -35,8 +35,10 @@ export type Create = {
     'id' | 'createdAt' | 'updatedAt'
   >;
   [RESOURCE_NAME.IURANS]: Omit<
-    ModelStructure['mount'],
-    'id' | 'createdAt' | 'updatedAt'
+    ModelStructure['user'] & {
+      iurans?: ModelStructure['mount'][];
+    },
+    'id'
   >;
 };
 

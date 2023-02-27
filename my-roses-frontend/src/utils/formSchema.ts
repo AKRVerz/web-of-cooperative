@@ -57,6 +57,11 @@ export const pembukuanSchema = Yup.object({
     .required('Keluar Dibutuhkan'),
 });
 
+export const iuranSchema = Yup.object({
+  tanggal: Yup.date().required('Tanggal Dibutuhkan'),
+  uang: Yup.number().required('Jumlah Uang Dibutuhkan'),
+});
+
 export const adminSchema = Yup.object({
   password: Yup.string(),
 }).concat(userSchema.omit(['password']));

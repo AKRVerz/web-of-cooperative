@@ -26,7 +26,7 @@ const IuranCreate: React.FC<Props> = ({ createIuran }) => {
   const toast = useChakraToast();
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
-  const create = async (value: Koperasi.Resource.Create['iurans']) => {
+  const create = async (value: Koperasi.Resource.Create['mount']) => {
     setIsRequested(true);
 
     try {
@@ -55,9 +55,8 @@ const IuranCreate: React.FC<Props> = ({ createIuran }) => {
           </Text>
           <Formik
             initialValues={{
-              tanggal: undefined as unknown as Date,
-              username: undefined as unknown as string,
-              uang: undefined as unknown as number,
+              createdAt: undefined as unknown as Date,
+              debt: undefined as unknown as number,
             }}
             validationSchema={iuranSchema}
             onSubmit={create}
