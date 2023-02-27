@@ -35,10 +35,8 @@ export type Create = {
     'id' | 'createdAt' | 'updatedAt'
   >;
   [RESOURCE_NAME.IURANS]: Omit<
-    ModelStructure['user'] & {
-      iurans?: ModelStructure['mount'][];
-    },
-    'id'
+    ModelStructure['mount'],
+    'id' | 'createdAt' | 'updatedAt' | 'userId'
   >;
 };
 
@@ -52,12 +50,6 @@ export type Update = {
   [RESOURCE_NAME.PEMBUKUANS]: Partial<
     Omit<
       Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.PEMBUKUANS],
-      'id' | 'createdAt' | 'updatedAt'
-    >
-  >;
-  [RESOURCE_NAME.IURANS]: Partial<
-    Omit<
-      Koperasi.Resource.ResourceStructure['mount'],
       'id' | 'createdAt' | 'updatedAt'
     >
   >;
