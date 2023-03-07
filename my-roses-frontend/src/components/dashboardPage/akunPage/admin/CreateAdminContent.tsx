@@ -10,7 +10,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Button,
-  Toast,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';

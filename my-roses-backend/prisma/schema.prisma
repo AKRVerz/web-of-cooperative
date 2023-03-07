@@ -62,10 +62,10 @@ model File {
 }
 
 model Mount {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  debt       Int
-  user       User     @relation(fields: [userId], references: [id])
-  updatedAt  DateTime @updatedAt
-  createdAdt DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  debt      Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

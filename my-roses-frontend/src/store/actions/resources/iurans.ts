@@ -22,10 +22,14 @@ export const getIuranById =
 
 export const createIuran =
   (payload: Koperasi.Resource.Create['mount']) => (dispatch: AppDispatch) => {
-    return addData(RESOURCE_NAME.IURANS)({
+    if (typeof payload.debt === 'string') {
+      payload.debt = +payload.debt;
+    }
+
+    return addData('iurans' as unknown as Resource.ResourceName)({
       ...payload,
-      createdAt: moment(payload.createdAdt).toISOString() as unknown as Date,
-    })(dispatch);
+      createdAt: moment(payload.createdAt).toISOString() as unknown as Date,
+    })(dispatch) as unknown as Promise<Resource.ResourceStructure['mount']>;
   };
 
 export const deleteIuran =

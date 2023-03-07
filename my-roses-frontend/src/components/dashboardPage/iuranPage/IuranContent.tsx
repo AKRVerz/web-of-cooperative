@@ -151,7 +151,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
           <Box display={'flex'} flexDirection="column">
             {_.map(_.values(users.rows), ({ iurans, ...user }, index) => {
               const iuranByMonth = _.groupBy(iurans, (a) =>
-                moment(a.createdAdt).format('YYYY-MM')
+                moment(a.createdAt).format('YYYY-MM')
               );
               const iuranTotal = _.map(iuranByMonth, (value, date) => ({
                 date: date,
@@ -169,7 +169,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                       textAlign={'center'}
                     >
                       <Text width={'31%'} py={2}>
-                        {user.id}
+                        {user.username}
                       </Text>
                       <Text width={'32%'} py={2}>
                         {moment(iuran.date).format('MMMM YYYY')}

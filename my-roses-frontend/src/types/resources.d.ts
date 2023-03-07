@@ -36,7 +36,7 @@ export type Create = {
   >;
   [RESOURCE_NAME.IURANS]: Omit<
     ModelStructure['mount'],
-    'id' | 'createdAt' | 'updatedAt' | 'userId'
+    'id' | 'updatedAt' | 'userId'
   >;
 };
 
@@ -60,5 +60,7 @@ export type UpdatePassword = {
   confirmationPassword: string;
   oldPassword: string;
 };
+
+export type ReactSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export as namespace Resource;

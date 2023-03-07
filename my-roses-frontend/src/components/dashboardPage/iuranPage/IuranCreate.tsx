@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   Flex,
@@ -22,14 +23,24 @@ import { createIuran as _createIuran } from 'src/store/actions/resources/iurans'
 import { errorToastfier } from 'src/utils/toastifier';
 import useChakraToast from 'src/hooks/useChakraToast';
 import { getAllUser as _getAllUser } from 'src/store/actions/resources/users';
-import { RESOURCE_NAME } from 'src/utils/constant';
+import AutoComplete from 'src/components/baseComponent/AutoComplete';
 
 const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
   const toast = useChakraToast();
+  const [keyword, setKeyword] = useState('');
+  const [userId, setUserId] = useState<number>();
+  const [isError, setIsError] = useState('');
+  const [isTouched, setIsTouched] = useState(false);
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
   const create = async (value: Koperasi.Resource.Create['mount']) => {
+    if (!userId) return;
+
     setIsRequested(true);
+
+    Object.assign(value, {
+      userId,
+    });
 
     try {
       await createIuran(value);
@@ -37,35 +48,33 @@ const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
 
       return setTimeout(() => {
         Router.push('/dashboard/iuran');
-      }, 3000);
+      }, 1000);
     } catch (e) {
       errorToastfier(toast, e);
+      setIsRequested(false);
     }
-
-    setIsRequested(false);
   };
 
   useEffect(() => {
     (async () => {
-      await getAllUser(RESOURCE_NAME.USERS);
+      await getAllUser('limit=all');
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <DashboardMainContainer>
       <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-        Laporan
+        Iuran
       </Text>
       <DashboardContainer overflow={'auto'}>
         <Flex p={5} flexDirection={'column'} height={'100%'}>
           <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={3}>
-            Formulir Pembuatan Laporan
+            Formulir Pembuatan Iuran
           </Text>
           <Formik
             initialValues={{
-              createdAdt: undefined as unknown as Date,
+              createdAt: undefined as unknown as Date,
               debt: undefined as unknown as number,
-              updatedAt: '' as unknown as Date & string,
             }}
             validationSchema={iuranSchema}
             onSubmit={create}
@@ -86,39 +95,51 @@ const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
               >
                 <VStack spacing={2} py={2}>
                   <FormControl
-                    isInvalid={!!errors.createdAdt && !!touched.createdAdt}
+                    isInvalid={!!errors.createdAt && !!touched.createdAt}
                   >
                     <FormLabel>Tanggal</FormLabel>
                     <Input
                       id="tanggal"
                       placeholder="tanggal"
-                      value={values.createdAdt as unknown as string}
-                      onChange={handleChange('tanggal')}
-                      onBlur={handleBlur('tanggal')}
+                      value={values.createdAt as unknown as string}
+                      onChange={handleChange('createdAt')}
+                      onBlur={handleBlur('createdAt')}
                       type="date"
                       {...createUserInput}
                     />
-                    {!!errors.createdAdt && touched.createdAdt && (
+                    {!!errors.createdAt && touched.createdAt && (
                       <FormErrorMessage>
-                        {errors.createdAdt as string}
+                        {errors.createdAt as string}
                       </FormErrorMessage>
                     )}
                   </FormControl>
-
+                  <FormControl isInvalid={!!isError && !!isTouched}>
+                    <FormLabel>Nama Orang Tua</FormLabel>
+                    <AutoComplete
+                      keyword={keyword}
+                      setKeyword={setKeyword}
+                      setUserId={setUserId}
+                      setIsError={setIsError}
+                      setIsTouched={setIsTouched}
+                      onFocus={() => setIsTouched(true)}
+                      isRequired
+                    />
+                    {!_.isEmpty(isError) && isTouched && (
+                      <FormErrorMessage>{isError}</FormErrorMessage>
+                    )}
+                  </FormControl>
                   <FormControl isInvalid={!!errors.debt && !!touched.debt}>
                     <FormLabel>Pembayaran</FormLabel>
                     <Input
                       id="pembayaran"
                       placeholder="pembayaran"
-                      value={values.debt as unknown as string}
-                      onChange={handleChange('pembayaran')}
-                      onBlur={handleBlur('pembayaran')}
+                      value={values.debt}
+                      onChange={handleChange('debt')}
+                      onBlur={handleBlur('debt')}
                       {...createUserInput}
                     />
                     {!!errors.debt && touched.debt && (
-                      <FormErrorMessage>
-                        {errors.debt as string}
-                      </FormErrorMessage>
+                      <FormErrorMessage>{errors.debt}</FormErrorMessage>
                     )}
                   </FormControl>
                 </VStack>
