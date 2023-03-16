@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 import { connect, ConnectedProps } from 'react-redux';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { FaEdit, FaSearch, FaTrash } from 'react-icons/fa';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import { RootState } from 'src/store';
@@ -37,6 +37,7 @@ import useChakraToast from 'src/hooks/useChakraToast';
 const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
   const [page, setPage] = useState<number>(1);
   const toast = useChakraToast();
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [iuranId, setIuranId] = useState<number | null>(null);
@@ -181,8 +182,10 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                         <Flex justifyContent={'space-between'}>
                           <FaEdit
                             onClick={() =>
-                              Router.push(
-                                `${Router.pathname}/${iurans.id}/update`
+                              router.push(
+                                `${router.pathname}/${user.id}/${moment(
+                                  iuran.date
+                                ).year()}/${moment(iuran.date).month()}`
                               )
                             }
                             cursor={'pointer'}
@@ -190,7 +193,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                           <Spacer />
                           <FaTrash
                             onClick={() => {
-                              setIuranId(iurans.id);
+                              // setIuranId(iurans.id);
                               setIsOpen(true);
                             }}
                             cursor={'pointer'}
