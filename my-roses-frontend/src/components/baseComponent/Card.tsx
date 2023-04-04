@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 
-const Card: ReactFC<Props> = ({ bGround, title, data }) => {
+const Card: ReactFC<Props> = ({ bGround, title }) => {
   return (
     <Box
       bg={bGround}
@@ -15,11 +15,7 @@ const Card: ReactFC<Props> = ({ bGround, title, data }) => {
             {title}
           </Text>
         </GridItem>
-        <GridItem colSpan={1} pl="1rem" pt={7}>
-          <Text fontFamily={'Poppins'} fontSize={'1.2rem'}>
-            {data}
-          </Text>
-        </GridItem>
+
         <GridItem colSpan={1} textAlign="end" justifyContent="end">
           <Flex justifyContent="end" pr={5} pb={5}></Flex>
         </GridItem>
@@ -31,7 +27,6 @@ const Card: ReactFC<Props> = ({ bGround, title, data }) => {
 type Props = {
   bGround: string;
   title: string;
-  data: number | string;
 };
 
 export default Card;

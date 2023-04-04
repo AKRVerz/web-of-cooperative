@@ -30,7 +30,7 @@ model User {
   password  String
   username  String   @unique
   role      Role     @default(member)
-  noKtp     Int
+  noKtp     String
   alamat    String
   tanggal   DateTime
   createdAt DateTime @default(now())

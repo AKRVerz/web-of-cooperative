@@ -32,6 +32,16 @@ export const createIuran =
     })(dispatch) as unknown as Promise<Resource.ResourceStructure['mount']>;
   };
 
+export const updateIuran =
+  (id: number, update: Koperasi.Resource.Update['mount'], query = '') =>
+  () =>
+    updateData(RESOURCE_NAME.IURANS)(id, {
+      ...update,
+      ...(!_.isEmpty(update.updatedAt) && {
+        updateAt: moment(update.updateAt).toISOString() as unknown as Date,
+      }),
+    });
+
 export const deleteIuran =
   (id: number, noRequest = false) =>
   (dispatch: AppDispatch) =>

@@ -53,6 +53,12 @@ export type Update = {
       'id' | 'createdAt' | 'updatedAt'
     >
   >;
+  [RESOURCE_NAME.IURANS]: Paerial<
+    Omit<
+      Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.IURANS],
+      'id' | 'createdAt' | 'userId'
+    >
+  >;
 };
 
 export type UpdatePassword = {

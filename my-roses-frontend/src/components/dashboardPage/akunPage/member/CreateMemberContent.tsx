@@ -144,6 +144,7 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                       onChange={handleChange('noKtp')}
                       onBlur={handleBlur('noKtp')}
                       type="number"
+                      maxLength={16}
                       {...createUserInput}
                     />
                     {!!errors.noKtp && touched.noKtp && (

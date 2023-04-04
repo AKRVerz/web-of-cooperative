@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Flex,
   Text,
@@ -8,33 +8,33 @@ import {
   FormErrorMessage,
   FormLabel,
   Button,
-} from "@chakra-ui/react";
-import Router from "next/router";
-import { connect, ConnectedProps } from "react-redux";
-import { Formik, Form } from "formik";
+} from '@chakra-ui/react';
+import Router from 'next/router';
+import { connect, ConnectedProps } from 'react-redux';
+import { Formik, Form } from 'formik';
 import {
   DashboardContainer,
   DashboardMainContainer,
-} from "src/components/baseComponent";
-import { pembukuanSchema } from "src/utils/formSchema";
-import { buttonStyle, createUserInput } from "src/utils/styles";
-import { createPembukuan as _createPembukuan } from "src/store/actions/resources/pembukuans";
-import { errorToastfier } from "src/utils/toastifier";
-import useChakraToast from "src/hooks/useChakraToast";
+} from 'src/components/baseComponent';
+import { pembukuanSchema } from 'src/utils/formSchema';
+import { buttonStyle, createUserInput } from 'src/utils/styles';
+import { createPembukuan as _createPembukuan } from 'src/store/actions/resources/pembukuans';
+import { errorToastfier } from 'src/utils/toastifier';
+import useChakraToast from 'src/hooks/useChakraToast';
 
 const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
   const toast = useChakraToast();
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
-  const create = async (value: Koperasi.Resource.Create["pembukuans"]) => {
+  const create = async (value: Koperasi.Resource.Create['pembukuans']) => {
     setIsRequested(true);
 
     try {
       await createPembukuan(value);
-      toast("Laporan Sudah Ditambahkan");
+      toast('Laporan Sudah Ditambahkan');
 
       return setTimeout(() => {
-        Router.push("/dashboard/pembukuan");
+        Router.push('/dashboard/pembukuan');
       }, 3000);
     } catch (e) {
       errorToastfier(toast, e);
@@ -45,18 +45,18 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
 
   return (
     <DashboardMainContainer>
-      <Text fontFamily={"Poppins"} fontSize={"1.45rem"} py={5}>
+      <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
         Laporan
       </Text>
-      <DashboardContainer overflow={"auto"}>
-        <Flex p={5} flexDirection={"column"} height={"100%"}>
-          <Text fontFamily={"Poppins"} fontSize={"1.45rem"} py={3}>
+      <DashboardContainer overflow={'auto'}>
+        <Flex p={5} flexDirection={'column'} height={'100%'}>
+          <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={3}>
             Formulir Pembuatan Laporan
           </Text>
           <Formik
             initialValues={{
               tanggal: undefined as unknown as Date,
-              uraian: "",
+              uraian: '',
               sumWood: undefined as unknown as number,
               harga: undefined as unknown as number,
               masuk: undefined as unknown as number,
@@ -89,8 +89,8 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       id="tanggal"
                       placeholder="tanggal"
                       value={values.tanggal as unknown as string}
-                      onChange={handleChange("tanggal")}
-                      onBlur={handleBlur("tanggal")}
+                      onChange={handleChange('tanggal')}
+                      onBlur={handleBlur('tanggal')}
                       type="date"
                       {...createUserInput}
                     />
@@ -106,8 +106,8 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       id="uraian"
                       placeholder="uraian"
                       value={values.uraian}
-                      onChange={handleChange("uraian")}
-                      onBlur={handleBlur("uraian")}
+                      onChange={handleChange('uraian')}
+                      onBlur={handleBlur('uraian')}
                       {...createUserInput}
                     />
                     {!!errors.uraian && touched.uraian && (
@@ -120,8 +120,8 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       id="sumWood"
                       placeholder="batang/kg"
                       value={values.sumWood}
-                      onChange={handleChange("sumWood")}
-                      onBlur={handleBlur("sumWood")}
+                      onChange={handleChange('sumWood')}
+                      onBlur={handleBlur('sumWood')}
                       type="number"
                       {...createUserInput}
                     />
@@ -135,8 +135,8 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       id="harga"
                       placeholder="harga"
                       value={values.harga}
-                      onChange={handleChange("harga")}
-                      onBlur={handleBlur("harga")}
+                      onChange={handleChange('harga')}
+                      onBlur={handleBlur('harga')}
                       type="number"
                       {...createUserInput}
                     />
@@ -166,8 +166,8 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       id="keluar"
                       placeholder="keluar"
                       value={values.keluar}
-                      onChange={handleChange("keluar")}
-                      onBlur={handleBlur("keluar")}
+                      onChange={handleChange('keluar')}
+                      onBlur={handleBlur('keluar')}
                       type="number"
                       {...createUserInput}
                     />
@@ -195,10 +195,10 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                 <Button
                   {...buttonStyle.confirmation}
                   fontFamily="poppins"
-                  fontSize={"0.813rem"}
+                  fontSize={'0.813rem'}
                   px={10}
                   borderRadius={6}
-                  _focus={{ border: "none" }}
+                  _focus={{ border: 'none' }}
                   type="submit"
                   disabled={isRequested}
                 >

@@ -59,6 +59,7 @@ export const pembukuanSchema = Yup.object({
 
 export const iuranSchema = Yup.object({
   createdAt: Yup.string().required('Tanggal Dibutuhkan'),
+  updatedAt: Yup.string().required('Tanggal Dibutuhkan'),
   debt: Yup.number().required('Jumlah Uang Dibutuhkan'),
 });
 

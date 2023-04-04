@@ -145,6 +145,7 @@ const CreateAdminContent: React.FC<Props> = ({ createUser }) => {
                       onBlur={handleBlur('noKtp')}
                       type="number"
                       {...createUserInput}
+                      maxLength={16}
                     />
                     {!!errors.noKtp && touched.noKtp && (
                       <FormErrorMessage>{errors.noKtp}</FormErrorMessage>

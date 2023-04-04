@@ -185,7 +185,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                               router.push(
                                 `${router.pathname}/${user.id}/${moment(
                                   iuran.date
-                                ).year()}/${moment(iuran.date).month()}`
+                                ).year()}/${moment(iuran.date).month()}/update`
                               )
                             }
                             cursor={'pointer'}
