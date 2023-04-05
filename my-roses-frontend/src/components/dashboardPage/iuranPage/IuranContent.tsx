@@ -193,7 +193,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                           <Spacer />
                           <FaTrash
                             onClick={() => {
-                              // setIuranId(iurans.id);
+                              setIuranId({ iurans, ...user }.id);
                               setIsOpen(true);
                             }}
                             cursor={'pointer'}

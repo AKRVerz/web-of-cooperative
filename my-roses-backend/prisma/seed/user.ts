@@ -11,7 +11,7 @@ const main = async (prisma: Prisma) => {
         email: 'admin@admin.com',
         password: await hashText('admin'),
         role: USER_ROLE.ADMIN,
-        noKtp: 100401,
+        noKtp: '100401',
         alamat: 'Jl Hi Rais',
         tanggal: moment('1997-07-16').toISOString() as unknown as Date,
       },

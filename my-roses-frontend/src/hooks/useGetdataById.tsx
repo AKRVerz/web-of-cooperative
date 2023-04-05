@@ -10,10 +10,12 @@ const useGetDataById = <T extends Koperasi.Resource.ResourceName>(
 
   useCustomDebounce(
     async () => {
+      console.log(id);
       if (!id) return;
 
       const data = await getDataById(resourceName, id)();
       setData(data);
+      console.log(data);
     },
     500,
     [id]

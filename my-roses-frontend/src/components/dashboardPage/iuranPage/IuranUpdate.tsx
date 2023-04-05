@@ -25,13 +25,13 @@ import { buttonStyle, createUserInput } from 'src/utils/styles';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import { updateIuran as _updateIuran } from 'src/store/actions/resources/iurans';
 import { errorToastfier } from 'src/utils/toastifier';
-import useIdQuery from 'src/hooks/useIdQuery';
+import useUserIdQuery from 'src/hooks/useUserIdQuery';
 import useGetDataById from 'src/hooks/useGetdataById';
 import useChakraToast from 'src/hooks/useChakraToast';
 import AutoComplete from 'src/components/baseComponent/AutoComplete';
 
 const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
-  const queryId = useIdQuery();
+  const queryId = useUserIdQuery();
   const toast = useChakraToast();
   const iuran = useGetDataById(RESOURCE_NAME.IURANS, queryId);
   const [keyword, setKeyword] = useState('');
