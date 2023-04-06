@@ -63,6 +63,8 @@ export const iuranSchema = Yup.object({
   debt: Yup.number().required('Jumlah Uang Dibutuhkan'),
 });
 
+export const updateIuranSchema = iuranSchema.omit(['updatedAt']);
+
 export const adminSchema = Yup.object({
   password: Yup.string(),
 }).concat(userSchema.omit(['password']));

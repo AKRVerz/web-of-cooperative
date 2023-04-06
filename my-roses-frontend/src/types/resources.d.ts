@@ -6,10 +6,10 @@ type ResourceName = typeof RESOURCE_NAME[keyof typeof RESOURCE_NAME];
 
 export type ResourceStructure = {
   [RESOURCE_NAME.USERS]: ModelStructure['user'] & {
-    iurans?: ModelStructure['mount'][];
+    iurans?: ModelStructure['mounts'][];
   };
   [RESOURCE_NAME.PEMBUKUANS]: ModelStructure['pembukuan'];
-  [RESOURCE_NAME.IURANS]: ModelStructure['mount'];
+  [RESOURCE_NAME.IURANS]: ModelStructure['mounts'];
 };
 
 export type ResourceRecord<T extends ResourceName> = {
@@ -22,7 +22,7 @@ export type ResourceRecord<T extends ResourceName> = {
 export type Resources = {
   [RESOURCE_NAME.USERS]: ResourceRecord<typeof RESOURCE_NAME.USERS>;
   [RESOURCE_NAME.PEMBUKUANS]: ResourceRecord<typeof RESOURCE_NAME.PEMBUKUANS>;
-  [RESOURCE_NAME.IURANS]: ResourceRecord<'mount'>;
+  [RESOURCE_NAME.IURANS]: ResourceRecord<'mounts'>;
 };
 
 export type Create = {
@@ -35,7 +35,7 @@ export type Create = {
     'id' | 'createdAt' | 'updatedAt'
   >;
   [RESOURCE_NAME.IURANS]: Omit<
-    ModelStructure['mount'],
+    ModelStructure['mounts'],
     'id' | 'updatedAt' | 'userId'
   >;
 };

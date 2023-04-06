@@ -40,7 +40,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [iuranId, setIuranId] = useState<number | null>(null);
+  const [iuranIds, setIuranIds] = useState<number[] | null>(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
 
@@ -68,9 +68,11 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
 
   const deleteIuran = async () => {
     try {
-      if (!iuranId) return;
+      if (!iuranIds || !iuranIds.length) return;
 
-      await deleteIurans(iuranId);
+      await Promise.all(
+        _.map(iuranIds, (id) => deleteIurans(id).catch(() => {}))
+      );
       onClose();
     } catch (e) {
       errorToastfier(toast, e);
@@ -156,7 +158,16 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
               );
               const iuranTotal = _.map(iuranByMonth, (value, date) => ({
                 date: date,
-                debt: _.reduce(value, (prev, curr) => prev + curr.debt, 0),
+                debt: _.reduce(
+                  value,
+                  (prev, curr) => {
+                    prev.total += curr.debt;
+                    prev.ids.push(curr.id);
+
+                    return prev;
+                  },
+                  { total: 0, ids: [] } as { total: number; ids: number[] }
+                ),
               }));
 
               return (
@@ -176,16 +187,14 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                         {moment(iuran.date).format('MMMM YYYY')}
                       </Text>
                       <Text width={'32%'} py={2}>
-                        {iuran.debt}
+                        {iuran.debt.total}
                       </Text>
                       <Text width={'5%'} py={2}>
                         <Flex justifyContent={'space-between'}>
                           <FaEdit
                             onClick={() =>
                               router.push(
-                                `${router.pathname}/${user.id}/${moment(
-                                  iuran.date
-                                ).year()}/${moment(iuran.date).month()}/update`
+                                `${router.pathname}/${user.id}/update`
                               )
                             }
                             cursor={'pointer'}
@@ -193,7 +202,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                           <Spacer />
                           <FaTrash
                             onClick={() => {
-                              setIuranId({ iurans, ...user }.id);
+                              setIuranIds(iuran.debt.ids);
                               setIsOpen(true);
                             }}
                             cursor={'pointer'}

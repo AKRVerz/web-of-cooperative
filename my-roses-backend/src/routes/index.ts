@@ -11,6 +11,6 @@ router.use('/auth', authsRoutes);
 router.use('/files', filesRoutes);
 router.use('/users', usersRoutes);
 router.use('/pembukuans', pembukuansRoutes);
-router.use('/iurans', iuransRouters);
+router.use('/mounts', iuransRouters);
 
 export default router;

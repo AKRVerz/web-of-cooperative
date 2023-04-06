@@ -33,7 +33,7 @@ const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
   const [isTouched, setIsTouched] = useState(false);
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
-  const create = async (value: Koperasi.Resource.Create['mount']) => {
+  const create = async (value: Koperasi.Resource.Create['mounts']) => {
     if (!userId) return;
 
     setIsRequested(true);

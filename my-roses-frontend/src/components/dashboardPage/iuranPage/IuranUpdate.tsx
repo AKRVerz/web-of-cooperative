@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Flex,
   Text,
@@ -20,7 +20,7 @@ import {
   DashboardContainer,
   DashboardMainContainer,
 } from 'src/components/baseComponent';
-import { iuranSchema } from 'src/utils/formSchema';
+import { iuranSchema, updateIuranSchema } from 'src/utils/formSchema';
 import { buttonStyle, createUserInput } from 'src/utils/styles';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import { updateIuran as _updateIuran } from 'src/store/actions/resources/iurans';
@@ -29,8 +29,9 @@ import useUserIdQuery from 'src/hooks/useUserIdQuery';
 import useGetDataById from 'src/hooks/useGetdataById';
 import useChakraToast from 'src/hooks/useChakraToast';
 import AutoComplete from 'src/components/baseComponent/AutoComplete';
+import { getAllUser as _getAllUser } from 'src/store/actions/resources/users';
 
-const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
+const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
   const queryId = useUserIdQuery();
   const toast = useChakraToast();
   const iuran = useGetDataById(RESOURCE_NAME.IURANS, queryId);
@@ -40,7 +41,11 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
   const [isTouched, setIsTouched] = useState(false);
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
-  const update = async (value: Partial<Resource.Update['mount']>) => {
+  useEffect(() => {
+    getAllUser('limit=all');
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const update = async (value: Partial<Resource.Update['mounts']>) => {
     setIsRequested(true);
 
     try {
@@ -71,10 +76,10 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
               </Text>
               <Formik
                 initialValues={{
-                  updateAt: undefined as unknown as Date,
+                  createdAt: undefined as unknown as Date,
                   debt: undefined as unknown as number,
                 }}
-                validationSchema={iuranSchema}
+                validationSchema={updateIuranSchema}
                 onSubmit={update}
               >
                 {({
@@ -93,21 +98,21 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
                   >
                     <VStack spacing={2} py={2}>
                       <FormControl
-                        isInvalid={!!errors.updateAt && !!touched.updateAt}
+                        isInvalid={!!errors.createdAt && !!touched.createdAt}
                       >
                         <FormLabel>Tanggal</FormLabel>
                         <Input
                           id="tanggal"
                           placeholder="tanggal"
-                          value={values.updateAt as unknown as string}
-                          onChange={handleChange('updateAt')}
-                          onBlur={handleBlur('updateAt')}
+                          value={values.createdAt as unknown as string}
+                          onChange={handleChange('createdAt')}
+                          onBlur={handleBlur('createdAt')}
                           type="date"
                           {...createUserInput}
                         />
-                        {!!errors.updateAt && touched.updateAt && (
+                        {!!errors.createdAt && touched.createdAt && (
                           <FormErrorMessage>
-                            {errors.updateAt as string}
+                            {errors.createdAt as string}
                           </FormErrorMessage>
                         )}
                       </FormControl>
@@ -134,6 +139,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
                           value={values.debt}
                           onChange={handleChange('debt')}
                           onBlur={handleBlur('debt')}
+                          type="number"
                           {...createUserInput}
                         />
                         {!!errors.debt && touched.debt && (
@@ -166,6 +172,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran }) => {
 
 const connector = connect(null, {
   updateIuran: _updateIuran,
+  getAllUser: _getAllUser,
 });
 
 type Props = ConnectedProps<typeof connector>;

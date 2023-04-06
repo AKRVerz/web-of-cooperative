@@ -6,9 +6,7 @@ const useGetAllByQuery = <T extends Koperasi.Resource.ResourceName>(
   resourceName: T,
   query: string = ''
 ) => {
-  const [data, setData] = useState<Koperasi.Resource.ResourceStructure[T][]>(
-    []
-  );
+  const [data, setData] = useState<Koperasi.Resource.ResourceRecord<T>>();
 
   useCustomDebounce(
     async () => {
@@ -21,7 +19,7 @@ const useGetAllByQuery = <T extends Koperasi.Resource.ResourceName>(
     [query]
   );
 
-  return data;
+  return data?.rows ?? [];
 };
 
 export default useGetAllByQuery;

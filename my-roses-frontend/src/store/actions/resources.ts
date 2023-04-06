@@ -126,7 +126,9 @@ export const updateData =
       }
     );
 
-    return data;
+    console.log(id);
+
+    return data as Koperasi.Resource.ResourceStructure[T];
   };
 
 // Delete the data by id
