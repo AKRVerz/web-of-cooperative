@@ -26,31 +26,15 @@ export const createIuran =
       payload.debt = +payload.debt;
     }
 
-    return addData('iurans' as unknown as Resource.ResourceName)({
-      ...payload,
-      createdAt: moment(payload.createdAt).toISOString() as unknown as Date,
-    })(dispatch) as unknown as Promise<Resource.ResourceStructure['mounts']>;
+    return addData('iurans' as unknown as Resource.ResourceName)(payload)(
+      dispatch
+    ) as unknown as Promise<Resource.ResourceStructure['mounts']>;
   };
 
 export const updateIuran =
   (id: number, update: Koperasi.Resource.Update['mounts'], query = '') =>
   () =>
-    updateData(RESOURCE_NAME.IURANS)(
-      id,
-      {
-        ...update,
-        ...(!_.isEmpty(update.debt) && {
-          debt: _.isNumber(update.debt) ? update.debt : _.toNumber(update.debt),
-        }),
-        ...(!_.isEmpty(update.createdAt) && {
-          createdAt: moment(update.createdAt).toISOString() as unknown as Date,
-        }),
-        ...(!_.isEmpty(update.updatedAt) && {
-          updateAt: moment(update.updateAt).toISOString() as unknown as Date,
-        }),
-      },
-      query
-    )();
+    updateData(RESOURCE_NAME.IURANS)(id, update, query)();
 
 export const deleteIuran =
   (id: number, noRequest = false) =>

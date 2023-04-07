@@ -7,6 +7,9 @@ import {
   MODELS_NAME,
   AnyRecord,
 } from './prisma-repo';
+import moment from 'moment';
+import { isIsoDateFormat } from '../utils/validator';
+import { toISOString } from '../utils/formatter';
 
 // This type will be used if you want to extends the functions in Pembukuan Class
 
@@ -32,6 +35,15 @@ class Mount extends BaseRepository(MODELS_NAME.MOUNT) {
       'updatedAt',
       'createdAt',
     ]);
+
+    if (mount.debt) {
+      const debt = _.toNumber(mount.debt);
+
+      mount.debt = !_.isNaN(debt) ? debt : 0;
+    }
+
+    if (mount.createdAt) mount.createdAt = toISOString(mount.createdAt);
+    if (mount.updatedAt) mount.updatedAt = toISOString(mount.updatedAt);
 
     return mount as Create;
   }
