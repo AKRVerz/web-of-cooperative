@@ -72,6 +72,9 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                   masuk: undefined as unknown as number,
                   keluar: undefined as unknown as number,
                   jumlah: undefined as unknown as number,
+                  cashBack: undefined as unknown as number,
+                  sumCashBack: undefined as unknown as number,
+                  afterCashBack: undefined as unknown as number,
                 }}
                 validationSchema={pembukuanSchema}
                 onSubmit={update}
@@ -158,6 +161,21 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                           <FormErrorMessage>{errors.harga}</FormErrorMessage>
                         )}
                       </FormControl>
+                      <FormControl>
+                        <FormLabel>Cashback Awal</FormLabel>
+                        <Input
+                          id="cashBack"
+                          placeholder="Cashback Awal"
+                          value={values.cashBack}
+                          onChange={handleChange('cashBack')}
+                          onBlur={handleBlur('cashBack')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.cashBack && touched.cashBack && (
+                          <FormErrorMessage>{errors.cashBack}</FormErrorMessage>
+                        )}
+                      </FormControl>
                       <FormControl isInvalid={!!errors.masuk && touched.masuk}>
                         <FormLabel>Masuk</FormLabel>
                         <Input
@@ -189,6 +207,36 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                         {!!errors.keluar && touched.keluar && (
                           <FormErrorMessage>{errors.keluar}</FormErrorMessage>
                         )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.sumCashBack && touched.sumCashBack}
+                      >
+                        <FormLabel>Total CashBack</FormLabel>
+                        <Input
+                          id="sumCashBack"
+                          placeholder="Total CashBack"
+                          value={values.sumCashBack}
+                          onChange={handleChange('Total CashBack')}
+                          onBlur={handleBlur('Total CashBack')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                      </FormControl>
+                      <FormControl
+                        isInvalid={
+                          !!errors.afterCashBack && touched.afterCashBack
+                        }
+                      >
+                        <FormLabel>Setelah CashBack</FormLabel>
+                        <Input
+                          id="afterCashBack"
+                          placeholder="Setelah CashBack"
+                          value={values.sumCashBack}
+                          onChange={handleChange('Setelah CashBack')}
+                          onBlur={handleBlur('Setelah CashBack')}
+                          type="number"
+                          {...createUserInput}
+                        />
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.jumlah && touched.jumlah}

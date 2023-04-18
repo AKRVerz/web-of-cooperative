@@ -38,6 +38,7 @@ import {
 } from 'src/components/baseComponent';
 import { buttonStyle } from 'src/utils/styles';
 import useChakraToast from 'src/hooks/useChakraToast';
+import { getPembukuanFilter } from 'src/utils/pembukuan';
 
 const PembukuanContent: React.FC<Props> = ({
   pembukuans,
@@ -51,11 +52,6 @@ const PembukuanContent: React.FC<Props> = ({
   const [pembukuanId, setPembukuanId] = useState<number | null>(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
-  const {
-    isOpen: isCsvOpen,
-    onClose: onCsvClose,
-    onOpen: onCsvOpen,
-  } = useDisclosure();
 
   const onClose = () => {
     setIsOpen(false);
@@ -73,7 +69,9 @@ const PembukuanContent: React.FC<Props> = ({
     async () => {
       if (firstLoad) return;
 
-      await getAllPembukuan(`page=${page}&limit=${limit}`);
+      await getAllPembukuan(
+        `page=${page}&limit=${limit}&${getPembukuanFilter(searchValue)}`
+      );
     },
     1000,
     [searchValue, page]
@@ -138,10 +136,10 @@ const PembukuanContent: React.FC<Props> = ({
                 <Th color="white" bg={'royalRed.200'} borderTopLeftRadius={10}>
                   No
                 </Th>
-                <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                <Th color="white" bg={'royalRed.200'} width={'15%'}>
                   Hari/Tanggal
                 </Th>
-                <Th color="white" bg={'royalRed.200'} width={'20%'}>
+                <Th color="white" bg={'royalRed.200'} width={'10%'}>
                   Uraian
                 </Th>
                 <Th color="white" bg={'royalRed.200'} width={'10%'}>
@@ -161,6 +159,14 @@ const PembukuanContent: React.FC<Props> = ({
                   width={'10%'}
                   textAlign="center"
                 >
+                  Cashback Awal
+                </Th>
+                <Th
+                  color="white"
+                  bg={'royalRed.200'}
+                  width={'10%'}
+                  textAlign="center"
+                >
                   Masuk
                 </Th>
                 <Th
@@ -170,6 +176,22 @@ const PembukuanContent: React.FC<Props> = ({
                   textAlign="center"
                 >
                   Keluar
+                </Th>
+                <Th
+                  color="white"
+                  bg={'royalRed.200'}
+                  width={'10%'}
+                  textAlign="center"
+                >
+                  Total Cashback
+                </Th>
+                <Th
+                  color="white"
+                  bg={'royalRed.200'}
+                  width={'10%'}
+                  textAlign="center"
+                >
+                  Setelah CashBack
                 </Th>
                 <Th
                   color="white"
@@ -199,8 +221,11 @@ const PembukuanContent: React.FC<Props> = ({
                   <Td>{pembukuan.uraian}</Td>
                   <Td>{pembukuan.sumWood}</Td>
                   <Td>{pembukuan.harga}</Td>
+                  <Td>{pembukuan.cashBack}</Td>
                   <Td>{pembukuan.masuk}</Td>
                   <Td>{pembukuan.keluar}</Td>
+                  <Td>{pembukuan.sumCashBack}</Td>
+                  <Td>{pembukuan.afterCashBack}</Td>
                   <Td>{pembukuan.jumlah}</Td>
                   <Td>
                     <Flex justifyContent={'space-between'}>

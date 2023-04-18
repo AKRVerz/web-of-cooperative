@@ -62,6 +62,9 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
               masuk: undefined as unknown as number,
               keluar: undefined as unknown as number,
               jumlah: undefined as unknown as number,
+              cashBack: undefined as unknown as number,
+              sumCashBack: undefined as unknown as number,
+              afterCashBack: undefined as unknown as number,
             }}
             validationSchema={pembukuanSchema}
             onSubmit={create}
@@ -144,6 +147,21 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       <FormErrorMessage>{errors.harga}</FormErrorMessage>
                     )}
                   </FormControl>
+                  <FormControl>
+                    <FormLabel>Cashback Awal</FormLabel>
+                    <Input
+                      id="cashBack"
+                      placeholder="Cashback Awal"
+                      value={values.cashBack}
+                      onChange={handleChange('cashBack')}
+                      onBlur={handleBlur('cashBack')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.cashBack && touched.cashBack && (
+                      <FormErrorMessage>{errors.cashBack}</FormErrorMessage>
+                    )}
+                  </FormControl>
                   <FormControl isInvalid={!!errors.masuk && touched.masuk}>
                     <FormLabel>Masuk</FormLabel>
                     <Input
@@ -175,12 +193,53 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       <FormErrorMessage>{errors.keluar}</FormErrorMessage>
                     )}
                   </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.sumCashBack && touched.sumCashBack}
+                  >
+                    <FormLabel>Total CashBack</FormLabel>
+                    <Input
+                      id="sumCashBack"
+                      placeholder="Hasil Setelah CashBack"
+                      value={values.cashBack * values.sumWood}
+                      readOnly
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.sumCashBack && touched.sumCashBack && (
+                      <FormErrorMessage>{errors.sumCashBack}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.afterCashBack && touched.afterCashBack}
+                  >
+                    <FormLabel>Setelah CashBack</FormLabel>
+                    <Input
+                      id="afterCashBack"
+                      placeholder="Setelah CashBack"
+                      value={
+                        values.harga * values.sumWood -
+                        values.cashBack * values.sumWood
+                      }
+                      readOnly
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.afterCashBack && touched.afterCashBack && (
+                      <FormErrorMessage>
+                        {errors.afterCashBack}
+                      </FormErrorMessage>
+                    )}
+                  </FormControl>
                   <FormControl isInvalid={!!errors.jumlah && touched.jumlah}>
                     <FormLabel>Jumlah</FormLabel>
                     <Input
                       id="jumlah"
                       placeholder="jumlah"
-                      value={values.harga * values.sumWood - values.keluar}
+                      value={
+                        values.harga * values.sumWood -
+                        values.cashBack * values.sumWood -
+                        values.keluar
+                      }
                       readOnly
                       // onChange={handleChange("jumlah")}
                       // onBlur={handleBlur("jumlah")}

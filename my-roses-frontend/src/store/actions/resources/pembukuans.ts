@@ -24,7 +24,10 @@ export const createPembukuan =
   (payload: Koperasi.Resource.Create['pembukuans']) =>
   (dispatch: AppDispatch) => {
     payload.masuk = payload.harga * payload.sumWood;
-    payload.jumlah = payload.masuk - payload.keluar;
+    payload.jumlah = payload.harga * payload.sumWood - payload.keluar;
+    payload.sumCashBack = payload.cashBack * payload.sumWood;
+    payload.afterCashBack =
+      payload.harga * payload.sumWood - payload.cashBack * payload.sumWood;
 
     return addData(RESOURCE_NAME.PEMBUKUANS)({
       ...payload,

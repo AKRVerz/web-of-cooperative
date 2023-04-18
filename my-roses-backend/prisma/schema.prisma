@@ -40,16 +40,19 @@ model User {
 }
 
 model Pembukuan {
-  id        Int      @id @default(autoincrement())
-  tanggal   DateTime
-  uraian    String
-  sumWood   Float
-  harga     Int
-  masuk     Float
-  keluar    Float
-  jumlah    Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  tanggal       DateTime
+  uraian        String
+  sumWood       Float
+  harga         Int
+  masuk         Float
+  keluar        Float
+  jumlah        Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  cashBack      Float
+  sumCashBack   Float
+  afterCashBack Float
 }
 
 model File {

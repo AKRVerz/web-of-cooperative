@@ -74,12 +74,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
           Dashboard
         </Text>
-        <Grid
-          templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
-          my={3}
-          gap={4}
-        ></Grid>
-
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
             mb={4}
@@ -98,10 +92,10 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'15%'}>
                     Hari/Tanggal
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'10%'}>
                     Uraian
                   </Th>
                   <Th color="white" bg={'royalRed.200'} width={'10%'}>
@@ -114,6 +108,14 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     textAlign="center"
                   >
                     Harga(Rp)
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'10%'}
+                    textAlign="center"
+                  >
+                    Cashback Awal
                   </Th>
                   <Th
                     color="white"
@@ -137,7 +139,31 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     width={'10%'}
                     textAlign="center"
                   >
+                    Total Cashback
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'10%'}
+                    textAlign="center"
+                  >
+                    Setelah CashBack
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'10%'}
+                    textAlign="center"
+                  >
                     Jumlah
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    textAlign="center"
+                    borderTopRightRadius={10}
+                  >
+                    Aksi
                   </Th>
                 </Tr>
               </Thead>
@@ -151,9 +177,32 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     <Td>{pembukuan.uraian}</Td>
                     <Td>{pembukuan.sumWood}</Td>
                     <Td>{pembukuan.harga}</Td>
+                    <Td>{pembukuan.cashBack}</Td>
                     <Td>{pembukuan.masuk}</Td>
                     <Td>{pembukuan.keluar}</Td>
+                    <Td>{pembukuan.sumCashBack}</Td>
+                    <Td>{pembukuan.afterCashBack}</Td>
                     <Td>{pembukuan.jumlah}</Td>
+                    <Td>
+                      <Flex justifyContent={'space-between'}>
+                        <FaEdit
+                          onClick={() =>
+                            Router.push(
+                              `${Router.pathname}/${pembukuan.id}/update`
+                            )
+                          }
+                          cursor={'pointer'}
+                        />
+                        <Spacer />
+                        <FaTrash
+                          onClick={() => {
+                            setPembukuanId(pembukuan.id);
+                            setIsOpen(true);
+                          }}
+                          cursor={'pointer'}
+                        />
+                      </Flex>
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>

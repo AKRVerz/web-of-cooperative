@@ -55,6 +55,11 @@ export const pembukuanSchema = Yup.object({
     )
 
     .required('Keluar Dibutuhkan'),
+  cashBack: Yup.number()
+    .test('isCashBackValid', 'Cash back harus besar dari 0', (value) =>
+      isValidNumber(value, 0)
+    )
+    .required('Cash Back Dibutuhkan'),
 });
 
 export const iuranSchema = Yup.object({
