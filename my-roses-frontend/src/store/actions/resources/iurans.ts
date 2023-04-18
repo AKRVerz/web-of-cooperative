@@ -26,7 +26,7 @@ export const createIuran =
       payload.debt = +payload.debt;
     }
 
-    return addData('iurans' as unknown as Resource.ResourceName)(payload)(
+    return addData(RESOURCE_NAME.IURANS)(payload)(
       dispatch
     ) as unknown as Promise<Resource.ResourceStructure['mounts']>;
   };

@@ -63,7 +63,7 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllUser }) => {
     if (firstLoad) return;
 
     await getAllUser(
-      `filters=role="admin"&page=${page}&limit=${limit}&${getUserFilter(
+      `page=${page}&limit=${limit}&filters=role = "admin" AND ${getUserFilter(
         searchValue
       )}`
     );
