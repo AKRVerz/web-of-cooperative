@@ -37,6 +37,7 @@ import {
   getAllUser as _getAlluser,
 } from 'src/store/actions/resources/users';
 import { getPembukuanFilter } from 'src/utils/pembukuan';
+import { formatRupiah } from 'src/utils/formaterRupiah';
 
 const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const toast = useChakraToast();
@@ -199,13 +200,13 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     </Td>
                     <Td>{pembukuan.uraian}</Td>
                     <Td>{pembukuan.sumWood}</Td>
-                    <Td>{pembukuan.harga}</Td>
-                    <Td>{pembukuan.cashBack}</Td>
-                    <Td>{pembukuan.masuk}</Td>
-                    <Td>{pembukuan.keluar}</Td>
-                    <Td>{pembukuan.sumCashBack}</Td>
-                    <Td>{pembukuan.afterCashBack}</Td>
-                    <Td>{pembukuan.jumlah}</Td>
+                    <Td>{formatRupiah(pembukuan.harga)}</Td>
+                    <Td>{formatRupiah(pembukuan.cashBack)}</Td>
+                    <Td>{formatRupiah(pembukuan.masuk)}</Td>
+                    <Td>{formatRupiah(pembukuan.keluar)}</Td>
+                    <Td>{formatRupiah(pembukuan.sumCashBack)}</Td>
+                    <Td>{formatRupiah(pembukuan.afterCashBack)}</Td>
+                    <Td>{formatRupiah(pembukuan.jumlah)}</Td>
                     <Td>
                       <Flex justifyContent={'space-between'}>
                         <FaEdit

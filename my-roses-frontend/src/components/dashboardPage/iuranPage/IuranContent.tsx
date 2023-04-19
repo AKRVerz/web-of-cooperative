@@ -34,6 +34,7 @@ import {
 import { buttonStyle } from 'src/utils/styles';
 import useChakraToast from 'src/hooks/useChakraToast';
 import { getIuranFilter } from 'src/utils/iuran';
+import { formatRupiah } from 'src/utils/formaterRupiah';
 
 const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
   const [page, setPage] = useState<number>(1);
@@ -192,7 +193,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                         {moment(iuran.date).format('MMMM YYYY')}
                       </Text>
                       <Text width={'32%'} py={2}>
-                        {iuran.debt.total}
+                        {formatRupiah(iuran.debt.total)}
                       </Text>
                       <Text width={'5%'} py={2}>
                         <Flex justifyContent={'space-between'}>
