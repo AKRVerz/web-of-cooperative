@@ -12,11 +12,14 @@ import {
   Thead,
   Spacer,
   useDisclosure,
+  Input,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import moment from 'moment';
 import { connect, ConnectedProps } from 'react-redux';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaSearch, FaTrash } from 'react-icons/fa';
 import { resources } from 'src/store/selectors';
 import { RootState } from 'src/store';
 import { RESOURCE_NAME } from 'src/utils/constant';
@@ -33,6 +36,7 @@ import {
   deleteUser as _deleteUser,
   getAllUser as _getAlluser,
 } from 'src/store/actions/resources/users';
+import { getPembukuanFilter } from 'src/utils/pembukuan';
 
 const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const toast = useChakraToast();
@@ -62,7 +66,9 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
     async () => {
       if (firstLoad) return;
 
-      await getAllPembukuan(`page=${page}&limit=${limit}`);
+      await getAllPembukuan(
+        `page=${page}&limit=${limit}&${getPembukuanFilter(searchValue)}`
+      );
     },
     1000,
     [searchValue, page]
@@ -74,13 +80,30 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
           Dashboard
         </Text>
+
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
             mb={4}
             mt={8}
             justifyContent={'space-between'}
             alignItems="center"
-          ></Flex>
+          >
+            <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
+              <Input
+                px={10}
+                color="black"
+                borderRadius={25}
+                fontFamily="poppins"
+                fontSize={'0.813rem'}
+                placeholder="Cari"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <InputRightElement pointerEvents="none">
+                <FaSearch />
+              </InputRightElement>
+            </InputGroup>
+          </Flex>
           <DashboardTableContainer>
             <Table>
               <Thead>

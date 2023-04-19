@@ -40,6 +40,7 @@ import {
   getAllUser as _getAlluser,
 } from 'src/store/actions/resources/users';
 import SessionUtils from 'src/utils/sessionUtils';
+import { getUserFilter } from 'src/utils/user';
 
 const CoreContent: React.FC<Props> = ({ users, deleteCore, getAllUser }) => {
   const toast = useChakraToast();
@@ -62,7 +63,11 @@ const CoreContent: React.FC<Props> = ({ users, deleteCore, getAllUser }) => {
   const getDatas = async () => {
     if (firstLoad) return;
 
-    await getAllUser(`filters=role="core"&page=${page}&limit=${limit}`, true);
+    await getAllUser(
+      `page=${page}&limit=${limit}&filters=role = "core" AND ${getUserFilter(
+        searchValue
+      )}`
+    );
   };
 
   const deleteUser = async () => {
@@ -112,17 +117,6 @@ const CoreContent: React.FC<Props> = ({ users, deleteCore, getAllUser }) => {
                 onClick={() => Router.push(`${Router.pathname}/create`)}
               >
                 Tambah
-              </Button>
-              <Button
-                {...buttonStyle.confirmation}
-                fontFamily="poppins"
-                fontSize={'0.813rem'}
-                px={10}
-                borderRadius={25}
-                _focus={{ border: 'none' }}
-                onClick={onCsvOpen}
-              >
-                Import CSV
               </Button>
             </Flex>
             <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>

@@ -117,7 +117,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
                         )}
                       </FormControl>
                       <FormControl isInvalid={!!isError && !!isTouched}>
-                        <FormLabel>Nama Orang Tua</FormLabel>
+                        <FormLabel>Nama Anggota Koperasi</FormLabel>
                         <AutoComplete
                           keyword={keyword}
                           setKeyword={setKeyword}
@@ -140,6 +140,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
                           onChange={handleChange('debt')}
                           onBlur={handleBlur('debt')}
                           type="number"
+                          maxLength={16}
                           {...createUserInput}
                         />
                         {!!errors.debt && touched.debt && (

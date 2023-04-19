@@ -33,6 +33,7 @@ import {
 } from 'src/components/baseComponent';
 import { buttonStyle } from 'src/utils/styles';
 import useChakraToast from 'src/hooks/useChakraToast';
+import { getIuranFilter } from 'src/utils/iuran';
 
 const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
   const [page, setPage] = useState<number>(1);
@@ -60,7 +61,11 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
     async () => {
       if (firstLoad) return;
 
-      await getAllUser(`page=${page}&limit=${limit}&includes=iurans`);
+      await getAllUser(
+        `page=${page}&limit=${limit}&includes=iurans&${getIuranFilter(
+          searchValue
+        )}`
+      );
     },
     1000,
     [searchValue, page]

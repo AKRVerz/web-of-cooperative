@@ -1,3 +1,3 @@
 export const getUserFilter = (search: string) => {
-  return `email CONTAINS "${search}"`;
+  return `username CONTAINS "${search}"`;
 };

@@ -114,7 +114,7 @@ const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!isError && !!isTouched}>
-                    <FormLabel>Nama Orang Tua</FormLabel>
+                    <FormLabel>Nama Anggota Koperasi</FormLabel>
                     <AutoComplete
                       keyword={keyword}
                       setKeyword={setKeyword}
@@ -136,6 +136,8 @@ const IuranCreate: React.FC<Props> = ({ createIuran, getAllUser }) => {
                       value={values.debt}
                       onChange={handleChange('debt')}
                       onBlur={handleBlur('debt')}
+                      type="number"
+                      maxLength={16}
                       {...createUserInput}
                     />
                     {!!errors.debt && touched.debt && (
