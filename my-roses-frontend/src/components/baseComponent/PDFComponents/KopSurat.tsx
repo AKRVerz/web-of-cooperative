@@ -41,15 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'black',
   },
-  'logo.sumbar': {
+  'logo.koperasi': {
     height: 55.6,
-    width: 54.2,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  'logo.smansa': {
-    height: 54.2,
     width: 54.2,
     marginTop: 10,
     marginLeft: 10,
@@ -61,12 +54,18 @@ const KopSurat = () => {
   return (
     <React.Fragment>
       <View style={styles.cops}>
-        <Image style={styles['logo.sumbar']} src={'/sumbar.png'} />
+        <Image
+          style={styles['logo.koperasi']}
+          src={'/Logo-Koperasi-1-1200x900.jpg'}
+        />
         <View style={styles.cops_inner}>
           <Text style={styles.cops_title}>DESA GIRIMULYO LESTARI</Text>
           <Text style={styles.cops_title}>KOPERASI ARGO MULYO LESTARI</Text>
         </View>
-        <Image style={styles['logo.smansa']} src={'/logo.png'} />
+        <Image
+          style={styles['logo.koperasi']}
+          src={'/Logo-Koperasi-1-1200x900.jpg'}
+        />
       </View>
       <View style={styles.borderThin} />
       <View style={styles.borderThicc} />

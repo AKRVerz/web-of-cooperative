@@ -7,40 +7,39 @@ const RiwayatTableHead = () => {
       borderColor: 'black',
       borderWidth: 1,
       alignItems: 'center',
-      fontSize: 12,
+      fontSize: 10,
       lineHeight: 1.5,
     },
+
     uraian: {
       borderRightColor: 'black',
       borderRightWidth: 1,
       width: '20%',
       marginHorizontal: 3,
-    },
-    sum: {
-      borderRightColor: 'black',
-      borderRightWidth: 1,
-      width: '20%',
       textAlign: 'center',
-      marginHorizontal: 3,
     },
-    jumlah: {
+    allWith15: {
       borderRightColor: 'black',
       borderRightWidth: 1,
-      width: '20%',
+      width: '15%',
       marginHorizontal: 3,
+      textAlign: 'center',
     },
-    date: {
-      width: '25%',
+    end: {
+      width: '10%',
       marginHorizontal: 3,
+      textAlign: 'center',
     },
   });
 
   return (
     <View style={styles.row}>
-      <Text style={styles.date}>Tanggal</Text>
+      <Text style={styles.allWith15}>Tanggal</Text>
       <Text style={styles.uraian}>Uraian</Text>
-      <Text style={styles.sum}>Jumlah Batang/Kg</Text>
-      <Text style={styles.jumlah}>Jumlah(Rp)</Text>
+      <Text style={styles.allWith15}>Harga</Text>
+      <Text style={styles.allWith15}>Masuk</Text>
+      <Text style={styles.allWith15}>Keluar</Text>
+      <Text style={styles.end}>Jumlah</Text>
     </View>
   );
 };

@@ -1,46 +1,36 @@
-import React from "react";
-import _ from "lodash";
-import moment from "moment";
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import { ResourceRecord } from "src/types/resources";
+import React from 'react';
+import _ from 'lodash';
+import moment from 'moment';
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { ResourceRecord } from 'src/types/resources';
+import { formatRupiah } from 'src/utils/formaterRupiah';
 
 const styles = StyleSheet.create({
   row: {
-    display: "flex",
-    flexDirection: "row",
-    borderColor: "black",
+    display: 'flex',
+    flexDirection: 'row',
+    borderColor: 'black',
     borderWidth: 1,
-    alignItems: "center",
-    fontSize: 12,
+    alignItems: 'center',
+    fontSize: 10,
     lineHeight: 1.5,
   },
+
   uraian: {
-    borderRightColor: "black",
-    borderRightWidth: 2,
-    width: "25%",
+    borderRightColor: 'black',
+    borderRightWidth: 1,
+    width: '20%',
     marginHorizontal: 3,
   },
-  sum: {
-    borderRightColor: "black",
-    borderRightWidth: 2,
-    width: "20%",
-    textAlign: "center",
+  allWith15: {
+    borderRightColor: 'black',
+    borderRightWidth: 1,
+    width: '15%',
     marginHorizontal: 3,
+    textAlign: 'center',
   },
-  harga: {
-    borderRightColor: "black",
-    borderRightWidth: 2,
-    width: "15%",
-    marginHorizontal: 3,
-  },
-  jumlah: {
-    width: "15%",
-    marginHorizontal: 3,
-  },
-  date: {
-    borderRightColor: "black",
-    borderRightWidth: 2,
-    width: "25%",
+  end: {
+    width: '10%',
     marginHorizontal: 3,
   },
 });
@@ -51,13 +41,18 @@ const RiwayatTableRow: React.FC<Props> = ({ pembukuans }) => {
       {_.map(_.values(pembukuans.rows), (pembukuan) => (
         <React.Fragment key={pembukuan.id}>
           <View style={styles.row}>
-            <Text style={styles.date}>
-              {moment(pembukuan.tanggal).format("dddd / DD MMMM YYYY")}
+            <Text style={styles.allWith15}>
+              {moment(pembukuan.tanggal).format('dddd / DD MMMM YYYY')}
             </Text>
             <Text style={styles.uraian}>{pembukuan.uraian}</Text>
-            <Text style={styles.sum}>{pembukuan.sumWood}</Text>
-            <Text style={styles.harga}>{pembukuan.harga}</Text>
-            <Text style={styles.jumlah}>{pembukuan.jumlah}</Text>
+            <Text style={styles.allWith15}>{pembukuan.sumWood}</Text>
+            <Text style={styles.allWith15}>
+              {formatRupiah(pembukuan.masuk)}
+            </Text>
+            <Text style={styles.allWith15}>
+              {formatRupiah(pembukuan.keluar)}
+            </Text>
+            <Text style={styles.end}>{formatRupiah(pembukuan.jumlah)}</Text>
           </View>
         </React.Fragment>
       ))}
@@ -66,7 +61,7 @@ const RiwayatTableRow: React.FC<Props> = ({ pembukuans }) => {
 };
 
 type Props = {
-  pembukuans: ResourceRecord<"pembukuans">;
+  pembukuans: ResourceRecord<'pembukuans'>;
 };
 
 export default RiwayatTableRow;

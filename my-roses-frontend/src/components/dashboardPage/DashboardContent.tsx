@@ -15,6 +15,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Button,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import moment from 'moment';
@@ -38,6 +39,7 @@ import {
 } from 'src/store/actions/resources/users';
 import { getPembukuanFilter } from 'src/utils/pembukuan';
 import { formatRupiah } from 'src/utils/formaterRupiah';
+import { buttonStyle } from 'src/utils/styles';
 
 const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const toast = useChakraToast();
@@ -89,6 +91,19 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
             justifyContent={'space-between'}
             alignItems="center"
           >
+            <Flex gap={2}>
+              <Button
+                {...buttonStyle.confirmation}
+                fontFamily="poppins"
+                fontSize={'0.813rem'}
+                px={10}
+                borderRadius={25}
+                _focus={{ border: 'none' }}
+                onClick={() => Router.push('dashboard/pdf/pembukuan')}
+              >
+                Download PDF
+              </Button>
+            </Flex>
             <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
               <Input
                 px={10}
@@ -181,14 +196,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                   >
                     Jumlah
                   </Th>
-                  <Th
-                    color="white"
-                    bg={'royalRed.200'}
-                    textAlign="center"
-                    borderTopRightRadius={10}
-                  >
-                    Aksi
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -207,26 +214,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     <Td>{formatRupiah(pembukuan.sumCashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.afterCashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.jumlah)}</Td>
-                    <Td>
-                      <Flex justifyContent={'space-between'}>
-                        <FaEdit
-                          onClick={() =>
-                            Router.push(
-                              `${Router.pathname}/${pembukuan.id}/update`
-                            )
-                          }
-                          cursor={'pointer'}
-                        />
-                        <Spacer />
-                        <FaTrash
-                          onClick={() => {
-                            setPembukuanId(pembukuan.id);
-                            setIsOpen(true);
-                          }}
-                          cursor={'pointer'}
-                        />
-                      </Flex>
-                    </Td>
                   </Tr>
                 ))}
               </Tbody>
