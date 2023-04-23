@@ -1,7 +1,10 @@
 import React from 'react';
 import { Flex, FlexProps } from '@chakra-ui/react';
 
-const DashboardMainContainer: React.FC<FlexProps> = ({ children, ...props }) => {
+const DashboardMainContainer: React.FC<FlexProps> = ({
+  children,
+  ...props
+}) => {
   return (
     <Flex
       bg="royalGray.100"
