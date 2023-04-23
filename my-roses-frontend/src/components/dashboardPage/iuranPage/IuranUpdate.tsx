@@ -42,6 +42,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
   const [isRequested, setIsRequested] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(getAllUser);
     getAllUser('limit=all');
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

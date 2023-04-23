@@ -56,7 +56,7 @@ export type Update = {
   [RESOURCE_NAME.IURANS]: Paerial<
     Omit<
       Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.IURANS],
-      'id' | 'createdAt' | 'userId'
+      'id' | 'userId'
     >
   >;
 };

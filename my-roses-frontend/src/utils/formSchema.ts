@@ -64,10 +64,11 @@ export const pembukuanSchema = Yup.object({
 
 export const iuranSchema = Yup.object({
   createdAt: Yup.string().required('Tanggal Dibutuhkan'),
+  updatedAt: Yup.string().required('Tanggal Dibutuhkan'),
   debt: Yup.number().required('Jumlah Uang Dibutuhkan'),
 });
 
-export const updateIuranSchema = iuranSchema;
+export const updateIuranSchema = iuranSchema.omit(['updatedAt']);
 
 export const adminSchema = Yup.object({
   password: Yup.string(),
