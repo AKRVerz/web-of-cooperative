@@ -47,6 +47,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/next-pwa": "^5.6.2",
     "@types/react-autosuggest": "^10.1.6"
   }
 }

@@ -1,6 +1,6 @@
-export const formatRupiah = (money: any) => {
+export const formatRupiah = <T>(money: T) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
-  }).format(money);
+  }).format(money as never);
 };

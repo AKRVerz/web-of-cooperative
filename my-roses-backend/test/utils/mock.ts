@@ -1,30 +1,15 @@
-import httpMocks from 'node-mocks-http';
+import express, { Express } from 'express';
+import supertest from 'supertest';
 
-export const createMockData = ({
-  url,
-  method,
-  body = {},
-  query = {},
-}: {
-  method: httpMocks.RequestMethod;
-  url: string;
-  body?: httpMocks.Body;
-  query?: httpMocks.Query;
-}) => {
-  const { req, res } = httpMocks.createMocks({
-    url,
-    method,
-    query,
-    body,
-    headers: {
-      'content-type': 'application/json',
-      accept: 'application/json',
-    },
-  });
+export const createMockApi = async () => {
+  const app = express();
 
-  return { req, res };
+  return app;
 };
 
-export const mockNextFn = () => {
-  return null;
+export const createPostRequest = (app: Express, endpoint = '/auth') => {
+  return supertest(app)
+    .post(endpoint)
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
 };

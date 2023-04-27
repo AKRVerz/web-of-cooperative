@@ -11,7 +11,7 @@
     "migrate:create": "prisma migrate dev --name",
     "migrate:reset": "prisma migrate reset",
     "seed": "prisma db seed",
-    "test": "jest -i ./test/*.test.ts"
+    "test": "jest -i"
   },
   "keywords": [],
   "author": "",
