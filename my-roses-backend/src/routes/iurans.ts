@@ -4,16 +4,16 @@ import * as iuran from '../middleware/iuran';
 
 const router = Router();
 
-//Post /iurans
+//Post /mounts
 router.post('/', user.authMw, iuran.createIuranMw, iuran.returnIuranMw);
 
-//GET /iurans
+//GET /mounts
 router.get('/', user.authMw, iuran.getIuransMw, iuran.returnIuransMw);
 
-//GET /iurans/:id
+//GET /mounts/:id
 router.get('/:id', user.authMw, iuran.getIuranMw, iuran.returnIuranMw);
 
-//PATCH /iurans/:id
+//PATCH /mounts/:id
 router.patch(
   '/:id',
   user.authMw,
@@ -23,7 +23,7 @@ router.patch(
   iuran.returnIuranMw
 );
 
-//DELETE /iurans/:id
+//DELETE /mounts/:id
 router.delete('/:id', user.authMw, iuran.getIuranMw, iuran.deleteIuranMw);
 
 export default router;

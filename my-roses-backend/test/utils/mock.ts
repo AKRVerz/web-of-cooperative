@@ -16,52 +16,7 @@ export const createMockApi = () => {
   return app;
 };
 
-export const setMockApiHeader = (mock: supertest.Request) => mock
-  .set('Content-Type', 'application/json')
-  .set('Accept', 'application/json');
-
-export const createMockData = ({
-  url,
-  method,
-  body = {},
-  query = {},
-}: {
-  method: httpMocks.RequestMethod;
-  url: string;
-  body?: httpMocks.Body;
-  query?: httpMocks.Query;
-}) => {
-  const { req, res } = httpMocks.createMocks({
-    url,
-    method,
-    query,
-    body,
-    headers: {
-      'content-type': 'application/json',
-      accept: 'application/json',
-    },
-  });
-
-  return { req, res };
-};
-
-export const mockNextFn = () => {
-  return null;
-};
-
-export const mockLoginMw = async () => {
-  const { req, res } = createMockData({
-    url: '/auth/login',
-    method: 'POST',
-    body: {
-      email: 'admin@admin.com',
-      password: 'admin',
-    },
-  });
-
-  const mw = extractMiddleware(userMiddleware.loginMw);
-
-  await mw(req, res, mockNextFn);
-
-  return { req, res };
-};
+export const setMockApiHeader = (mock: supertest.Request) =>
+  mock
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
