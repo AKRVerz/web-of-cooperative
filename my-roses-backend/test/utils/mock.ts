@@ -8,7 +8,7 @@ import root from '../../src/utils/root';
 
 dotenvConfig();
 
-export const createMockApi = async () => {
+export const createMockApi = () => {
   const app = express();
 
   root(app);
@@ -16,12 +16,9 @@ export const createMockApi = async () => {
   return app;
 };
 
-export const createPostRequest = (app: Express, endpoint = '/user') => {
-  return supertest(app)
-    .get(endpoint)
-    .set('Content-Type', 'application/json')
-    .set('Accept', 'application/json');
-};
+export const setMockApiHeader = (mock: supertest.Request) => mock
+  .set('Content-Type', 'application/json')
+  .set('Accept', 'application/json');
 
 export const createMockData = ({
   url,
