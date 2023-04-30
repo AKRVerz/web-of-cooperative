@@ -91,10 +91,10 @@ jobs:
             node --version
             pwd
             pm2 stop all
-            cd ArgoMulyoKoperasi && git fetch && git reset --hard origin/main
+            cd ArgoMulyoKoperasi/my-roses-backend && git fetch && git reset --hard origin/main
             npm install
             rm -rf ~/ArgoMulyoKoperasi/my-roses-backend/dist && echo "dist directory removed."
-            unzip -o ~/artifacts/backend.zip -d ~/ArgoMulyoKoperasi/my-roses-backend
+            unzip -o ~/artifacts/my-roses-backend/backend.zip -d ~/ArgoMulyoKoperasi/my-roses-backend
             npm run migrate && npm run seed
 
       - name: deploy frontend assets
@@ -108,9 +108,9 @@ jobs:
             source ~/.nvm/nvm.sh
             node --version
             pwd
-            cd ArgoMulyoKoperasi && git fetch && git reset --hard origin/main
+            cd ArgoMulyoKoperasi/my-roses-frontend && git fetch && git reset --hard origin/main
             npm install
             rm -rf ~/ArgoMulyoKoperasi/my-roses-frontend/.next && echo ".next directory removed."
-            unzip -o ~/artifacts/frontend.zip -d ~/ArgoMulyoKoperasi/my-roses-frontend
+            unzip -o ~/artifacts/my-roses-frontend/frontend.zip -d ~/ArgoMulyoKoperasi/my-roses-frontend
             pm2 reset all
             pm2 start all
