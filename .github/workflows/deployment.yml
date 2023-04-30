@@ -53,23 +53,21 @@ jobs:
         run: zip frontend.zip ./next -r
 
       - name: push backend assets to server # In cloud server
-        working-directory: './my-roses-backend'
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.CLOUD_IP }}
           username: ${{ secrets.CLOUD_USERNAME }}
           password: ${{ secrets.CLOUD_PASSWORD }}
-          source: ./backend.zip
+          source: ./my-roses-backend/backend.zip
           target: '~/artifacts'
 
       - name: push frontend assets to server # In cloud server
-        working-directory: './my-roses-frontend'
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.CLOUD_IP }}
           username: ${{ secrets.CLOUD_USERNAME }}
           password: ${{ secrets.CLOUD_PASSWORD }}
-          source: ./frontend.zip
+          source: ./my-roses-frontend/frontend.zip
           target: '~/artifacts'
 
   deploy:
