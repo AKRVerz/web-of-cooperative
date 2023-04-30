@@ -1,0 +1,115 @@
+name: deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cleanup:
+    name: 'Prepare server before deployment' # In Github workflow server
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: remove backend and frontend assets # In cloud server
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.CLOUD_IP }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
+          script: |
+            rm -rf ~/artifacts/backend.zip
+            rm -rf ~/artifacts/frontend.zip
+
+  build:
+    name: 'Build server assets for deployment' # In Github workflow server
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: cleanup
+    steps:
+      - name: checkout to main # In Github workflow server
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: install node.js # In Github workflow server
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: build backend assets # In Github workflow server
+        working-directory: './my-roses-backend'
+        run: npm install && npm run build
+
+      - name: build frontend assets # In Github workflow server
+        working-directory: './my-roses-frontend'
+        run: npm install && npm run build
+
+      - name: compress backend assets # In Github workflow server
+        working-directory: './my-roses-backend'
+        run: zip backend.zip ./dist -r
+
+      - name: compress frontend assets # In Github workflow server
+        working-directory: './my-roses-frontend'
+        run: zip frontend.zip ./next -r
+
+      - name: push backend assets to server # In cloud server
+        working-directory: './my-roses-backend'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.CLOUD_IP }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
+          source: ./backend.zip
+          target: '~/artifacts'
+
+      - name: push frontend assets to server # In cloud server
+        working-directory: './my-roses-frontend'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.CLOUD_IP }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
+          source: ./frontend.zip
+          target: '~/artifacts'
+
+  deploy:
+    name: 'Deploy assets to server' # In Github workflow server
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: deploy backend assets
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.CLOUD_IP }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            node --version
+            pwd
+            pm2 stop all
+            cd ArgoMulyoKoperasi && git fetch && git reset --hard origin/main
+            npm install
+            rm -rf ~/ArgoMulyoKoperasi/my-roses-backend/dist && echo "dist directory removed."
+            unzip -o ~/artifacts/backend.zip -d ~/ArgoMulyoKoperasi/my-roses-backend
+            npm run migrate && npm run seed
+
+      - name: deploy frontend assets
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.CLOUD_IP }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            node --version
+            pwd
+            cd ArgoMulyoKoperasi && git fetch && git reset --hard origin/main
+            npm install
+            rm -rf ~/ArgoMulyoKoperasi/my-roses-frontend/.next && echo ".next directory removed."
+            unzip -o ~/artifacts/frontend.zip -d ~/ArgoMulyoKoperasi/my-roses-frontend
+            pm2 reset all
+            pm2 start all
