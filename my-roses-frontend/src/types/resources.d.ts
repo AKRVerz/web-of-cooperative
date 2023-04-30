@@ -1,8 +1,8 @@
 import { ModelStructure } from '../../../my-roses-backend/src/repository/prisma-repo';
 import { RESOURCE_NAME, USER_ROLE } from 'src/utils/constant';
 
-type UserRole = typeof USER_ROLE[keyof typeof USER_ROLE];
-type ResourceName = typeof RESOURCE_NAME[keyof typeof RESOURCE_NAME];
+type UserRole = (typeof USER_ROLE)[keyof typeof USER_ROLE];
+type ResourceName = (typeof RESOURCE_NAME)[keyof typeof RESOURCE_NAME];
 
 export type ResourceStructure = {
   [RESOURCE_NAME.USERS]: ModelStructure['user'] & {
@@ -44,7 +44,7 @@ export type Update = {
   [RESOURCE_NAME.USERS]: Partial<
     Omit<
       Koperasi.Resource.ResourceStructure[typeof RESOURCE_NAME.USERS],
-      'id' | 'createdAt' | 'updatedAt' | 'password'
+      'id' | 'createdAt' | 'updatedAt'
     >
   >;
   [RESOURCE_NAME.PEMBUKUANS]: Partial<

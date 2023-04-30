@@ -64,7 +64,7 @@ const CreateCoreContent: React.FC<Props> = ({ createUser }) => {
               username: '',
               password: '',
               role: USER_ROLE.CORE,
-              noKtp: undefined as unknown as number,
+              noKtp: undefined as unknown as string,
               alamat: '',
               tanggal: undefined as unknown as Date,
             }}

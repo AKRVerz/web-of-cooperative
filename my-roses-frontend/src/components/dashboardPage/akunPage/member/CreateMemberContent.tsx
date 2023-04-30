@@ -64,7 +64,7 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
               username: '',
               password: '',
               role: USER_ROLE.MEMBER,
-              noKtp: undefined as unknown as number,
+              noKtp: undefined as unknown as string,
               alamat: '',
               tanggal: undefined as unknown as Date,
             }}

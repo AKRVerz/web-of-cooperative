@@ -64,7 +64,7 @@ const CreateAdminContent: React.FC<Props> = ({ createUser }) => {
               username: '',
               password: '',
               role: USER_ROLE.ADMIN,
-              noKtp: undefined as unknown as number,
+              noKtp: undefined as unknown as string,
               alamat: '',
               tanggal: undefined as unknown as Date,
             }}

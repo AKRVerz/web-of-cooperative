@@ -42,7 +42,10 @@ jobs:
 
       - name: build frontend assets # In Github workflow server
         working-directory: './my-roses-frontend'
-        run: npm install && npm run build
+        run: |
+          touch .env
+          echo "NEXT_PUBLIC_API_URL={{ secrets.API_URL }}" > .env
+          npm install && npm run build
 
       - name: compress backend assets # In Github workflow server
         working-directory: './my-roses-backend'
