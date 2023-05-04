@@ -1,5 +1,5 @@
 import { Document, Page, Text } from '@react-pdf/renderer';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { connect, ConnectedProps } from 'react-redux';
 import { pdfStyles as styles } from 'src/utils/styles';
@@ -10,18 +10,25 @@ import { KopSurat } from 'src/components/baseComponent/PDFComponents';
 import RiwayatTableHead from 'src/components/baseComponent/PDFComponents/RiwayatTableHead';
 import RiwayatTableRow from 'src/components/baseComponent/PDFComponents/RiwayatTableRow';
 import { RootState } from 'src/store';
-import { getAllData as _getAllData } from 'src/store/actions/resources';
+import { getAllPembukuan as _getAllPembukuan } from 'src/store/actions/resources/pembukuans';
 
 const PDFViewer = dynamic(
   () => import('@react-pdf/renderer').then(({ PDFViewer }) => PDFViewer),
   { ssr: false }
 );
 
-const ExportPdf: React.FC<Props> = ({ pembukuans, getAllData }) => {
+const ExportPdf: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
+  const [page, setPage] = useState<number>(1);
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [limit] = useState<number>(99999999999);
+
   useEffect(() => {
-    getAllData(RESOURCE_NAME.PEMBUKUANS);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    (async () => {
+      await getAllPembukuan(`page=${page}&limit=${limit}`);
+
+      setFirstLoad(false);
+    })();
+  }, []); // eslint-disable-line
 
   return (
     <PDFViewer style={{ width: '100vw', height: `100vh` }}>
@@ -58,7 +65,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const connector = connect(mapStateToProps, {
-  getAllData: _getAllData,
+  getAllPembukuan: _getAllPembukuan,
 });
 
 type Props = ConnectedProps<typeof connector>;
