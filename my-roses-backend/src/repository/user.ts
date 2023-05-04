@@ -38,6 +38,7 @@ class User extends BaseRepository(MODELS_NAME.USER) {
     ]);
 
     if (user.email) user.email = _.toLower(resource.email);
+    if (user.username) user.username = _.toLower(resource.username);
     if (user.noKtp && !_.isString(user.noKtp))
       user.noKtp = _.toString(user.noKtp);
     if (user.password) user.password = await hashText(resource.password);

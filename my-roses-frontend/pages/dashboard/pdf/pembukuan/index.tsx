@@ -20,12 +20,18 @@ const PDFViewer = dynamic(
 const ExportPdf: React.FC<Props> = ({ pembukuans, getAllData }) => {
   useEffect(() => {
     getAllData(RESOURCE_NAME.PEMBUKUANS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <PDFViewer style={{ width: '100vw', height: `100vh` }}>
       <Document {...DEFAULT_DOCUMENT_PROPS} subject={'Lamporan Pembukuan'}>
-        <Page orientation="landscape" size="LETTER" style={styles.body}>
+        <Page
+          orientation="landscape"
+          size="LETTER"
+          wrap={true}
+          style={styles.body}
+        >
           <KopSurat />
           <Text style={styles.title}>Laporan Pembukuan</Text>
           <Text style={styles.text}>

@@ -49,11 +49,6 @@ const AdminContent: React.FC<Props> = ({ users, deleteAdmin, getAllUser }) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
-  const {
-    isOpen: isCsvOpen,
-    onClose: onCsvClose,
-    onOpen: onCsvOpen,
-  } = useDisclosure();
 
   const onClose = () => {
     setIsOpen(false);
