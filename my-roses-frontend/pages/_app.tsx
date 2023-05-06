@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import 'moment/locale/id';
+import Head from 'next/head';
 import moment from 'moment';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
@@ -15,6 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <ToastContainer />
       <ChakraProvider theme={customTheme}>
+        <Head>
+          <title>Koperasi Argo Mulyo Lestari</title>
+        </Head>
         <Component {...pageProps} />
       </ChakraProvider>
     </Provider>

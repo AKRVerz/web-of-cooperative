@@ -11,11 +11,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link
-            rel="shortcut icon"
-            href="alarm-clock.png"
-            type="image/x-icon"
-          />
+          <link rel="shortcut icon" type="image/x-icon" />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#fffff" />
         </Head>
