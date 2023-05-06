@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   Table,
-  Grid,
   Tr,
   Th,
   Td,
@@ -40,20 +39,10 @@ import { getPembukuanFilter } from 'src/utils/pembukuan';
 import { formatRupiah } from 'src/utils/formaterRupiah';
 
 const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
-  const toast = useChakraToast();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [pembukuanId, setPembukuanId] = useState<number | null>(null);
-
-  const [userId, setUserId] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(15);
-  const {
-    isOpen: isCsvOpen,
-    onClose: onCsvClose,
-    onOpen: onCsvOpen,
-  } = useDisclosure();
 
   useEffect(() => {
     (async () => {
@@ -81,12 +70,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
           Dashboard
         </Text>
-        <Grid
-          templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
-          my={3}
-          gap={4}
-        ></Grid>
-
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
             mb={4}

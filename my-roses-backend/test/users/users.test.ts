@@ -1,11 +1,8 @@
 import moment from 'moment';
 import { Express } from 'express';
 import supertest from 'supertest';
-import * as middleware from '../../src/middleware/pembukuans';
-import * as userMiddleware from '../../src/middleware/users';
 import { USER_ROLE } from '../../src/utils/constant';
 import { hashText } from '../../src/utils/encryption';
-import { extractMiddleware, resolveMiddleware } from '../utils/common';
 import { createMockApi, setMockApiHeader } from '../utils/mock';
 import _ from 'lodash';
 
@@ -55,17 +52,16 @@ describe('User Middleware', () => {
   });
 
   it.skip('Create User', async () => {
-    const request = setMockApiHeader(
-      test.post('/users').send({
-        username: 'admin2',
-        email: 'admin2@admin.com',
-        password: await hashText('admin'),
-        role: USER_ROLE.ADMIN,
-        noKtp: '10042001',
-        alamat: 'Jl Hi Rais',
-        tanggal: moment('2021-07-16').toISOString() as unknown as Date,
-      })
-    );
+    const payload = {
+      username: 'admin2',
+      email: 'admin2@admin.com',
+      password: await hashText('admin'),
+      role: USER_ROLE.ADMIN,
+      noKtp: '10042001',
+      alamat: 'Jl Hi Rais',
+      tanggal: moment('2021-07-16').toISOString() as unknown as Date,
+    };
+    const request = setMockApiHeader(test.post('/users').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -75,17 +71,16 @@ describe('User Middleware', () => {
   });
 
   it.skip('Update User', async () => {
-    const request = setMockApiHeader(
-      test.patch('/users/2').send({
-        username: 'admin@2001',
-        email: 'admin2001@admin.com',
-        password: await hashText('admin2'),
-        role: USER_ROLE.ADMIN,
-        noKtp: '20010410',
-        alamat: 'Jl Hi Rais',
-        tanggal: moment('2023-05-01').toISOString() as unknown as Date,
-      })
-    );
+    const payload = {
+      username: 'admin@2001',
+      email: 'admin2001@admin.com',
+      password: await hashText('admin2'),
+      role: USER_ROLE.ADMIN,
+      noKtp: '20010410',
+      alamat: 'Jl Hi Rais',
+      tanggal: moment('2023-05-01').toISOString() as unknown as Date,
+    };
+    const request = setMockApiHeader(test.patch('/users/2').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

@@ -39,19 +39,9 @@ const UserLayout: ReactFC = ({ children }) => {
           flex={1}
           overflow={'auto'}
         >
-          <GridItem
-            colSpan={3}
-            display={{ base: 'none', md: 'inline' }}
-            width={'100%'}
-          />
-          <GridItem colSpan={{ base: 1, md: 6 }} width={'100%'}>
+          <GridItem colSpan={{ base: 3, md: 12 }} width={'100%'}>
             <Children />
           </GridItem>
-          <GridItem
-            colSpan={3}
-            display={{ base: 'none', md: 'inline' }}
-            width={'100%'}
-          />
         </Grid>
       )}
       <Flex display={{ base: 'flex', md: 'none' }}>

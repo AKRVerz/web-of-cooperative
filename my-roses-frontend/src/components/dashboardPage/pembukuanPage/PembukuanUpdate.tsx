@@ -56,12 +56,12 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
       {pembukuan ? (
         <React.Fragment>
           <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-            Data Member
+            Laporan Pembukuan
           </Text>
           <DashboardContainer overflow={'auto'}>
             <Flex p={5} flexDirection={'column'} height={'100%'}>
               <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={3}>
-                Formulir Pembaruan Akun Member
+                Formulir Pembaruan Laporan Pembukuan
               </Text>
               <Formik
                 initialValues={{

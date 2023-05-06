@@ -52,20 +52,19 @@ describe('Pembukuan Middleware', () => {
   });
 
   it.skip('Create pembukuan', async () => {
-    const request = setMockApiHeader(
-      test.post('/pembukuans').send({
-        tanggal: moment('2021-07-16').toISOString() as unknown as Date,
-        uraian: 'Bibit Kopi',
-        sumWood: 4500,
-        harga: 25000,
-        masuk: 112500000,
-        keluar: 11806248,
-        jumlah: 100693752,
-        cashBack: 2000,
-        sumCashBack: 9000000,
-        afterCashBack: 103500000,
-      })
-    );
+    const payload = {
+      tanggal: moment('2021-07-16').toISOString() as unknown as Date,
+      uraian: 'Bibit Kopi',
+      sumWood: 4500,
+      harga: 25000,
+      masuk: 112500000,
+      keluar: 11806248,
+      jumlah: 100693752,
+      cashBack: 2000,
+      sumCashBack: 9000000,
+      afterCashBack: 103500000,
+    };
+    const request = setMockApiHeader(test.post('/pembukuans').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -75,20 +74,19 @@ describe('Pembukuan Middleware', () => {
   });
 
   it.skip('Update pembukuan', async () => {
-    const request = setMockApiHeader(
-      test.patch('/pembukuans/2').send({
-        tanggal: moment('2021-08-01').toISOString() as unknown as Date,
-        uraian: 'Bibit Jahe',
-        sumWood: 4500,
-        harga: 25000,
-        masuk: 112500000,
-        keluar: 11806248,
-        jumlah: 100693752,
-        cashBack: 2000,
-        sumCashBack: 9000000,
-        afterCashBack: 103500000,
-      })
-    );
+    const payload = {
+      tanggal: moment('2021-08-01').toISOString() as unknown as Date,
+      uraian: 'Bibit Jahe',
+      sumWood: 4500,
+      harga: 25000,
+      masuk: 112500000,
+      keluar: 11806248,
+      jumlah: 100693752,
+      cashBack: 2000,
+      sumCashBack: 9000000,
+      afterCashBack: 103500000,
+    };
+    const request = setMockApiHeader(test.patch('/pembukuans/2').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

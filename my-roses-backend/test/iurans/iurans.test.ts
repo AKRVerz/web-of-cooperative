@@ -40,13 +40,12 @@ describe('Iuran Middleware', () => {
   });
 
   it.skip('Create Iurans', async () => {
-    const request = setMockApiHeader(
-      test.post('/mounts').send({
-        userId: 4,
-        debt: 2020202,
-        createdAt: moment('2021-07-16').toISOString() as unknown as Date,
-      })
-    );
+    const payload = {
+      userId: 4,
+      debt: 2020202,
+      createdAt: moment('2021-07-16').toISOString() as unknown as Date,
+    };
+    const request = setMockApiHeader(test.post('/mounts').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -55,13 +54,12 @@ describe('Iuran Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
   it.skip('Update Iurans', async () => {
-    const request = setMockApiHeader(
-      test.patch('/mounts/4').send({
-        userId: 4,
-        debt: 111111,
-        createdAt: moment('2021-05-16').toISOString() as unknown as Date,
-      })
-    );
+    const payload = {
+      userId: 4,
+      debt: 111111,
+      createdAt: moment('2021-05-16').toISOString() as unknown as Date,
+    };
+    const request = setMockApiHeader(test.patch('/mounts/4').send());
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

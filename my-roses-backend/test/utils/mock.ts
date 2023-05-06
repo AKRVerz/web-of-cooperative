@@ -1,8 +1,6 @@
 import { config as dotenvConfig } from 'dotenv';
-import httpMocks from 'node-mocks-http';
-import * as userMiddleware from '../../src/middleware/users';
-import { extractMiddleware, resolveMiddleware } from './common';
-import express, { Express } from 'express';
+
+import express from 'express';
 import supertest from 'supertest';
 import root from '../../src/utils/root';
 
