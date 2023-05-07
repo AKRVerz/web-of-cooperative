@@ -54,12 +54,12 @@ const KopSurat = () => {
   return (
     <React.Fragment>
       <View style={styles.cops}>
-        <Image style={styles['logo.koperasi']} src={'/Logo.jpg'} />
+        <Image style={styles['logo.koperasi']} src={'/Logo.webp'} />
         <View style={styles.cops_inner}>
           <Text style={styles.cops_title}>DESA GIRIMULYO LESTARI</Text>
           <Text style={styles.cops_title}>KOPERASI ARGO MULYO LESTARI</Text>
         </View>
-        <Image style={styles['logo.koperasi']} src={'/Logo.jpg'} />
+        <Image style={styles['logo.koperasi']} src={'/Logo.webp'} />
       </View>
       <View style={styles.borderThin} />
       <View style={styles.borderThicc} />

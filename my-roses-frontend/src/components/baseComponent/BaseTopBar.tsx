@@ -54,7 +54,7 @@ const BaseTopBar: ReactFC = ({ children }) => {
           >
             <Image
               borderRadius="full"
-              src={`${basePath}/Logo.jpg`}
+              src={`${basePath}/Logo.webp`}
               alt="Logo"
             />
           </AspectRatio>

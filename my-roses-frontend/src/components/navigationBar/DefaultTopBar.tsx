@@ -35,7 +35,7 @@ const DefaultTopBar: ReactFC = () => {
       <Flex align="center" mr={5}>
         <AspectRatio ratio={1} width={{ base: '50px', sm: '75px', md: '85px' }}>
           <Image
-            src={`${basePath}/Logo.jpg`}
+            src={`${basePath}/Logo.webp`}
             alt="Logo"
             width={100}
             height={100}
