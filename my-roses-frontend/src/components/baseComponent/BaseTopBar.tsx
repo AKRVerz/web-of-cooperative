@@ -54,7 +54,7 @@ const BaseTopBar: ReactFC = ({ children }) => {
           >
             <Image
               borderRadius="full"
-              src={`${basePath}/Logo-Koperasi-1-1200x900.jpg`}
+              src={`${basePath}/Logo.jpg`}
               alt="Logo"
             />
           </AspectRatio>

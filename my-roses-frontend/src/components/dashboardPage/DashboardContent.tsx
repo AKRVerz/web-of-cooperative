@@ -50,7 +50,7 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const [page, setPage] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const [limit] = useState<number>(15);
+  const [limit] = useState<number>(10);
   const {
     isOpen: isCsvOpen,
     onClose: onCsvClose,

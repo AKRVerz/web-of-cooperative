@@ -20,11 +20,10 @@ const PDFViewer = dynamic(
 const ExportPdf: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const [page, setPage] = useState<number>(1);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const [limit] = useState<number>(99999999999);
 
   useEffect(() => {
     (async () => {
-      await getAllPembukuan(`page=${page}&limit=${limit}`);
+      await getAllPembukuan(`page=${page}&limit=all`);
 
       setFirstLoad(false);
     })();

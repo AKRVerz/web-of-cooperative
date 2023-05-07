@@ -52,7 +52,7 @@ const PembukuanContent: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [pembukuanId, setPembukuanId] = useState<number | null>(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const [limit] = useState<number>(15);
+  const [limit] = useState<number>(10);
 
   const onClose = () => {
     setIsOpen(false);
