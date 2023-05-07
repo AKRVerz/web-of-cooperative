@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack, Flex, Text, Image, AspectRatio } from '@chakra-ui/react';
+import { Stack, Flex, Text, AspectRatio } from '@chakra-ui/react';
+import Image from 'next/image';
 import useBasePath from 'src/utils/useBasePath';
 
 const DefaultTopBar: ReactFC = () => {
@@ -34,9 +35,10 @@ const DefaultTopBar: ReactFC = () => {
       <Flex align="center" mr={5}>
         <AspectRatio ratio={1} width={{ base: '50px', sm: '75px', md: '85px' }}>
           <Image
-            borderRadius="full"
-            src={`${basePath}/Logo-Koperasi-1-1200x900.jpg`}
+            src={`${basePath}/Logo.jpg`}
             alt="Logo"
+            width={100}
+            height={100}
           />
         </AspectRatio>
       </Flex>

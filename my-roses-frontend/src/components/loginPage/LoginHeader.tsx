@@ -46,7 +46,7 @@ const LoginHeader: ReactFC = () => {
           <AspectRatio ratio={1} width={{ base: 70, lg: 75 }}>
             <Image
               borderRadius="full"
-              src="Logo-Koperasi-1-1200x900.jpg"
+              src="Logo.jpg"
               alt="Logo"
               width={{ base: 70, lg: 75 }}
               height={{ base: 70, lg: 75 }}

@@ -2,15 +2,9 @@ import _ from 'lodash';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { AspectRatio, Flex, FlexProps, Grid, GridItem } from '@chakra-ui/react';
-import {
-  VscHome,
-  VscGraph,
-  VscSettingsGear,
-  VscSignOut,
-} from 'react-icons/vsc';
+import { VscHome, VscSettingsGear, VscSignOut } from 'react-icons/vsc';
 import { BsGearFill } from 'react-icons/bs';
 import { HiHome } from 'react-icons/hi';
-import { GoGraph } from 'react-icons/go';
 import { removeToken } from 'src/utils/sessionUtils';
 
 const BottomBar: ReactFC = () => {
@@ -25,15 +19,7 @@ const BottomBar: ReactFC = () => {
   const inHome = () => {
     const pathname = router.pathname;
 
-    return (
-      !_.includes(pathname, '/grafik') && !_.includes(pathname, '/settings')
-    );
-  };
-
-  const inGraph = () => {
-    const pathname = router.pathname;
-
-    return _.includes(pathname, '/grafik');
+    return !_.includes(pathname, '/settings');
   };
 
   const inSettings = () => {
