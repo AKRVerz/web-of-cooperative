@@ -137,7 +137,7 @@ const CreateAdminContent: React.FC<Props> = ({ createUser }) => {
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!errors.jabatan && touched.jabatan}>
-                    <FormLabel>Nama Lengkap</FormLabel>
+                    <FormLabel>Jabatan</FormLabel>
                     <Input
                       id="jabatan"
                       placeholder="Jabatan"

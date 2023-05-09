@@ -136,6 +136,20 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
                       <FormErrorMessage>{errors.username}</FormErrorMessage>
                     )}
                   </FormControl>
+                  <FormControl isInvalid={!!errors.jabatan && touched.jabatan}>
+                    <FormLabel>Jabatan</FormLabel>
+                    <Input
+                      id="jabatan"
+                      placeholder="Jabatan"
+                      value={values.jabatan}
+                      onChange={handleChange('jabatan')}
+                      onBlur={handleBlur('jabatan')}
+                      {...createUserInput}
+                    />
+                    {!!errors.jabatan && touched.jabatan && (
+                      <FormErrorMessage>{errors.jabatan}</FormErrorMessage>
+                    )}
+                  </FormControl>
                   <FormControl isInvalid={!!errors.noKtp && touched.noKtp}>
                     <FormLabel>No KTP</FormLabel>
                     <Input
