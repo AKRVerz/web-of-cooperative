@@ -11,7 +11,7 @@ const UserContent = () => {
   useEffect(() => {
     const role = SessionUtils.getRole();
 
-    setIsCoreMember(_.includes([USER_ROLE.CORE, USER_ROLE.MEMBER], role));
+    setIsCoreMember(_.includes([USER_ROLE.MEMBER], role));
   }, []);
 
   return (
