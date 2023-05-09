@@ -23,7 +23,7 @@ const Login = () => {
       case USER_ROLE.ADMIN:
         router.push('/dashboard');
         break;
-      default:
+      case USER_ROLE.MEMBER:
         router.push('/');
         break;
     }
