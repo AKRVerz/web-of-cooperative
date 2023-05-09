@@ -67,6 +67,7 @@ const CreateMemberContent: React.FC<Props> = ({ createUser }) => {
               noKtp: undefined as unknown as string,
               alamat: '',
               tanggal: undefined as unknown as Date,
+              jabatan: undefined as unknown as string,
             }}
             validationSchema={userSchema}
             onSubmit={create}

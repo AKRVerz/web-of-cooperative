@@ -153,13 +153,16 @@ const MemberContent: React.FC<Props> = ({
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
                     Hari/Tanggal
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'25%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
                     Nama Lengkap
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'20%'}>
+                  <Th color="white" bg={'royalRed.200'} width={'15%'}>
+                    Jabatan
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'15%'}>
                     Email
                   </Th>
                   <Th color="white" bg={'royalRed.200'} width={'20%'}>
@@ -186,6 +189,7 @@ const MemberContent: React.FC<Props> = ({
                       {moment(user.tanggal).format('dddd / DD MMMM YYYY')}
                     </Td>
                     <Td>{user.username}</Td>
+                    <Td>{user.jabatan}</Td>
                     <Td>{user.email}</Td>
                     <Td>{user.noKtp}</Td>
                     <Td>{user.alamat}</Td>

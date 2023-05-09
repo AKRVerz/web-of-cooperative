@@ -72,6 +72,7 @@ const UpdateAdminContent: React.FC<Props> = ({ updateUser }) => {
                   alamat: admin?.alamat,
                   tanggal: undefined as unknown as Date,
                   password: admin?.password,
+                  jabatan: admin?.jabatan,
                   role: USER_ROLE.ADMIN,
                 }}
                 validationSchema={adminSchema}
