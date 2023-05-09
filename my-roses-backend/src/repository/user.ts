@@ -35,6 +35,7 @@ class User extends BaseRepository(MODELS_NAME.USER) {
       'alamat',
       'tanggal',
       'iurans',
+      'jabatan',
     ]);
 
     if (user.email) user.email = _.toLower(resource.email);

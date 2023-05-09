@@ -67,6 +67,7 @@ const CreateAdminContent: React.FC<Props> = ({ createUser }) => {
               noKtp: undefined as unknown as string,
               alamat: '',
               tanggal: undefined as unknown as Date,
+              jabatan: undefined as unknown as string,
             }}
             validationSchema={userSchema}
             onSubmit={create}
@@ -133,6 +134,20 @@ const CreateAdminContent: React.FC<Props> = ({ createUser }) => {
                     />
                     {!!errors.username && touched.username && (
                       <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.jabatan && touched.jabatan}>
+                    <FormLabel>Nama Lengkap</FormLabel>
+                    <Input
+                      id="jabatan"
+                      placeholder="Jabatan"
+                      value={values.jabatan}
+                      onChange={handleChange('jabatan')}
+                      onBlur={handleBlur('jabatan')}
+                      {...createUserInput}
+                    />
+                    {!!errors.jabatan && touched.jabatan && (
+                      <FormErrorMessage>{errors.jabatan}</FormErrorMessage>
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!errors.noKtp && touched.noKtp}>

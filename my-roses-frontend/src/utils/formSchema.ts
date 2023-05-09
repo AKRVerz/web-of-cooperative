@@ -27,6 +27,7 @@ export const loginSchema = Yup.object({
 export const userSchema = Yup.object({
   email: Yup.string().email().required('Email Dibutuhkan'),
   username: Yup.string().required('Nama Lengkap Dibutuhkan'),
+  jabatan: Yup.string().required('Jabatan Dibutuhkan'),
   noKtp: Yup.string().required('No KTP Dibutuhkan'),
   alamat: Yup.string().required('Alamat Dibutuhkan'),
   tanggal: Yup.date().required('Tanggal Dibutuhkan'),

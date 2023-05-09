@@ -44,7 +44,7 @@ export const isAuthenticated = (): boolean => {
 export const canDelete = (): boolean => {
   const role = getRole();
 
-  return _.includes([USER_ROLE.ADMIN, USER_ROLE.CORE], role);
+  return _.includes([USER_ROLE.ADMIN], role);
 };
 
 export const getAccountId = (): number | undefined => {

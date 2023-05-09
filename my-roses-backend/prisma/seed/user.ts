@@ -8,6 +8,7 @@ const main = async (prisma: Prisma) => {
     data: [
       {
         username: 'admin',
+        jabatan: 'Seketaris',
         email: 'admin@admin.com',
         password: await hashText('admin'),
         role: USER_ROLE.ADMIN,

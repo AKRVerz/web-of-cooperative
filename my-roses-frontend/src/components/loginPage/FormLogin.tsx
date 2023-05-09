@@ -62,9 +62,6 @@ const FormLogin: ReactFC<Props> = ({ userLogin }) => {
         case USER_ROLE.ADMIN:
           router.push('/dashboard');
           break;
-        case USER_ROLE.CORE:
-          router.push('/');
-        default:
           router.push('/');
           break;
       }
