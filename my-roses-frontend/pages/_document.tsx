@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" type="image/x-icon" />
           <link rel="manifest" href="/manifest.json" />
-          <meta name="theme-color" content="#fffff" />
         </Head>
         <body>
           <Main />
