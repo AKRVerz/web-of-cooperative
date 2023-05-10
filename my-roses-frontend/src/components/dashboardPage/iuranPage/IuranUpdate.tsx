@@ -20,7 +20,7 @@ import {
   DashboardContainer,
   DashboardMainContainer,
 } from 'src/components/baseComponent';
-import { iuranSchema, updateIuranSchema } from 'src/utils/formSchema';
+import { updateIuranSchema } from 'src/utils/formSchema';
 import { buttonStyle, createUserInput } from 'src/utils/styles';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import { updateIuran as _updateIuran } from 'src/store/actions/resources/iurans';
