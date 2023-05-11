@@ -6,10 +6,10 @@ type ResourceName = (typeof RESOURCE_NAME)[keyof typeof RESOURCE_NAME];
 
 export type ResourceStructure = {
   [RESOURCE_NAME.USERS]: ModelStructure['user'] & {
-    iurans?: ModelStructure['mounts'][];
+    iurans?: ModelStructure['mount'][];
   };
   [RESOURCE_NAME.PEMBUKUANS]: ModelStructure['pembukuan'];
-  [RESOURCE_NAME.IURANS]: ModelStructure['mounts'];
+  [RESOURCE_NAME.IURANS]: ModelStructure['mount'];
 };
 
 export type ResourceRecord<T extends ResourceName> = {

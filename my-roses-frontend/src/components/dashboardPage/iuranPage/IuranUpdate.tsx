@@ -12,7 +12,7 @@ import {
   FormLabel,
   Button,
 } from '@chakra-ui/react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
@@ -25,26 +25,17 @@ import { buttonStyle, createUserInput } from 'src/utils/styles';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import { updateIuran as _updateIuran } from 'src/store/actions/resources/iurans';
 import { errorToastfier } from 'src/utils/toastifier';
-import useUserIdQuery from 'src/hooks/useUserIdQuery';
+import useIdQuery from 'src/hooks/useIdQuery';
 import useGetDataById from 'src/hooks/useGetdataById';
 import useChakraToast from 'src/hooks/useChakraToast';
-import AutoComplete from 'src/components/baseComponent/AutoComplete';
 import { getAllUser as _getAllUser } from 'src/store/actions/resources/users';
 
 const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
-  const queryId = useUserIdQuery();
+  const router = useRouter();
+  const queryId = router.query.iuranId as never;
   const toast = useChakraToast();
   const iuran = useGetDataById(RESOURCE_NAME.IURANS, queryId);
-  const [keyword, setKeyword] = useState('');
-  const [userId, setUserId] = useState<number>();
-  const [isError, setIsError] = useState('');
-  const [isTouched, setIsTouched] = useState(false);
   const [isRequested, setIsRequested] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(getAllUser);
-    getAllUser('limit=all');
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const update = async (value: Partial<Resource.Update['mounts']>) => {
     setIsRequested(true);
@@ -115,21 +106,6 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
                           <FormErrorMessage>
                             {errors.createdAt as string}
                           </FormErrorMessage>
-                        )}
-                      </FormControl>
-                      <FormControl isInvalid={!!isError && !!isTouched}>
-                        <FormLabel>Nama Anggota Koperasi</FormLabel>
-                        <AutoComplete
-                          keyword={keyword}
-                          setKeyword={setKeyword}
-                          setUserId={setUserId}
-                          setIsError={setIsError}
-                          setIsTouched={setIsTouched}
-                          onFocus={() => setIsTouched(true)}
-                          isRequired
-                        />
-                        {!_.isEmpty(isError) && isTouched && (
-                          <FormErrorMessage>{isError}</FormErrorMessage>
                         )}
                       </FormControl>
                       <FormControl isInvalid={!!errors.debt && !!touched.debt}>

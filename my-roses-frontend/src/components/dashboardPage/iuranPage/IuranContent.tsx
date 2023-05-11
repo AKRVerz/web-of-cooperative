@@ -199,9 +199,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                         <Flex justifyContent={'space-between'}>
                           <FaEdit
                             onClick={() =>
-                              router.push(
-                                `${router.pathname}/${user.id}/update`
-                              )
+                              router.push(`${router.pathname}/${user.id}`)
                             }
                             cursor={'pointer'}
                           />
