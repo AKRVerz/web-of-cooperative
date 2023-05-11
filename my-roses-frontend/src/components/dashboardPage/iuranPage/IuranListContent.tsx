@@ -47,7 +47,7 @@ const IuranListContent = () => {
   return (
     <DashboardMainContainer>
       <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-        Data Member
+        Data Iuran Member
       </Text>
       <DashboardContainer px={10} flexDirection={'column'}>
         <Flex
