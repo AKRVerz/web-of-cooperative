@@ -59,7 +59,7 @@ describe('Iuran Middleware', () => {
       debt: 111111,
       createdAt: moment('2021-05-16').toISOString() as unknown as Date,
     };
-    const request = setMockApiHeader(test.patch('/mounts/4').send());
+    const request = setMockApiHeader(test.patch('/mounts/1').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -68,7 +68,7 @@ describe('Iuran Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
   it('Delete Iurans', async () => {
-    const request = setMockApiHeader(test.delete('/mounts/2'));
+    const request = setMockApiHeader(test.delete('/mounts/1'));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

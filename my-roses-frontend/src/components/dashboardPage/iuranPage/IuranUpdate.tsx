@@ -59,7 +59,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
       {iuran ? (
         <React.Fragment>
           <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-            Data Member
+            Data Iuran
           </Text>
           <DashboardContainer overflow={'auto'}>
             <Flex p={5} flexDirection={'column'} height={'100%'}>

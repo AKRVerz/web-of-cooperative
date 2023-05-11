@@ -139,7 +139,7 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                 Nama
               </Text>
               <Text color="white" bg={'royalRed.200'} width={'32%'} py={2}>
-                Hari/Tanggal
+                Bulan
               </Text>
               <Text color="white" bg={'royalRed.200'} width={'32%'} py={2}>
                 Uang(RP)
@@ -186,16 +186,16 @@ const IuranContent: React.FC<Props> = ({ users, deleteIurans, getAllUser }) => {
                       flexDirection="row"
                       textAlign={'center'}
                     >
-                      <Text width={'30%'} py={2}>
+                      <Text width={'31%'} py={2}>
                         {user.username}
                       </Text>
-                      <Text width={'30%'} py={2}>
+                      <Text width={'32%'} py={2}>
                         {moment(iuran.date).format('MMMM YYYY')}
                       </Text>
-                      <Text width={'30%'} py={2}>
+                      <Text width={'32%'} py={2}>
                         {formatRupiah(iuran.debt.total)}
                       </Text>
-                      <Text width={'10%'} py={2}>
+                      <Text width={'5%'} py={2}>
                         <Flex justifyContent={'space-between'}>
                           <FaEdit
                             onClick={() =>

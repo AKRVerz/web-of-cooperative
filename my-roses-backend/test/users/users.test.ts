@@ -58,6 +58,7 @@ describe('User Middleware', () => {
       password: await hashText('admin'),
       role: USER_ROLE.ADMIN,
       noKtp: '10042001',
+      jabatan: 'Ketua Sidang',
       alamat: 'Jl Hi Rais',
       tanggal: moment('2021-07-16').toISOString() as unknown as Date,
     };

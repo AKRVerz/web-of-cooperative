@@ -13,10 +13,6 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" type="image/x-icon" />
           <link rel="manifest" href="/manifest.json" />
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-          />
         </Head>
         <body>
           <Main />
