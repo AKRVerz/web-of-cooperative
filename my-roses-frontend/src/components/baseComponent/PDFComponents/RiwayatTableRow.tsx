@@ -52,7 +52,7 @@ const RiwayatTableRow: React.FC<Props> = ({ pembukuans }) => {
             <Text style={styles.allWith15}>
               {formatRupiah(pembukuan.keluar)}
             </Text>
-            <Text style={styles.end}>{formatRupiah(pembukuan.jumlah)}</Text>
+            <Text style={styles.end}>{formatRupiah(pembukuan.shu)}</Text>
           </View>
         </React.Fragment>
       ))}

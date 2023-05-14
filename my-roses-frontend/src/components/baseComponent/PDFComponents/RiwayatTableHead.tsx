@@ -39,7 +39,7 @@ const RiwayatTableHead = () => {
       <Text style={styles.allWith15}>Harga</Text>
       <Text style={styles.allWith15}>Masuk</Text>
       <Text style={styles.allWith15}>Keluar</Text>
-      <Text style={styles.end}>Jumlah</Text>
+      <Text style={styles.end}>SHU</Text>
     </View>
   );
 };
