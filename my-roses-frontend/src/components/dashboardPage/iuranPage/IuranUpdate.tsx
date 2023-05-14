@@ -69,7 +69,7 @@ const IuranUpdate: React.FC<Props> = ({ updateIuran, getAllUser }) => {
               <Formik
                 initialValues={{
                   createdAt: undefined as unknown as Date,
-                  debt: undefined as unknown as number,
+                  debt: iuran?.debt,
                 }}
                 validationSchema={updateIuranSchema}
                 onSubmit={update}

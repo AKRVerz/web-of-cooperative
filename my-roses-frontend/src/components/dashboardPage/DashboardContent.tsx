@@ -81,9 +81,8 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
     <React.Fragment>
       <DashboardMainContainer>
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-          Dashboard
+          Buat Laporan
         </Text>
-
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
             mb={4}
@@ -99,9 +98,9 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                 px={10}
                 borderRadius={25}
                 _focus={{ border: 'none' }}
-                onClick={() => Router.push('dashboard/pdf/pembukuan')}
+                onClick={() => Router.push(`${Router.pathname}/create`)}
               >
-                Download PDF
+                Tambah
               </Button>
             </Flex>
             <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
@@ -131,51 +130,43 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'15%'}>
-                    Hari/Tanggal
-                  </Th>
                   <Th color="white" bg={'royalRed.200'} width={'10%'}>
-                    Uraian
+                    Hari dan Tanggal
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'10%'}>
-                    Jumlah Batang/Kg
+                  <Th color="white" bg={'royalRed.200'} width={'5%'}>
+                    Tujuan Pengiriman
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'5%'}>
+                    Jumlah Batang
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Harga(Rp)
+                    Harga/Batang
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Cashback Awal
+                    Hasil
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Masuk
+                    Cash Back
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
-                    textAlign="center"
-                  >
-                    Keluar
-                  </Th>
-                  <Th
-                    color="white"
-                    bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
                     Total Cashback
@@ -186,7 +177,47 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     width={'10%'}
                     textAlign="center"
                   >
-                    Setelah CashBack
+                    Bayar Penangkar
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Ongkos Kirim
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Uang Jalan
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    PPH (1,5%)
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Operasional QC
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Royalti
                   </Th>
                   <Th
                     color="white"
@@ -194,7 +225,23 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     width={'10%'}
                     textAlign="center"
                   >
-                    Jumlah
+                    Total Pengeluaran
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'10%'}
+                    textAlign="center"
+                  >
+                    SHU
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    textAlign="center"
+                    borderTopRightRadius={10}
+                  >
+                    Aksi
                   </Th>
                 </Tr>
               </Thead>
@@ -208,12 +255,37 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     <Td>{pembukuan.uraian}</Td>
                     <Td>{pembukuan.sumWood}</Td>
                     <Td>{formatRupiah(pembukuan.harga)}</Td>
-                    <Td>{formatRupiah(pembukuan.cashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.masuk)}</Td>
-                    <Td>{formatRupiah(pembukuan.keluar)}</Td>
+                    <Td>{formatRupiah(pembukuan.cashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.sumCashBack)}</Td>
-                    <Td>{formatRupiah(pembukuan.afterCashBack)}</Td>
-                    <Td>{formatRupiah(pembukuan.jumlah)}</Td>
+                    <Td>{formatRupiah(pembukuan.payBreed)}</Td>
+                    <Td>{formatRupiah(pembukuan.shipCost)}</Td>
+                    <Td>{formatRupiah(pembukuan.roadMoney)}</Td>
+                    <Td>{formatRupiah(pembukuan.pph)}</Td>
+                    <Td>{formatRupiah(pembukuan.operationalQc)}</Td>
+                    <Td>{formatRupiah(pembukuan.royalti)}</Td>
+                    <Td>{formatRupiah(pembukuan.keluar)}</Td>
+                    <Td>{formatRupiah(pembukuan.shu)}</Td>
+                    <Td>
+                      <Flex justifyContent={'space-between'}>
+                        <FaEdit
+                          onClick={() =>
+                            Router.push(
+                              `${Router.pathname}/${pembukuan.id}/update`
+                            )
+                          }
+                          cursor={'pointer'}
+                        />
+                        <Spacer />
+                        <FaTrash
+                          onClick={() => {
+                            setPembukuanId(pembukuan.id);
+                            setIsOpen(true);
+                          }}
+                          cursor={'pointer'}
+                        />
+                      </Flex>
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>

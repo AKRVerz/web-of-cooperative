@@ -62,16 +62,21 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
               </Text>
               <Formik
                 initialValues={{
-                  tanggal: undefined as unknown as Date,
-                  uraian: '',
-                  sumWood: undefined as unknown as number,
-                  harga: undefined as unknown as number,
-                  masuk: undefined as unknown as number,
-                  keluar: undefined as unknown as number,
-                  jumlah: undefined as unknown as number,
-                  cashBack: undefined as unknown as number,
-                  sumCashBack: undefined as unknown as number,
-                  afterCashBack: undefined as unknown as number,
+                  tanggal: pembukuan?.tanggal,
+                  uraian: pembukuan?.uraian,
+                  sumWood: pembukuan?.sumWood,
+                  harga: pembukuan?.harga,
+                  masuk: pembukuan?.masuk,
+                  keluar: pembukuan?.keluar,
+                  cashBack: pembukuan?.cashBack,
+                  sumCashBack: pembukuan?.sumCashBack,
+                  shipCost: pembukuan?.shipCost,
+                  roadMoney: pembukuan?.roadMoney,
+                  payBreed: pembukuan?.payBreed,
+                  operationalQc: pembukuan?.operationalQc,
+                  pph: pembukuan?.pph,
+                  royalti: pembukuan?.royalti,
+                  shu: pembukuan?.shu,
                 }}
                 validationSchema={pembukuanSchema}
                 onSubmit={update}
@@ -113,10 +118,10 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                       <FormControl
                         isInvalid={!!errors.uraian && touched.uraian}
                       >
-                        <FormLabel>Uraian</FormLabel>
+                        <FormLabel>Tujuan Pengiriman</FormLabel>
                         <Input
                           id="uraian"
-                          placeholder="uraian"
+                          placeholder="Tujuan Pengiriman"
                           value={values.uraian}
                           onChange={handleChange('uraian')}
                           onBlur={handleBlur('uraian')}
@@ -129,10 +134,10 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                       <FormControl
                         isInvalid={!!errors.sumWood && touched.sumWood}
                       >
-                        <FormLabel>Batang/Kg</FormLabel>
+                        <FormLabel>Jumlah Batang</FormLabel>
                         <Input
                           id="sumWood"
-                          placeholder="batang/kg"
+                          placeholder="Jumlah Batang"
                           value={values.sumWood}
                           onChange={handleChange('sumWood')}
                           onBlur={handleBlur('sumWood')}
@@ -144,10 +149,10 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                         )}
                       </FormControl>
                       <FormControl isInvalid={!!errors.harga && touched.harga}>
-                        <FormLabel>Harga</FormLabel>
+                        <FormLabel>Harga/Batang</FormLabel>
                         <Input
                           id="harga"
-                          placeholder="harga"
+                          placeholder="Harga/Batang"
                           value={values.harga}
                           onChange={handleChange('harga')}
                           onBlur={handleBlur('harga')}
@@ -158,11 +163,27 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                           <FormErrorMessage>{errors.harga}</FormErrorMessage>
                         )}
                       </FormControl>
+                      <FormControl isInvalid={!!errors.masuk && touched.masuk}>
+                        <FormLabel>Hasil</FormLabel>
+                        <Input
+                          id="masuk"
+                          placeholder="Hasil"
+                          value={values.harga * values.sumWood}
+                          readOnly
+                          // onChange={handleChange("masuk")}
+                          // onBlur={handleBlur("masuk")}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.masuk && touched.masuk && (
+                          <FormErrorMessage>{errors.masuk}</FormErrorMessage>
+                        )}
+                      </FormControl>
                       <FormControl>
-                        <FormLabel>Cashback Awal</FormLabel>
+                        <FormLabel>Cashback</FormLabel>
                         <Input
                           id="cashBack"
-                          placeholder="Cashback Awal"
+                          placeholder="Cashback"
                           value={values.cashBack}
                           onChange={handleChange('cashBack')}
                           onBlur={handleBlur('cashBack')}
@@ -173,19 +194,128 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                           <FormErrorMessage>{errors.cashBack}</FormErrorMessage>
                         )}
                       </FormControl>
-                      <FormControl isInvalid={!!errors.masuk && touched.masuk}>
-                        <FormLabel>Masuk</FormLabel>
+                      <FormControl
+                        isInvalid={!!errors.sumCashBack && touched.sumCashBack}
+                      >
+                        <FormLabel>Total CashBack</FormLabel>
                         <Input
-                          id="masuk"
-                          placeholder="masuk"
-                          value={values.masuk}
-                          onChange={handleChange('masuk')}
-                          onBlur={handleBlur('masuk')}
+                          id="sumCashBack"
+                          placeholder="Hasil Setelah CashBack"
+                          value={values.cashBack * values.sumWood}
+                          readOnly
                           type="number"
                           {...createUserInput}
                         />
-                        {!!errors.masuk && touched.masuk && (
-                          <FormErrorMessage>{errors.masuk}</FormErrorMessage>
+                        {!!errors.sumCashBack && touched.sumCashBack && (
+                          <FormErrorMessage>
+                            {errors.sumCashBack}
+                          </FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.payBreed && touched.payBreed}
+                      >
+                        <FormLabel>Bayar Penangkar/Batang</FormLabel>
+                        <Input
+                          id="payBreed"
+                          placeholder="Bayar Penangkar"
+                          value={values.payBreed}
+                          onChange={handleChange('payBreed')}
+                          onBlur={handleBlur('payBreed')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.payBreed && touched.payBreed && (
+                          <FormErrorMessage>{errors.payBreed}</FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.shipCost && touched.shipCost}
+                      >
+                        <FormLabel>Ongkos Kirim</FormLabel>
+                        <Input
+                          id="shipCpst"
+                          placeholder="Ongkos Kirim"
+                          value={values.shipCost}
+                          onChange={handleChange('shipCost')}
+                          onBlur={handleBlur('shipCost')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.shipCost && touched.shipCost && (
+                          <FormErrorMessage>{errors.shipCost}</FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.roadMoney && touched.roadMoney}
+                      >
+                        <FormLabel>Uang Jalan</FormLabel>
+                        <Input
+                          id="roadMoney"
+                          placeholder="Uang Jalan"
+                          value={values.roadMoney}
+                          onChange={handleChange('roadMoney')}
+                          onBlur={handleBlur('roadMoney')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.roadMoney && touched.roadMoney && (
+                          <FormErrorMessage>
+                            {errors.roadMoney}
+                          </FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl isInvalid={!!errors.pph && touched.pph}>
+                        <FormLabel>PPH (1,5%)</FormLabel>
+                        <Input
+                          id="pph"
+                          placeholder="PPH (1,5%)"
+                          value={values.harga * values.sumWood * (1.5 / 100)}
+                          // onChange={handleChange('pph')}
+                          // onBlur={handleBlur('pph')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.pph && touched.pph && (
+                          <FormErrorMessage>{errors.pph}</FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={
+                          !!errors.operationalQc && touched.operationalQc
+                        }
+                      >
+                        <FormLabel>Operasional QC</FormLabel>
+                        <Input
+                          id="operationalQc"
+                          placeholder="Operasional Qc"
+                          value={values.sumWood * 1000}
+                          // onChange={handleChange('harga')}
+                          // onBlur={handleBlur('harga')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.operationalQc && touched.operationalQc && (
+                          <FormErrorMessage>
+                            {errors.operationalQc}
+                          </FormErrorMessage>
+                        )}
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.royalti && touched.royalti}
+                      >
+                        <FormLabel>Royalti</FormLabel>
+                        <Input
+                          id="royalti"
+                          placeholder="Royalti"
+                          value={values.sumWood * 1000}
+                          // onChange={handleChange('harga')}
+                          // onBlur={handleBlur('harga')}
+                          type="number"
+                          {...createUserInput}
+                        />
+                        {!!errors.royalti && touched.royalti && (
+                          <FormErrorMessage>{errors.royalti}</FormErrorMessage>
                         )}
                       </FormControl>
                       <FormControl
@@ -195,9 +325,16 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                         <Input
                           id="keluar"
                           placeholder="keluar"
-                          value={values.keluar}
-                          onChange={handleChange('keluar')}
-                          onBlur={handleBlur('keluar')}
+                          value={
+                            values.payBreed * values.sumWood +
+                            values.shipCost +
+                            values.roadMoney +
+                            values.harga * values.sumWood * (1.5 / 100) +
+                            values.sumWood * 1000 +
+                            values.sumWood * 1000
+                          }
+                          // onChange={handleChange('keluar')}
+                          // onBlur={handleBlur('keluar')}
                           type="number"
                           {...createUserInput}
                         />
@@ -205,19 +342,28 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                           <FormErrorMessage>{errors.keluar}</FormErrorMessage>
                         )}
                       </FormControl>
-                      <FormControl
-                        isInvalid={!!errors.sumCashBack && touched.sumCashBack}
-                      >
-                        <FormLabel>Total CashBack</FormLabel>
+                      <FormControl isInvalid={!!errors.shu && touched.shu}>
+                        <FormLabel>SHU</FormLabel>
                         <Input
-                          id="sumCashBack"
-                          placeholder="Total CashBack"
-                          value={values.sumCashBack}
-                          onChange={handleChange('Total CashBack')}
-                          onBlur={handleBlur('Total CashBack')}
+                          id="shu"
+                          placeholder="SHU"
+                          value={
+                            values.harga * values.sumWood -
+                            values.payBreed * values.sumWood -
+                            values.shipCost -
+                            values.roadMoney -
+                            values.harga * values.sumWood * (1.5 / 100) -
+                            values.sumWood * 1000 -
+                            values.sumWood * 1000
+                          }
+                          // onChange={handleChange('keluar')}
+                          // onBlur={handleBlur('keluar')}
                           type="number"
                           {...createUserInput}
                         />
+                        {!!errors.keluar && touched.keluar && (
+                          <FormErrorMessage>{errors.keluar}</FormErrorMessage>
+                        )}
                       </FormControl>
                     </VStack>
                     <Button
