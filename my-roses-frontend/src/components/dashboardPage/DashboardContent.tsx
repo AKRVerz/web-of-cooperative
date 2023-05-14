@@ -98,9 +98,9 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                 px={10}
                 borderRadius={25}
                 _focus={{ border: 'none' }}
-                onClick={() => Router.push(`${Router.pathname}/create`)}
+                onClick={() => Router.push('dashboard/pdf/pembukuan')}
               >
-                Tambah
+                Download PDF
               </Button>
             </Flex>
             <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>

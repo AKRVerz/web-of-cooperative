@@ -104,51 +104,43 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                   >
                     No
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'15%'}>
-                    Hari/Tanggal
-                  </Th>
                   <Th color="white" bg={'royalRed.200'} width={'10%'}>
-                    Uraian
+                    Hari dan Tanggal
                   </Th>
-                  <Th color="white" bg={'royalRed.200'} width={'10%'}>
-                    Jumlah Batang/Kg
+                  <Th color="white" bg={'royalRed.200'} width={'5%'}>
+                    Tujuan Pengiriman
+                  </Th>
+                  <Th color="white" bg={'royalRed.200'} width={'5%'}>
+                    Jumlah Batang
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Harga(Rp)
+                    Harga/Batang
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Cashback Awal
+                    Hasil
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
-                    Masuk
+                    Cash Back
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
-                    width={'10%'}
-                    textAlign="center"
-                  >
-                    Keluar
-                  </Th>
-                  <Th
-                    color="white"
-                    bg={'royalRed.200'}
-                    width={'10%'}
+                    width={'5%'}
                     textAlign="center"
                   >
                     Total Cashback
@@ -159,16 +151,63 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     width={'10%'}
                     textAlign="center"
                   >
-                    Setelah CashBack
+                    Bayar Penangkar
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Ongkos Kirim
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Uang Jalan
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    PPH (1,5%)
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Operasional QC
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'5%'}
+                    textAlign="center"
+                  >
+                    Royalti
                   </Th>
                   <Th
                     color="white"
                     bg={'royalRed.200'}
                     width={'10%'}
                     textAlign="center"
-                    borderTopRightRadius={10}
                   >
-                    Jumlah
+                    Total Pengeluaran
+                  </Th>
+                  <Th
+                    color="white"
+                    bg={'royalRed.200'}
+                    width={'10%'}
+                    textAlign="center"
+                  >
+                    SHU
                   </Th>
                 </Tr>
               </Thead>
@@ -182,12 +221,17 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     <Td>{pembukuan.uraian}</Td>
                     <Td>{pembukuan.sumWood}</Td>
                     <Td>{formatRupiah(pembukuan.harga)}</Td>
-                    <Td>{formatRupiah(pembukuan.cashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.masuk)}</Td>
-                    <Td>{formatRupiah(pembukuan.keluar)}</Td>
+                    <Td>{formatRupiah(pembukuan.cashBack)}</Td>
                     <Td>{formatRupiah(pembukuan.sumCashBack)}</Td>
-                    <Td>{formatRupiah(pembukuan.afterCashBack)}</Td>
-                    <Td>{formatRupiah(pembukuan.jumlah)}</Td>
+                    <Td>{formatRupiah(pembukuan.payBreed)}</Td>
+                    <Td>{formatRupiah(pembukuan.shipCost)}</Td>
+                    <Td>{formatRupiah(pembukuan.roadMoney)}</Td>
+                    <Td>{formatRupiah(pembukuan.pph)}</Td>
+                    <Td>{formatRupiah(pembukuan.operationalQc)}</Td>
+                    <Td>{formatRupiah(pembukuan.royalti)}</Td>
+                    <Td>{formatRupiah(pembukuan.keluar)}</Td>
+                    <Td>{formatRupiah(pembukuan.shu)}</Td>
                   </Tr>
                 ))}
               </Tbody>
