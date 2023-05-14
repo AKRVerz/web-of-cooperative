@@ -5,8 +5,6 @@ import {
   VStack,
   FormControl,
   Input,
-  InputGroup,
-  InputRightElement,
   FormErrorMessage,
   FormLabel,
   Button,
@@ -14,7 +12,6 @@ import {
 import Router from 'next/router';
 import { connect, ConnectedProps } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import {
   DashboardContainer,
   DashboardMainContainer,
@@ -221,39 +218,6 @@ const PembukuanUpdate: React.FC<Props> = ({ updatePembukuan }) => {
                           type="number"
                           {...createUserInput}
                         />
-                      </FormControl>
-                      <FormControl
-                        isInvalid={
-                          !!errors.afterCashBack && touched.afterCashBack
-                        }
-                      >
-                        <FormLabel>Setelah CashBack</FormLabel>
-                        <Input
-                          id="afterCashBack"
-                          placeholder="Setelah CashBack"
-                          value={values.sumCashBack}
-                          onChange={handleChange('Setelah CashBack')}
-                          onBlur={handleBlur('Setelah CashBack')}
-                          type="number"
-                          {...createUserInput}
-                        />
-                      </FormControl>
-                      <FormControl
-                        isInvalid={!!errors.jumlah && touched.jumlah}
-                      >
-                        <FormLabel>Jumlah</FormLabel>
-                        <Input
-                          id="jumlah"
-                          placeholder="jumlah"
-                          value={values.jumlah}
-                          onChange={handleChange('jumlah')}
-                          onBlur={handleBlur('jumlah')}
-                          type="number"
-                          {...createUserInput}
-                        />
-                        {!!errors.jumlah && touched.jumlah && (
-                          <FormErrorMessage>{errors.jumlah}</FormErrorMessage>
-                        )}
                       </FormControl>
                     </VStack>
                     <Button

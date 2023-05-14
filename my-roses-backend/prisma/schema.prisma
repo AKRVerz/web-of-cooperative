@@ -47,12 +47,17 @@ model Pembukuan {
   harga         Int
   masuk         Float
   keluar        Float
-  jumlah        Float
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   cashBack      Float
   sumCashBack   Float
-  afterCashBack Float
+  shipCost      Float
+  roadMoney     Float
+  payBreed      Float
+  operationalQc Float
+  pph           Float
+  royalti       Float
+  shu           Float
 }
 
 model File {

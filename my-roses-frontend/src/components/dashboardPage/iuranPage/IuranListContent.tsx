@@ -22,8 +22,7 @@ import { resources as resourcesSelector } from 'src/store/selectors';
 import { RESOURCE_NAME } from 'src/utils/constant';
 import moment from 'moment';
 import { formatRupiah } from 'src/utils/formaterRupiah';
-import { FaEdit, FaSearch, FaTrash } from 'react-icons/fa';
-import { buttonStyle } from 'src/utils/styles';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const IuranListContent = () => {
   const router = useRouter();

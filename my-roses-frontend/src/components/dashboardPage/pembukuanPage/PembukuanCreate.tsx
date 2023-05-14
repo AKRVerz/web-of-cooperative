@@ -61,10 +61,15 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
               harga: undefined as unknown as number,
               masuk: undefined as unknown as number,
               keluar: undefined as unknown as number,
-              jumlah: undefined as unknown as number,
               cashBack: undefined as unknown as number,
               sumCashBack: undefined as unknown as number,
-              afterCashBack: undefined as unknown as number,
+              shipCost: undefined as unknown as number,
+              roadMoney: undefined as unknown as number,
+              payBreed: undefined as unknown as number,
+              operationalQc: undefined as unknown as number,
+              pph: undefined as unknown as number,
+              royalti: undefined as unknown as number,
+              shu: undefined as unknown as number,
             }}
             validationSchema={pembukuanSchema}
             onSubmit={create}
@@ -104,10 +109,10 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!errors.uraian && touched.uraian}>
-                    <FormLabel>Uraian</FormLabel>
+                    <FormLabel>Tujuan Pengiriman</FormLabel>
                     <Input
                       id="uraian"
-                      placeholder="uraian"
+                      placeholder="Tujuan Pengiriman"
                       value={values.uraian}
                       onChange={handleChange('uraian')}
                       onBlur={handleBlur('uraian')}
@@ -118,10 +123,10 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!errors.sumWood && touched.sumWood}>
-                    <FormLabel>Batang/Kg</FormLabel>
+                    <FormLabel>Jumlah Batang</FormLabel>
                     <Input
                       id="sumWood"
-                      placeholder="batang/kg"
+                      placeholder="Jumlah Batang"
                       value={values.sumWood}
                       onChange={handleChange('sumWood')}
                       onBlur={handleBlur('sumWood')}
@@ -133,10 +138,10 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!errors.harga && touched.harga}>
-                    <FormLabel>Harga</FormLabel>
+                    <FormLabel>Harga/Batang</FormLabel>
                     <Input
                       id="harga"
-                      placeholder="harga"
+                      placeholder="Harga/Batang"
                       value={values.harga}
                       onChange={handleChange('harga')}
                       onBlur={handleBlur('harga')}
@@ -147,26 +152,11 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       <FormErrorMessage>{errors.harga}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl>
-                    <FormLabel>Cashback Awal</FormLabel>
-                    <Input
-                      id="cashBack"
-                      placeholder="Cashback Awal"
-                      value={values.cashBack}
-                      onChange={handleChange('cashBack')}
-                      onBlur={handleBlur('cashBack')}
-                      type="number"
-                      {...createUserInput}
-                    />
-                    {!!errors.cashBack && touched.cashBack && (
-                      <FormErrorMessage>{errors.cashBack}</FormErrorMessage>
-                    )}
-                  </FormControl>
                   <FormControl isInvalid={!!errors.masuk && touched.masuk}>
-                    <FormLabel>Masuk</FormLabel>
+                    <FormLabel>Hasil</FormLabel>
                     <Input
                       id="masuk"
-                      placeholder="masuk"
+                      placeholder="Hasil"
                       value={values.harga * values.sumWood}
                       readOnly
                       // onChange={handleChange("masuk")}
@@ -178,19 +168,19 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                       <FormErrorMessage>{errors.masuk}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl isInvalid={!!errors.keluar && touched.keluar}>
-                    <FormLabel>Keluar</FormLabel>
+                  <FormControl>
+                    <FormLabel>Cashback</FormLabel>
                     <Input
-                      id="keluar"
-                      placeholder="keluar"
-                      value={values.keluar}
-                      onChange={handleChange('keluar')}
-                      onBlur={handleBlur('keluar')}
+                      id="cashBack"
+                      placeholder="Cashback"
+                      value={values.cashBack}
+                      onChange={handleChange('cashBack')}
+                      onBlur={handleBlur('cashBack')}
                       type="number"
                       {...createUserInput}
                     />
-                    {!!errors.keluar && touched.keluar && (
-                      <FormErrorMessage>{errors.keluar}</FormErrorMessage>
+                    {!!errors.cashBack && touched.cashBack && (
+                      <FormErrorMessage>{errors.cashBack}</FormErrorMessage>
                     )}
                   </FormControl>
                   <FormControl
@@ -210,44 +200,148 @@ const PembukuanCreate: React.FC<Props> = ({ createPembukuan }) => {
                     )}
                   </FormControl>
                   <FormControl
-                    isInvalid={!!errors.afterCashBack && touched.afterCashBack}
+                    isInvalid={!!errors.payBreed && touched.payBreed}
                   >
-                    <FormLabel>Setelah CashBack</FormLabel>
+                    <FormLabel>Bayar Penangkar/Batang</FormLabel>
                     <Input
-                      id="afterCashBack"
-                      placeholder="Setelah CashBack"
-                      value={
-                        values.harga * values.sumWood -
-                        values.cashBack * values.sumWood
-                      }
-                      readOnly
+                      id="payBreed"
+                      placeholder="Bayar Penangkar"
+                      value={values.payBreed}
+                      onChange={handleChange('payBreed')}
+                      onBlur={handleBlur('payBreed')}
                       type="number"
                       {...createUserInput}
                     />
-                    {!!errors.afterCashBack && touched.afterCashBack && (
+                    {!!errors.payBreed && touched.payBreed && (
+                      <FormErrorMessage>{errors.payBreed}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.shipCost && touched.shipCost}
+                  >
+                    <FormLabel>Ongkos Kirim</FormLabel>
+                    <Input
+                      id="shipCpst"
+                      placeholder="Ongkos Kirim"
+                      value={values.shipCost}
+                      onChange={handleChange('shipCost')}
+                      onBlur={handleBlur('shipCost')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.shipCost && touched.shipCost && (
+                      <FormErrorMessage>{errors.shipCost}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.roadMoney && touched.roadMoney}
+                  >
+                    <FormLabel>Uang Jalan</FormLabel>
+                    <Input
+                      id="roadMoney"
+                      placeholder="Uang Jalan"
+                      value={values.roadMoney}
+                      onChange={handleChange('roadMoney')}
+                      onBlur={handleBlur('roadMoney')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.roadMoney && touched.roadMoney && (
+                      <FormErrorMessage>{errors.roadMoney}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.pph && touched.pph}>
+                    <FormLabel>PPH (1,5%)</FormLabel>
+                    <Input
+                      id="pph"
+                      placeholder="PPH (1,5%)"
+                      value={values.harga * values.sumWood * (1.5 / 100)}
+                      // onChange={handleChange('pph')}
+                      // onBlur={handleBlur('pph')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.pph && touched.pph && (
+                      <FormErrorMessage>{errors.pph}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.operationalQc && touched.operationalQc}
+                  >
+                    <FormLabel>Operasional QC</FormLabel>
+                    <Input
+                      id="operationalQc"
+                      placeholder="Operasional Qc"
+                      value={values.sumWood * 1000}
+                      // onChange={handleChange('harga')}
+                      // onBlur={handleBlur('harga')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.operationalQc && touched.operationalQc && (
                       <FormErrorMessage>
-                        {errors.afterCashBack}
+                        {errors.operationalQc}
                       </FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl isInvalid={!!errors.jumlah && touched.jumlah}>
-                    <FormLabel>Jumlah</FormLabel>
+                  <FormControl isInvalid={!!errors.royalti && touched.royalti}>
+                    <FormLabel>Royalti</FormLabel>
                     <Input
-                      id="jumlah"
-                      placeholder="jumlah"
-                      value={
-                        values.harga * values.sumWood -
-                        values.cashBack * values.sumWood -
-                        values.keluar
-                      }
-                      readOnly
-                      // onChange={handleChange("jumlah")}
-                      // onBlur={handleBlur("jumlah")}
+                      id="royalti"
+                      placeholder="Royalti"
+                      value={values.sumWood * 1000}
+                      // onChange={handleChange('harga')}
+                      // onBlur={handleBlur('harga')}
                       type="number"
                       {...createUserInput}
                     />
-                    {!!errors.jumlah && touched.jumlah && (
-                      <FormErrorMessage>{errors.jumlah}</FormErrorMessage>
+                    {!!errors.royalti && touched.royalti && (
+                      <FormErrorMessage>{errors.royalti}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.keluar && touched.keluar}>
+                    <FormLabel>Keluar</FormLabel>
+                    <Input
+                      id="keluar"
+                      placeholder="keluar"
+                      value={
+                        values.payBreed * values.sumWood +
+                        values.shipCost +
+                        values.roadMoney +
+                        values.harga * values.sumWood * (1.5 / 100) +
+                        values.sumWood * 1000 +
+                        values.sumWood * 1000
+                      }
+                      // onChange={handleChange('keluar')}
+                      // onBlur={handleBlur('keluar')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.keluar && touched.keluar && (
+                      <FormErrorMessage>{errors.keluar}</FormErrorMessage>
+                    )}
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.shu && touched.shu}>
+                    <FormLabel>SHU</FormLabel>
+                    <Input
+                      id="shu"
+                      placeholder="SHU"
+                      value={
+                        values.harga * values.sumWood -
+                        values.payBreed * values.sumWood -
+                        values.shipCost -
+                        values.roadMoney -
+                        values.harga * values.sumWood * (1.5 / 100) -
+                        values.sumWood * 1000 -
+                        values.sumWood * 1000
+                      }
+                      // onChange={handleChange('keluar')}
+                      // onBlur={handleBlur('keluar')}
+                      type="number"
+                      {...createUserInput}
+                    />
+                    {!!errors.keluar && touched.keluar && (
+                      <FormErrorMessage>{errors.keluar}</FormErrorMessage>
                     )}
                   </FormControl>
                 </VStack>

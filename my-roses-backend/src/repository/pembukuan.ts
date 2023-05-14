@@ -33,10 +33,15 @@ class Pembukuan extends BaseRepository(MODELS_NAME.PEMBUKUAN) {
       'harga',
       'masuk',
       'keluar',
-      'jumlah',
-      'afterCashBack',
       'sumCashBack',
       'cashBack',
+      'shipCost',
+      'roadMoney',
+      'payBreed',
+      'operationalQc',
+      'pph',
+      'royalti',
+      'shu',
     ]);
 
     return pembukuan as Create;
