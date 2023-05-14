@@ -51,11 +51,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [limit] = useState<number>(10);
-  const {
-    isOpen: isCsvOpen,
-    onClose: onCsvClose,
-    onOpen: onCsvOpen,
-  } = useDisclosure();
 
   useEffect(() => {
     (async () => {
@@ -266,26 +261,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                     <Td>{formatRupiah(pembukuan.royalti)}</Td>
                     <Td>{formatRupiah(pembukuan.keluar)}</Td>
                     <Td>{formatRupiah(pembukuan.shu)}</Td>
-                    <Td>
-                      <Flex justifyContent={'space-between'}>
-                        <FaEdit
-                          onClick={() =>
-                            Router.push(
-                              `${Router.pathname}/${pembukuan.id}/update`
-                            )
-                          }
-                          cursor={'pointer'}
-                        />
-                        <Spacer />
-                        <FaTrash
-                          onClick={() => {
-                            setPembukuanId(pembukuan.id);
-                            setIsOpen(true);
-                          }}
-                          cursor={'pointer'}
-                        />
-                      </Flex>
-                    </Td>
                   </Tr>
                 ))}
               </Tbody>
