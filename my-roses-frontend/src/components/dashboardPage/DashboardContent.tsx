@@ -230,14 +230,6 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
                   >
                     SHU
                   </Th>
-                  <Th
-                    color="white"
-                    bg={'royalRed.200'}
-                    textAlign="center"
-                    borderTopRightRadius={10}
-                  >
-                    Aksi
-                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
