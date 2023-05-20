@@ -36,8 +36,6 @@ describe('Pembukuan Middleware', () => {
 
     const response = (await request).body;
 
-    console.log(response);
-
     expect(response.count).toBeDefined();
   });
 
@@ -46,23 +44,28 @@ describe('Pembukuan Middleware', () => {
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
-    console.log(response);
+
     expect(response.statusCode).toBe(200);
     expect(response.body.id).toBeDefined();
   });
 
-  it.skip('Create pembukuan', async () => {
+  it('Create pembukuan', async () => {
     const payload = {
       tanggal: moment('2021-07-16').toISOString() as unknown as Date,
-      uraian: 'Bibit Kopi',
+      uraian: 'Jambi',
       sumWood: 4500,
       harga: 25000,
       masuk: 112500000,
-      keluar: 11806248,
-      jumlah: 100693752,
       cashBack: 2000,
       sumCashBack: 9000000,
-      afterCashBack: 103500000,
+      payBreed: 67500000,
+      shipCost: 2000000,
+      roadMoney: 600000,
+      operationalQc: 4500000,
+      pph: 1687500,
+      royalti: 4500000,
+      keluar: 80787500,
+      shu: 31712500,
     };
     const request = setMockApiHeader(test.post('/pembukuans').send(payload));
     request.set('Authorization', `Bearer ${token}`);
@@ -73,20 +76,25 @@ describe('Pembukuan Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
 
-  it.skip('Update pembukuan', async () => {
+  it('Update pembukuan', async () => {
     const payload = {
-      tanggal: moment('2021-08-01').toISOString() as unknown as Date,
-      uraian: 'Bibit Jahe',
+      tanggal: moment('2021-07-16').toISOString() as unknown as Date,
+      uraian: 'Sumatera Selatan',
       sumWood: 4500,
       harga: 25000,
       masuk: 112500000,
-      keluar: 11806248,
-      jumlah: 100693752,
       cashBack: 2000,
       sumCashBack: 9000000,
-      afterCashBack: 103500000,
+      roadBreed: 67500000,
+      shipCost: 2500000,
+      roadMoney: 600000,
+      operationalQc: 4500000,
+      pph: 1687500,
+      royalti: 4500000,
+      keluar: 81287500,
+      shu: 31212500,
     };
-    const request = setMockApiHeader(test.patch('/pembukuans/2').send(payload));
+    const request = setMockApiHeader(test.patch('/pembukuans/9').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -95,8 +103,8 @@ describe('Pembukuan Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
 
-  it.skip('Delete pembukuan', async () => {
-    const request = setMockApiHeader(test.delete('/pembukuans/2'));
+  it('Delete pembukuan', async () => {
+    const request = setMockApiHeader(test.delete('/pembukuans/9'));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

@@ -35,11 +35,10 @@ describe('Iuran Middleware', () => {
     request.set('Authorization', `Bearer ${token}`);
 
     const response = (await request).body;
-    console.log(response);
     expect(response.count).toBeDefined();
   });
 
-  it.skip('Create Iurans', async () => {
+  it('Create Iurans', async () => {
     const payload = {
       userId: 4,
       debt: 2020202,
@@ -53,26 +52,24 @@ describe('Iuran Middleware', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body.id).toBeDefined();
   });
-  it.skip('Update Iurans', async () => {
+  it('Update Iurans', async () => {
     const payload = {
       userId: 4,
       debt: 111111,
       createdAt: moment('2021-05-16').toISOString() as unknown as Date,
     };
-    const request = setMockApiHeader(test.patch('/mounts/1').send(payload));
+    const request = setMockApiHeader(test.patch('/mounts/10').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
-    console.log(response);
     expect(response.statusCode).toBe(200);
     expect(response.body.id).toBeDefined();
   });
   it('Delete Iurans', async () => {
-    const request = setMockApiHeader(test.delete('/mounts/1'));
+    const request = setMockApiHeader(test.delete('/mounts/10'));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
-    console.log(response);
     expect(response.statusCode).toBe(204);
   });
 });

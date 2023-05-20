@@ -4,7 +4,7 @@ import { Box, Flex } from '@chakra-ui/react';
 const DefaultLayout: ReactFC = ({ children }) => {
   return (
     <Box
-      bgImage={'./bg.webp'}
+      bgImage={'./background_login.webp'}
       height="100vh"
       width="100vw"
       bgPosition="center"

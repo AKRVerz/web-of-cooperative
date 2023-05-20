@@ -15,7 +15,7 @@ const DefaultTopBar: ReactFC = () => {
   };
 
   const poppinsText = (isYellow = true) => ({
-    ...(isYellow ? { color: 'textLogin.SMA' } : {}),
+    ...(isYellow ? { color: 'textLogin.Koperasi' } : {}),
     fontFamily: 'Poppins',
     fontSize: {
       base: '0.85rem',

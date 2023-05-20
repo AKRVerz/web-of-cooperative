@@ -2,7 +2,6 @@ import moment from 'moment';
 import { Express } from 'express';
 import supertest from 'supertest';
 import { USER_ROLE } from '../../src/utils/constant';
-import { hashText } from '../../src/utils/encryption';
 import { createMockApi, setMockApiHeader } from '../utils/mock';
 import _ from 'lodash';
 
@@ -51,15 +50,15 @@ describe('User Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
 
-  it.skip('Create User', async () => {
+  it('Create User', async () => {
     const payload = {
-      username: 'admin2',
-      email: 'admin2@admin.com',
-      password: await hashText('admin'),
+      username: 'Supardi',
+      email: 'supardi@admin.com',
+      password: 'admin3',
       role: USER_ROLE.ADMIN,
       noKtp: '10042001',
-      jabatan: 'Ketua Sidang',
-      alamat: 'Jl Hi Rais',
+      jabatan: 'Ketua Kelompok',
+      alamat: 'Lampung Timur',
       tanggal: moment('2021-07-16').toISOString() as unknown as Date,
     };
     const request = setMockApiHeader(test.post('/users').send(payload));
@@ -71,17 +70,18 @@ describe('User Middleware', () => {
     expect(response.body.id).toBeDefined();
   });
 
-  it.skip('Update User', async () => {
+  it('Update User', async () => {
     const payload = {
-      username: 'admin@2001',
-      email: 'admin2001@admin.com',
-      password: await hashText('admin2'),
+      username: 'Supardi',
+      email: 'admin200@admin.com',
+      password: 'supardi',
       role: USER_ROLE.ADMIN,
-      noKtp: '20010410',
-      alamat: 'Jl Hi Rais',
+      noKtp: '10042001',
+      jabatan: 'Ketua Kelompok',
+      alamat: 'Lampung Timur',
       tanggal: moment('2023-05-01').toISOString() as unknown as Date,
     };
-    const request = setMockApiHeader(test.patch('/users/2').send(payload));
+    const request = setMockApiHeader(test.patch('/users/9').send(payload));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;
@@ -89,8 +89,8 @@ describe('User Middleware', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body.id).toBeDefined();
   });
-  it.skip('Delet User', async () => {
-    const request = setMockApiHeader(test.delete('/users/2'));
+  it('Delet User', async () => {
+    const request = setMockApiHeader(test.delete('/users/9'));
     request.set('Authorization', `Bearer ${token}`);
 
     const response = await request;

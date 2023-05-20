@@ -19,7 +19,7 @@ const LoginHeader: ReactFC = () => {
   };
 
   const poppinsText = (isYellow = true) => ({
-    ...{ color: isYellow ? 'textLogin.SMA' : 'white' },
+    ...{ color: isYellow ? 'textLogin.Koperasi' : 'white' },
     fontFamily: 'Poppins',
     fontSize: {
       base: '0.85rem',
