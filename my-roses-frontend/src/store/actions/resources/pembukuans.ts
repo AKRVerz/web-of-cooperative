@@ -28,8 +28,9 @@ export const createPembukuan =
     payload.sumCashBack = payload.cashBack * payload.sumWood;
     payload.operationalQc = payload.sumWood * 1000;
     payload.royalti = payload.sumWood * 1000;
+    payload.payBreed = payload.payBreed * payload.sumWood;
     payload.keluar =
-      payload.payBreed * payload.sumWood +
+      payload.payBreed +
       payload.shipCost +
       payload.roadMoney +
       payload.harga * payload.sumWood * (1.5 / 100) +
@@ -37,7 +38,7 @@ export const createPembukuan =
       payload.sumWood * 1000;
     payload.shu =
       payload.harga * payload.sumWood -
-      payload.payBreed * payload.sumWood -
+      payload.payBreed -
       payload.shipCost -
       payload.roadMoney -
       payload.harga * payload.sumWood * (1.5 / 100) -
