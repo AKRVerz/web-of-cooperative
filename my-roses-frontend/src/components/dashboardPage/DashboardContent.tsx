@@ -76,7 +76,7 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
     <React.Fragment>
       <DashboardMainContainer>
         <Text fontFamily={'Poppins'} fontSize={'1.45rem'} py={5}>
-          Buat Laporan
+          Dashboard
         </Text>
         <DashboardContainer px={10} flexDirection={'column'}>
           <Flex
