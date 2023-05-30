@@ -14,6 +14,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Button,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import moment from 'moment';
@@ -37,6 +38,7 @@ import {
 } from 'src/store/actions/resources/users';
 import { getPembukuanFilter } from 'src/utils/pembukuan';
 import { formatRupiah } from 'src/utils/formaterRupiah';
+import { buttonStyle } from 'src/utils/styles';
 
 const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
   const [page, setPage] = useState<number>(1);
@@ -77,6 +79,19 @@ const DashboardContent: React.FC<Props> = ({ pembukuans, getAllPembukuan }) => {
             justifyContent={'space-between'}
             alignItems="center"
           >
+            <Flex gap={2}>
+              <Button
+                {...buttonStyle.confirmation}
+                fontFamily="poppins"
+                fontSize={'0.813rem'}
+                px={10}
+                borderRadius={25}
+                _focus={{ border: 'none' }}
+                onClick={() => Router.push('dashboard/pdf/pembukuan')}
+              >
+                Download PDF
+              </Button>
+            </Flex>
             <InputGroup width={'15rem'} boxShadow={'lg'} borderRadius={25}>
               <Input
                 px={10}
