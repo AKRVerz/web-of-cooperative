@@ -3,12 +3,7 @@ import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { AspectRatio, Flex, FlexProps, HStack } from '@chakra-ui/react';
 import BaseTopBar from 'src/components/baseComponent/BaseTopBar';
-import {
-  VscHome,
-  VscGraph,
-  VscSettingsGear,
-  VscSignOut,
-} from 'react-icons/vsc';
+import { VscHome, VscSettingsGear, VscSignOut } from 'react-icons/vsc';
 import { BsGearFill } from 'react-icons/bs';
 import { HiHome } from 'react-icons/hi';
 import { GoGraph } from 'react-icons/go';
@@ -27,14 +22,15 @@ const TopBar: ReactFC = () => {
     const pathname = router.pathname;
 
     return (
-      !_.includes(pathname, '/grafik') && !_.includes(pathname, '/settings')
+      !_.includes(pathname, '/grafik-penjualan-bibit') &&
+      !_.includes(pathname, '/settings')
     );
   };
 
   const inGraph = () => {
     const pathname = router.pathname;
 
-    return _.includes(pathname, '/grafik');
+    return _.includes(pathname, '/grafik-penjualan-bibit');
   };
 
   const inSettings = () => {
@@ -49,6 +45,15 @@ const TopBar: ReactFC = () => {
         <Flex {...navigationStyle}>
           <AspectRatio ratio={1} width={6} onClick={() => router.push('/')}>
             {inHome() ? <HiHome /> : <VscHome />}
+          </AspectRatio>
+        </Flex>
+        <Flex {...navigationStyle}>
+          <AspectRatio
+            ratio={1}
+            width={6}
+            onClick={() => router.push('/grafik-penjualan-bibit')}
+          >
+            {inHome() ? <GoGraph /> : <GoGraph />}
           </AspectRatio>
         </Flex>
         <Flex {...navigationStyle}>

@@ -11,7 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { GoSignOut } from 'react-icons/go';
+import { GoSignOut, GoGraph } from 'react-icons/go';
 import { FaUser, FaHome } from 'react-icons/fa';
 import { RiAddCircleFill } from 'react-icons/ri';
 import { USER_ROLE } from 'src/utils/constant';
@@ -129,6 +129,20 @@ const SideBar: ReactFC<Props> = ({ show }) => {
         </Flex>
         <Flex
           width={'90%'}
+          alignItems={'center'}
+          userSelect={'none'}
+          cursor={'pointer'}
+          onClick={() => router.push('/grafik')}
+          _hover={{ color: 'royalRed.100' }}
+          {...(_.includes(router.pathname, '/grafik') && isActive)}
+        >
+          <AspectRatio justifyContent={'flex-start'} ratio={1} width={8} mr={2}>
+            <GoGraph />
+          </AspectRatio>
+          <Text>Grafik Penjualan Bibit</Text>
+        </Flex>
+        <Flex
+          width={'90%'}
           userSelect={'none'}
           cursor={'pointer'}
           onClick={() => {
@@ -138,7 +152,7 @@ const SideBar: ReactFC<Props> = ({ show }) => {
           _hover={{ color: 'royalRed.100' }}
         >
           <Flex ml={'5px'} alignItems={'center'}>
-            <AspectRatio justifyContent={'center'} ratio={1} width={8} mr={3}>
+            <AspectRatio justifyContent={'center'} ratio={1} width={8} mr={2}>
               <GoSignOut />
             </AspectRatio>
             <Text>Keluar</Text>
